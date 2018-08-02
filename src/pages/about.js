@@ -15,7 +15,7 @@ class About extends React.Component {
         <div className={`content`} style={{marginTop: "48px", marginBottom: "48px"}}>
           <h2 id="history">History</h2>
           <p>
-            Software Engineer at DeNA Co., Ltd. (2017 - )<br/>
+            Software Engineer at DeNA Co., Ltd. (2017 - Present)<br/>
             Graduate School of Information Sciences, Tohoku Univ. (2015 - 2016)
           </p>
 
