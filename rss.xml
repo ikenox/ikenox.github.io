@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Thu, 02 Aug 2018 16:09:55 GMT</lastBuildDate><item><title><![CDATA[MouseX::Types::Enum - PerlでJavaのenum(列挙型)のようなクラスを実現するモジュール]]></title><description><![CDATA[MouseX::Types::Enum - metacpan.org Javaの 型のように、フィールドやメソッドを持つ列挙型をPerlでも使いたくなったので、 というモジュールを作りました。   Dependencies Mouse の拡張モジュールとして作ったので、Mouse…]]></description><link>https://ikenox.info/2018-05-20-perl-mousex-types-enum/</link><guid isPermaLink="false">https://ikenox.info/2018-05-20-perl-mousex-types-enum/</guid><pubDate>Sun, 20 May 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://metacpan.org/pod/MouseX::Types::Enum&quot;&gt;MouseX::Types::Enum - metacpan.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Javaの&lt;code class=&quot;language-text&quot;&gt;enum&lt;/code&gt;型のように、フィールドやメソッドを持つ列挙型をPerlでも使いたくなったので、&lt;code class=&quot;language-text&quot;&gt;MouseX::Types::Enum&lt;/code&gt;というモジュールを作りました。  &lt;/p&gt;
+&lt;h3&gt;Dependencies&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://metacpan.org/pod/Mouse&quot;&gt;Mouse&lt;/a&gt;の拡張モジュールとして作ったので、Mouseに依存しています。&lt;/p&gt;
+&lt;h2&gt;使用例&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;MouseX::Types::Enum&lt;/code&gt;では、Javaの列挙型のように各列挙定数がメンバ変数やメソッドを持つことが可能です。&lt;br&gt;
+使用例を以下に示します。この例では、&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;APPLE&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;ORANGE&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;BANANA&lt;/code&gt;という3つの列挙定数を定義しました。&lt;code class=&quot;language-text&quot;&gt;use&lt;/code&gt;句で&lt;code class=&quot;language-text&quot;&gt;MouseX::Types::Enum&lt;/code&gt;を呼び出す際に、定義したい列挙定数の配列を渡してあげます。  &lt;/li&gt;
+&lt;li&gt;列挙定数に&lt;code class=&quot;language-text&quot;&gt;name&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;color&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;has_seed&lt;/code&gt;というメンバ変数を定義しました。メンバ変数の定義にはMouseの文法である&lt;code class=&quot;language-text&quot;&gt;has&lt;/code&gt;が使えます。&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;make_sentence&lt;/code&gt;というメソッドを定義しました。引数やメンバ変数をもとに文字列を組み立てて返します。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-perl&quot;&gt;&lt;code class=&quot;language-perl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; Fruits&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;use&lt;/span&gt; Mouse&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;use&lt;/span&gt; MouseX&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;Types&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;Enum &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    APPLE  &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Apple&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;red&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    ORANGE &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Cherry&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;red&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    BANANA &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; name &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Banana&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; color &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;yellow&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; has_seed &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+has name &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;is &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;ro&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; isa &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Str&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+has color &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;is &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;ro&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; isa &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Str&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+has has_seed &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;is &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;ro&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; isa &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;Int&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token function&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;sub&lt;/span&gt; make_sentence&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;my&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;$self&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$suffix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;@_&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token variable&quot;&gt;$suffix&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    return sprintf&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;%s is %s%s&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$self&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$self&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;color&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;$suffix&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+__PACKAGE__&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;meta&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;make_immutable&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-perl&quot;&gt;&lt;code class=&quot;language-perl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;use&lt;/span&gt; Fruits&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# 1&lt;/span&gt;
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;ORANGE&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# &apos;&apos;&lt;/span&gt;
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;to_string&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# &apos;APPLE&apos;&lt;/span&gt;
+
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# &apos;Apple&apos;;&lt;/span&gt;
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;color&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# &apos;red&apos;&lt;/span&gt;
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;has_seed&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# 1&lt;/span&gt;
+
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;APPLE&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;make_sentence&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;!!!&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# &apos;Apple is red!!!&apos;&lt;/span&gt;
+
+Fruits&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;enums&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# { APPLE  =&gt; Fruits-&gt;APPLE, ORANGE =&gt; Fruits-&gt;ORANGE, BANANA =&gt; Fruits-&gt;BANANA }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;メンバ変数が不要な場合の宣言方法&lt;/h3&gt;
+&lt;p&gt;メンバ変数が不要な場合は、以下のようにも宣言できます。  &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-perl&quot;&gt;&lt;code class=&quot;language-perl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; Day&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;use&lt;/span&gt; MouseX&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;Types&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;Enum &lt;span class=&quot;token string&quot;&gt;qw/
+    Sun
+    Mon
+    Tue
+    Wed
+    Thu
+    Fri
+    Sat
+/&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+__PACKAGE__&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;meta&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;make_immutable&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-perl&quot;&gt;&lt;code class=&quot;language-perl&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;use&lt;/span&gt; Day&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+Day&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;Sun &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; Day&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;Sun&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# 1&lt;/span&gt;
+Day&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;Sun &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; Day&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;Mon&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# &apos;&apos;&lt;/span&gt;
+Day&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;Sun&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;to_string&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;token comment&quot;&gt;# &apos;APPLE&apos;&lt;/span&gt;
+Day&lt;span class=&quot;token operator&quot;&gt;-&gt;&lt;/span&gt;enums&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# { Sun =&gt; Day-&gt;Sun, Mon =&gt; Day-&gt;Mon, ... }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;備考&lt;/h2&gt;
+&lt;p&gt;Javaの&lt;code class=&quot;language-text&quot;&gt;enum&lt;/code&gt;型は&lt;code class=&quot;language-text&quot;&gt;ordinal()&lt;/code&gt;というインスタンスメソッドを持っており、各列挙定数から呼ぶとその列挙定数の序数(ユニークな数値)を返してくれます。&lt;br&gt;
+しかし、序数は列挙定数の宣言順に決まるため、列挙定数の宣言順が変化するとそれらに対応する序数も変わってしまうという性質があります。&lt;br&gt;
+そのため、&lt;code class=&quot;language-text&quot;&gt;ordinal()&lt;/code&gt;で取得した序数がどこかで永続化された後に列挙定数の宣言順を入れ替えたり、新たな宣言を既存の列挙定数の宣言の間に追加したような場合に、序数に不整合が生じてしまうことが懸念されます。  &lt;/p&gt;
+&lt;p&gt;この挙動は予期せぬバグを引き起こす可能性があるため、&lt;code class=&quot;language-text&quot;&gt;MouseX::Types::Enum&lt;/code&gt;では&lt;code class=&quot;language-text&quot;&gt;ordinal()&lt;/code&gt;メソッドや序数の概念は定義しないことにしました。&lt;br&gt;
+コードが増えることとのトレードオフではありますが、数値⇔列挙定数のマッピングは明示的にコード内のどこかに書くのが良いのではないかと考えています。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[IntelliJ(Android Studio)のVimプラグイン「IdeaVim」の使い方と設定]]></title><description><![CDATA[この記事は JetBrains Advent Calendar 2017 の最終日分の投稿です。前日まで空いていたため、滑り込みで参加させていただきました！ IdeaVimとは IdeaVim    Github:  JetBrains/ideavim IdeaVim…]]></description><link>https://ikenox.info/2017-12-25-ideavim-introduction/</link><guid isPermaLink="false">https://ikenox.info/2017-12-25-ideavim-introduction/</guid><pubDate>Mon, 25 Dec 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;この記事は&lt;a href=&quot;https://qiita.com/advent-calendar/2017/jetbrains&quot;&gt;JetBrains Advent Calendar 2017&lt;/a&gt;の最終日分の投稿です。前日まで空いていたため、滑り込みで参加させていただきました！&lt;/p&gt;
+&lt;h2&gt;IdeaVimとは&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://plugins.jetbrains.com/plugin/164-ideavim&quot;&gt;IdeaVim&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains/ideavim&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;IdeaVimは、&lt;strong&gt;IntelliJやAndroid StudioなどのJetBrains系列のIDEで使えるVimプラグイン&lt;/strong&gt; です。このプラグインを導入することでIntelliJなどをVimっぽく操作できるようになります。&lt;br&gt;
+リポジトリ名を見るとわかるように、JetBrainsの公式プラグインです。IntelliJの初回起動時にもオススメされます。&lt;/p&gt;
+&lt;p&gt;※ 以下、IntelliJを例にして進めますが、JetBrains系列のIDEであれば基本的に一緒なはずですので自身の使っているものに置き換えてお読みください。&lt;/p&gt;
+&lt;h3&gt;なぜIdeaVimを使うか&lt;/h3&gt;
+&lt;p&gt;(※&lt;strong&gt;個人的には&lt;/strong&gt;) IntelliJとVimのそれぞれに対して以下の点に良さを感じています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IntelliJ: 補完、コードジャンプ、リファクタ機能などの強さ、またそれらの設定の容易さ&lt;/li&gt;
+&lt;li&gt;Vim: テキストエディタとしての編集操作の効率の良さ (Vimのキーバインドとかモードの概念が無いとコード書きたくない)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;IntelliJにIdeaVimプラグインを導入することで上記の双方の利点を同時に享受することができ&lt;/strong&gt;、快適なIntelliJライフを送れるようになりました。&lt;br&gt;
+細かい部分の挙動などはまだまだ本家Vimとの差分もありますが、&lt;strong&gt;自分のような比較的ライトなVimユーザーがVimに求めている機能については、IdeaVimはその多くをカバーできているのではないか&lt;/strong&gt; と思います。&lt;br&gt;
+この記事ではIdeaVimの機能や設定方法の説明を通じて、その良さを伝えられたらと思います。&lt;/p&gt;
+&lt;h3&gt;IdeaVimがサポートしている機能の一例&lt;/h3&gt;
+&lt;p&gt;細かい機能まで列挙するのは難しいため、普段自分がよく使う機能に絞ってその対応状況をまとめました。  &lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;left&quot;&gt;機能&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;対応状況&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;モード&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;ノーマルモード、インサートモード、ビジュアルモードが存在&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;モーション&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;ヤンク(
+&lt;code class=&quot;language-text&quot;&gt;y&lt;/code&gt;
+), 削除(
+&lt;code class=&quot;language-text&quot;&gt;d&lt;/code&gt;
+), 変更(
+&lt;code class=&quot;language-text&quot;&gt;c&lt;/code&gt;
+), Undo(
+&lt;code class=&quot;language-text&quot;&gt;u&lt;/code&gt;
+), Redo(
+&lt;code class=&quot;language-text&quot;&gt;Ctrl-r&lt;/code&gt;
+),
+&lt;br&gt;
+テキストオブジェクト操作(
+&lt;code class=&quot;language-text&quot;&gt;ciw&lt;/code&gt;
+,
+&lt;code class=&quot;language-text&quot;&gt;vi(&lt;/code&gt;
+, …) などなど
+&lt;br&gt;
+(行いたい操作が未実装だったという経験は筆者は無いです)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;検索&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;Vimと同様に
+&lt;code class=&quot;language-text&quot;&gt;/&lt;/code&gt;
+による検索が可能、
+&lt;code class=&quot;language-text&quot;&gt;:set incsearch&lt;/code&gt;
+によるインクリメンタルサーチも&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;置換&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;Vimと同様に
+&lt;code class=&quot;language-text&quot;&gt;:s&lt;/code&gt;
+,
+&lt;code class=&quot;language-text&quot;&gt;:%s&lt;/code&gt;
+,
+&lt;code class=&quot;language-text&quot;&gt;:&amp;#39;&amp;lt;,&amp;#39;&amp;gt;s&lt;/code&gt;
+などで正規表現による置換が可能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;コマンド&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;:w&lt;/code&gt;
+, 
+&lt;code class=&quot;language-text&quot;&gt;:q&lt;/code&gt;
+, 
+&lt;code class=&quot;language-text&quot;&gt;:tabnew&lt;/code&gt;
+, 
+&lt;code class=&quot;language-text&quot;&gt;:split&lt;/code&gt;
+, 一部
+&lt;code class=&quot;language-text&quot;&gt;:set&lt;/code&gt;
+オプション などなど&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;設定・キーマップ&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;
+と同様の文法で各種
+&lt;code class=&quot;language-text&quot;&gt;map&lt;/code&gt;
+や一部
+&lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt;
+オプションを
+&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;
+に記述可能
+&lt;br&gt;
+また、IntelliJの機能をキーマッピングすることも可能(後の章で詳しく説明)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;マクロ&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;利用可能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;レジスタ&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;利用可能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;その他&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;:set surround&lt;/code&gt;
+することで
+&lt;a href=&quot;https://github.com/tpope/vim-surround&quot;&gt;vim-surround&lt;/a&gt;
+を再現した機能を利用可能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;より詳しく知りたいという方は、
+&lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;GitHubのレポジトリ&lt;/a&gt;
+のREADMEなどご覧になってみてください。&lt;/p&gt;
+&lt;h2&gt;IdeaVimをインストール&lt;/h2&gt;
+&lt;p&gt;通常のIntelliJプラグインと同じく、&lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Plugins]&lt;/code&gt;からインストールできます。&lt;br&gt;
+インストール後にIntelliJを再起動するとIdeaVimが有効になります。&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-ab1f1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 64.48484848484848%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC0ElEQVQ4y6WTzU/TYBzHxwGMJz3I+A80Rg8EwzbWt6dr121tt7VdtzHkJVuACJEXeRtjEIkn/xL0ML17wMSr8WAMekJJBKMJAiMmGrPxfH02MiEmevFJPvn+2j799NenTz0eNr5tvb367uOW+nn/i3R0cEgODw7Iwdd9Uj38SnZ3d8nOzgfyfnubfNrbI9XqETmuVln+Rjo+roaqR0fdntaYvzO5sf7wAUprayfFUhnLK2WUVu9jqbyOlfIaZucWMHNvHkvFZRSXS5hfLGJh6ZT5xSVaKq9ienbuVXtHx8WmsLu3txJSIxAkucaLIuVFiUqyREOKSEVCqCCJVIvpNKIbNMAJ1M/x56kHRQk9Pv9rprrcFPo4UkmkMogn7Zqq21SN2VSPJ6jj6FQKJ6isJWnS7aeWm6ExM06NRJLqjBibw6gnnBRkNdwQXmoKb2qlijnzFNrERu3awHPcGNrE9cFN9BRegBt/BjH/GNbYOvITsyiMjmG4MIbC2DjyjTqfr+cGh6BokTNhN29XMqOLyI7O1SSniD5zGr7YXQSMKSj2FOKZCfQPFXB7MAcnOwBrZIZlDqlMFm62v+6wlELqmdAX8FdMU4MWFmsc5wfP+yHwAZYByISDKgfRWJKom0fEyrE6DSvlImE7SDqpumnZEOTQOWEfXzEtF+GoWZMUDYTBiSFwktKsQ2oYhpOFOTAJIz0Cy03DSWeaabvpupG0/hRyFSNpQ4sZNUWLUrYelJdkKhCFappCY1GVsm5oNpelUT1GiRqmclhrUdd0AwI5J+QE6Qn7gohbTj3puNB0E3E71ezAYq8XMeJgDwBPQqwTBeI5mOiEsC3Xx4tv2lrb5pYv8KhxAzv5PciLP/v+BSecwp9mgBN/8GEbPl592eqw7UqnN9jp7cqzHGaMdHq9I41s0Thm1/+Cd9jb1ZVnaMx1wRMUpNYf2PafeDra2z2/AG6nljP9vPi+AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Install IdeaVim&quot;
+        title=&quot;&quot;
+        src=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fb8a0.png&quot;
+        srcset=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-1a291.png 148w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-2bc4a.png 295w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fb8a0.png 590w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-526de.png 885w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fa2eb.png 1180w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-ab1f1.png 1650w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;h2&gt;.ideavimrcに設定を記述&lt;/h2&gt;
+&lt;p&gt;IdeaVimでは、&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;というファイルに設定を記述してホームディレクトリに設置しておくことで、IntelliJ起動時にその設定を読み込んでくれます。&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;には &lt;strong&gt;本家Vimの&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;と同様に、各種mapやsetコマンドを記述することが可能です。&lt;/strong&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;利用できる&lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt;コマンドのオプション一覧は&lt;a href=&quot;https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md&quot;&gt;こちら&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;IdeaVim独自のオプションとして&lt;code class=&quot;language-text&quot;&gt;set surround&lt;/code&gt;が存在し、本家Vimで言うところの&lt;a href=&quot;https://github.com/tpope/vim-surround&quot;&gt;vim-surround&lt;/a&gt;を一部再現した機能が利用可能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;VimとIdeaVimのキーマップを一元管理&lt;/h3&gt;
+&lt;p&gt;自分は&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;から基本的なキーマップは切り出して&lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;という独立したファイルにしておき、&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;それぞれから&lt;code class=&quot;language-text&quot;&gt;source&lt;/code&gt;コマンドを使って読み込んでいます。&lt;br&gt;
+こうすることで、VimとIdeaVimで共通して設定したい基本的なキーマップを一元管理できるようになります。これは&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;が&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;とほとんど同じ文法で記述できるからこそのメリットですね。&lt;/p&gt;
+&lt;p&gt;参考までに自分の&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;を以下に載せておきます。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ikenox/dotfiles/blob/master/vimrc.keymap&quot;&gt;.vimrc.keymap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ikenox/dotfiles/blob/master/ideavimrc&quot;&gt;.ideavimrc&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;IntelliJの機能をキーマッピング&lt;/h3&gt;
+&lt;p&gt;上記の&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;を見てもらうと、&lt;code class=&quot;language-text&quot;&gt;nnoremap xxx :action yyy&lt;/code&gt;という記述が多くあることがわかります。&lt;br&gt;
+IdeaVimでは&lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt;コマンドで &lt;strong&gt;IntelliJの機能(Action)を呼び出して使用することができます&lt;/strong&gt;。&lt;br&gt;
+カーソルの移動など単純な操作からもっと高次な機能まで、IntelliJがAPIとして提供しているActionや、インストールしているプラグインで定義されているActionは全て呼び出せるようです。&lt;strong&gt;IntelliJの強力なコードジャンプやリファクタ機能についても、Vimのキーマップ的な設定・呼び出しが可能ということになります&lt;/strong&gt;。&lt;br&gt;
+このAction呼び出し機能により、IdeaVimとIntelliJの連携の自由度が格段に上がります。    &lt;/p&gt;
+&lt;h4&gt;設定しておくと幸せになれそうなActionの一例&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;left&quot;&gt;Action&lt;/th&gt;
+&lt;th align=&quot;left&quot;&gt;概要&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;SearchEverywhere&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;任意のクラス・関数・ファイルを検索・ジャンプ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;FindInPath&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;開いているプロジェクト内の任意の文字列を検索(grep的な)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;FileStructurePopup&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;編集しているファイル内の任意の関数を検索・ジャンプ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;GotoDeclaration&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;カーソル上の関数や変数の定義元にジャンプ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;FindUsages&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;カーソル上の関数や変数の使用箇所一覧を表示&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;RenameElement&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;カーソル上の関数や変数のrename&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;ReformatCode&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;コードの整形&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;CommentByLineComment&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;コメントアウト&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;ActivateProjectToolWindow&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;ウィンドウフォーカスをファイルツリーに移す&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;ShowIntentionActions&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;クイックフィックス&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;left&quot;&gt;GotoAction&lt;/td&gt;
+&lt;td align=&quot;left&quot;&gt;なんでも呼び出し&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;筆者の設定例&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nnoremap &amp;lt;Space&amp;gt;e :action SearchEverywhere&amp;lt;CR&amp;gt;
+nnoremap &amp;lt;Space&amp;gt;g :action FindInPath&amp;lt;CR&amp;gt;
+nnoremap gd :action GotoDeclaration&amp;lt;CR&amp;gt;
+nnoremap U :action FindUsages&amp;lt;CR&amp;gt;
+nnoremap R :action RenameElement&amp;lt;CR&amp;gt;
+nnoremap &amp;lt;Space&amp;gt;a :action GotoAction&amp;lt;CR&amp;gt;
+nnoremap cc :action CommentByLineComment&amp;lt;CR&amp;gt;
+vnoremap cc :action CommentByLineComment&amp;lt;CR&amp;gt;
+nnoremap == :action ReformatCode&amp;lt;CR&amp;gt;
+vnoremap == :action ReformatCode&amp;lt;CR&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;※ ビジュアルモードでの範囲選択に対する&lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt;コマンドの適用については、バージョン0.49.3以降で利用可能です。2018年2月現在ではEAP buildの最新版で利用できます。&lt;/p&gt;
+&lt;h3&gt;Actionの検索&lt;/h3&gt;
+&lt;p&gt;呼び出し可能なActionの一覧は&lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;コマンドで確認できます。&lt;br&gt;
+また、&lt;code class=&quot;language-text&quot;&gt;:actionlist hoge&lt;/code&gt;と検索することで名前に&lt;code class=&quot;language-text&quot;&gt;hoge&lt;/code&gt;を含むActionを検索することもできます。&lt;br&gt;
+自分が何らかの機能をキーマップに設定したいと思った際は、IntelliJの&lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Keymap]&lt;/code&gt;から設定したいAction名の見当をつけた上で&lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;コマンドで探すという手順を取っています。&lt;/p&gt;
+&lt;h2&gt;その他&lt;/h2&gt;
+&lt;h3&gt;EAP build&lt;/h3&gt;
+&lt;p&gt;IdeaVimのアップデート頻度は年に数回程度と、そこまで高くはありません。&lt;br&gt;
+IntelliJ内から&lt;code class=&quot;language-text&quot;&gt;[Settings] &amp;gt; [Plugins] &amp;gt; [Browse Repositories] &amp;gt; [Manage Repositories]&lt;/code&gt;に下記のURLを追加することで、まだ正式にはリリースされていないEAP&lt;sup id=&quot;fnref-1&quot;&gt;&lt;a href=&quot;#fn-1&quot; class=&quot;footnote-ref&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; buildのIdeaVimを利用することができます。&lt;br&gt;
+&lt;a href=&quot;https://plugins.jetbrains.com/plugins/eap/ideavim&quot;&gt;https://plugins.jetbrains.com/plugins/eap/ideavim&lt;/a&gt;&lt;br&gt;
+不便だと思っていた不具合がEAP buildでは直っているみたいなケースも少なくないため、基本入れておいて損はないと思います。&lt;/p&gt;
+&lt;h2&gt;おわりに&lt;/h2&gt;
+&lt;p&gt;本記事ではIdeaVimの機能や設定方法について説明しました。&lt;br&gt;
+IdeaVimはまだ発展途上な部分もありますが、IntelliJの強力な機能をそのまま活かしつつVimの操作性を取り入れることができる素晴らしいプラグインだと思います。&lt;br&gt;
+IdeaVimを使いこなして、快適なIntelliJライフを送りましょう！  &lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&quot;fn-1&quot;&gt;
+&lt;p&gt;Early Access Program&lt;/p&gt;
+&lt;a href=&quot;#fnref-1&quot; class=&quot;footnote-backref&quot;&gt;↩&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content:encoded></item><item><title><![CDATA[first commit]]></title><description><![CDATA[Jekyll  +  GitHub Pages  でブログを作ってみた。 10分程度あればブログを公開するところまで持ってこれて、その後のカスタマイズの自由度も高そう 記事をMarkdownで書ける 記事をGit…]]></description><link>https://ikenox.info/2017-10-15-first-commit/</link><guid isPermaLink="false">https://ikenox.info/2017-10-15-first-commit/</guid><pubDate>Sun, 15 Oct 2017 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://jekyllrb-ja.github.io/&quot;&gt;Jekyll&lt;/a&gt; + &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; でブログを作ってみた。&lt;br&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;10分程度あればブログを公開するところまで持ってこれて、その後のカスタマイズの自由度も高そう&lt;/li&gt;
+&lt;li&gt;記事をMarkdownで書ける&lt;/li&gt;
+&lt;li&gt;記事をGitでバージョン管理できる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;など、色々と嬉しい。&lt;br&gt;
+普段の学習がインプットに偏り気味なので、アウトプットの場としてブログを活用していきたい。&lt;br&gt;
+ちなみに、Jekyllのテーマは&lt;a href=&quot;https://github.com/chesterhow/tale/&quot;&gt;Tale&lt;/a&gt; をベースにした。&lt;/p&gt;</content:encoded></item></channel></rss>
