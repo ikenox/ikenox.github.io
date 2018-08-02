@@ -35,7 +35,7 @@ class BlogPostTemplate extends React.Component {
         <Bio/>
         <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
         <p className={`date-text`} style={{marginTop: 0}}>{post.frontmatter.date}</p>
-        <SocialButtons url={window.location.href}/>
+        <SocialButtons url={document.location.href} />
         <div className={`content`} dangerouslySetInnerHTML={{__html: post.html}}
              style={{marginTop: "2rem", marginBottom: "2rem"}}/>
         {post.html.length > 1000 && (

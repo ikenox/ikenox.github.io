@@ -10,7 +10,6 @@ const Div = styled.div`
 
 class SocialButtons extends React.Component {
   render() {
-    console.log(this.props.url)
     return (
       <Div style={{height: "25px"}}>
         <div style={{width: "115px", height: "25px !important"}}>
