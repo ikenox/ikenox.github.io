@@ -10,10 +10,11 @@ const Div = styled.div`
 
 class SocialButtons extends React.Component {
   render() {
+    console.log(this.props.url)
     return (
-      <Div style={{height:"25px"}}>
+      <Div style={{height: "25px"}}>
         <div style={{width: "115px", height: "25px !important"}}>
-          <HatenabookmarkButton layout={`standard-balloon`} url={window.location.href}/>
+          <HatenabookmarkButton layout={`standard-balloon`} url={this.props.url}/>
         </div>
         <div style={{width: "106px", height: "25px !important"}}>
           <FacebookButton layout={`button_count`} share={true}/>
