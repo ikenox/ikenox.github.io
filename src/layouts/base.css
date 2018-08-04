@@ -151,8 +151,7 @@ hr {
 }
 
 .twitter-share-button,
-.hatena-bookmark-button-frame
-{
+.hatena-bookmark-button-frame {
   margin-bottom: 2px;
 }
 
@@ -171,4 +170,18 @@ hr {
 .fb_iframe_widget,
 .pocket-btn {
   margin-right: 4px;
+}
+
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  padding-left: .5rem;
+  border-left: 3px solid #aaa;
+}
+
+blockquote > p {
+  line-height: 1.4em;
 }
