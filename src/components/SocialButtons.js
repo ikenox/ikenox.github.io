@@ -13,7 +13,7 @@ class SocialButtons extends React.Component {
     return (
       <Div style={{height: "25px"}}>
         <div style={{width: "115px", height: "25px !important"}}>
-          <HatenabookmarkButton layout={`standard-balloon`} url={this.props.url}/>
+          <HatenabookmarkButton layout={`standard-balloon`} url={`https://ikenox.info`+this.props.path}/>
         </div>
         <div style={{width: "106px", height: "25px !important"}}>
           <FacebookButton layout={`button_count`} share={true}/>
