@@ -1,0 +1,2 @@
+webpackJsonp([0xe30c857b775f],{361:function(t,e){t.exports={data:{allSitePage:{totalCount:5,edges:[{node:{path:"/2018-05-20-perl-mousex-types-enum/"}},{node:{path:"/2017-12-25-ideavim-introduction/"}},{node:{path:"/2017-10-15-first-commit/"}},{node:{path:"/about/"}},{node:{path:"/"}}]}},pathContext:{}}}});
+//# sourceMappingURL=path---dev-404-page-6dfc1f550e2fdc6746fa.js.map
