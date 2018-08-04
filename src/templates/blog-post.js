@@ -32,7 +32,6 @@ class BlogPostTemplate extends React.Component {
     return (
       <div>
         <Helmet title={`${post.frontmatter.title} | ${siteTitle}`}/>
-        <Bio/>
         <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
         <p className={`date-text`} style={{marginTop: 0}}>{post.frontmatter.date}</p>
         <SocialButtons path={this.props.location.pathname} />

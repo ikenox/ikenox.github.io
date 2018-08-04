@@ -11,7 +11,6 @@ class About extends React.Component {
     return (
       <div>
         <Helmet title={`About | ${siteTitle}`}/>
-        <Bio/>
         <div className={`content`} style={{marginTop: "48px", marginBottom: "48px"}}>
           <h2 id="history">History</h2>
           <p>

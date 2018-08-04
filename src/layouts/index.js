@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import FaRSS from 'react-icons/lib/fa/feed'
+import Bio from '../components/Bio'
 
 require("./prism.css");
 require("./base.css");
@@ -37,6 +38,7 @@ class Template extends React.Component {
     return (
       <div className={`content-wrapper`}>
         {header}
+        <Bio/>
         {children()}
       </div>
     )
