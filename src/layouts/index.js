@@ -39,7 +39,7 @@ class Template extends React.Component {
     return (
       <div className={`content-wrapper`}>
         <Helmet>
-          <meta name={`og:image`} content={`https://ikenox.info/favicon/ico`}/>
+          <meta name={`og:image`} content={`https://ikenox.info/icon.png`}/>
           <meta name={`og:type`} content={`article`}/>
         </Helmet>
         {header}
