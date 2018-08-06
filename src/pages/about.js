@@ -11,7 +11,7 @@ class About extends React.Component {
       <div>
         <Helmet title={title}>
           <meta name={`og:title`} content={title}/>
-          <meta name={`og:type`} content={`profile`}/>
+          <meta name={`og:type`} content={`website`}/>
         </Helmet>
         <div className={`content`} style={{marginTop: "48px", marginBottom: "48px"}}>
           <h2 id="history">History</h2>
