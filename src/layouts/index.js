@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import FaRSS from 'react-icons/lib/fa/feed'
 import Bio from '../components/Bio'
+import Helmet from 'react-helmet'
 
 require("./prism.css");
 require("./base.css");
@@ -37,6 +38,10 @@ class Template extends React.Component {
     }
     return (
       <div className={`content-wrapper`}>
+        <Helmet>
+          <meta name={`og:image`} content={`https://ikenox.info/favicon/ico`}/>
+          <meta name={`og:type`} content={`article`}/>
+        </Helmet>
         {header}
         <Bio/>
         {children()}

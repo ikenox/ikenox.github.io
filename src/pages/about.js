@@ -1,16 +1,18 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-
-import Bio from '../components/Bio'
 import FaTwitter from 'react-icons/lib/fa/twitter'
 import FaMail from 'react-icons/lib/fa/envelope-o'
 
 class About extends React.Component {
   render() {
     const siteTitle = this.props.data.site.siteMetadata.title
+    const title = `About | ${siteTitle}`
     return (
       <div>
-        <Helmet title={`About | ${siteTitle}`}/>
+        <Helmet title={title}>
+          <meta name={`og:title`} content={title}/>
+          <meta name={`og:type`} content={`profile`}/>
+        </Helmet>
         <div className={`content`} style={{marginTop: "48px", marginBottom: "48px"}}>
           <h2 id="history">History</h2>
           <p>
