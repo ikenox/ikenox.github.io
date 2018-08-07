@@ -5,7 +5,7 @@ date: "2018-08-04T00:00Z"
 
 ### GatsbyJS
 
-<preview-link url="https://www.gatsbyjs.org/"></preview-link>
+<preview-link title="GatsbyJS" url="https://www.gatsbyjs.org/"></preview-link>
 
 今までブログは[ Jekyll ]( https://jekyllrb.com/ )で生成してましたが、GatsbyJSに移行してみました。
 

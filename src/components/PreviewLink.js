@@ -22,13 +22,13 @@ class PreviewLink extends React.Component {
           <div style={{
             width: "5rem",
             height: "5rem",
-            background:"#eee",
+            background: "#eee",
             borderBottomLeftRadius: radius,
             borderTopLeftRadius: radius,
             margin: "-1px"
           }}>
             <img
-              src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII=" }
+              src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
               style={{
                 borderBottomLeftRadius: radius,
                 borderTopLeftRadius: radius,
@@ -49,7 +49,7 @@ class PreviewLink extends React.Component {
               height: "1.2em",
               overflow: "hidden",
             }}>
-              {this.state.title}
+              {this.state.title ? this.state.title : this.props.title}
             </p>
             <p style={{
               overflow: "hidden",
@@ -72,7 +72,7 @@ class PreviewLink extends React.Component {
               lineHeight: "1.2em",
               height: "1.2em"
             }}>
-              {this.state.host}
+              {(new URL(this.props.url)).hostname}
             </p>
           </div>
         </div>
