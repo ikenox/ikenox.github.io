@@ -1,9 +1,4 @@
 import React from 'react'
-import styled from 'styled-components';
-
-const Info = styled.div`
-p { margin:0px;line-height:1.2em; }
-`
 
 class PreviewLink extends React.Component {
   constructor(props) {
@@ -13,31 +8,70 @@ class PreviewLink extends React.Component {
 
   render() {
     return (
-      <a href={this.props.url}
-         style={{display: "box", marginTop: "10px", marginBottom: "10px", textDecoration: "none"}}>
-        <div style={{border: "1px solid #ccc", display: "flex", maxWidth: "500px"}}>
-          <img src={this.state.imageUrl} style={{width: "120px", height: "120px", objectFit: "cover"}}/>
-          <Info style={{padding: ".5rem .75rem", position:"relative"}}>
-            <p style={{fontWeight: "bold"}}>{this.state.title}</p>
+      <a href={this.props.url} target={`_blank`}
+         style={{textDecoration: "none"}}>
+        <div style={{
+          verticalAlign: "middle",
+          display: "flex",
+          alignItems: "center",
+          border: "1px solid #ccc",
+          borderRadius: 3
+        }}>
+          <div style={{width: "5rem", height: "5rem", margin: "-1px"}}>
+            <img
+              src={this.state.imageUrl}
+              style={{
+                borderBottomLeftRadius: 3,
+                borderTopLeftRadius: 3,
+                float: "left",
+                objectFit: "cover",
+                width: "5rem",
+                height: "5rem"
+              }}
+            />
+          </div>
+          <div style={{marginLeft: ".75rem", marginRight:".5rem"}}>
             <p style={{
-              marginTop:".2rem",
-              color: "#666",
-              height:"4.2em",
-              fontSize: ".75rem",
+              fontSize: "0.85rem",
+              textOverflow: "ellipsis",
+              fontWeight: "700",
+              margin: 0,
+              lineHeight: "1.2em",
+              height: "1.2em",
+              overflow: "hidden"
+            }}>
+              {this.state.title}
+            </p>
+            <p style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
-              wordBreak: "break-all",
-              lineHeight:"1.4em"
-            }}>{this.state.description}</p>
-            <p style={{	marginBottom:".5rem", position: "absolute", bottom: 0, color: "#666", fontSize: ".7rem"}}>{this.state.host}</p>
-          </Info>
+              fontSize: ".7rem",
+              color: "#666",
+              margin: ".2rem 0 0 0",
+              lineHeight: "1.4em",
+              height: "2.8em"
+            }}>
+              {this.state.description}
+            </p>
+            <p style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              wordBreak:"break-all",
+              fontSize: ".7em",
+              color: "#666",
+              margin: ".2rem 0 0 0",
+              lineHeight: "1.2em",
+              height: "1.2em"
+            }}>
+              {this.state.host}
+            </p>
+          </div>
         </div>
       </a>
     )
   }
 
-  componentDidMount
-  () {
+  componentDidMount() {
     fetch(`https://api.microlink.io/?url=${ this.props.url }`)
       .then(res => res.json())
       .then(
