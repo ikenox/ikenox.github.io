@@ -1,5 +1,7 @@
 import React from 'react'
 
+const radius = ".2rem"
+
 class PreviewLink extends React.Component {
   constructor(props) {
     super(props);
@@ -15,14 +17,14 @@ class PreviewLink extends React.Component {
           display: "flex",
           alignItems: "center",
           border: "1px solid #ccc",
-          borderRadius: 3
+          borderRadius: radius
         }}>
           <div style={{width: "5rem", height: "5rem", margin: "-1px"}}>
             <img
               src={this.state.imageUrl}
               style={{
-                borderBottomLeftRadius: 3,
-                borderTopLeftRadius: 3,
+                borderBottomLeftRadius: radius,
+                borderTopLeftRadius: radius,
                 float: "left",
                 objectFit: "cover",
                 width: "5rem",
@@ -72,6 +74,13 @@ class PreviewLink extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      imageUrl: "https://pbs.twimg.com/profile_images/378800000220029324/fe66faeca20115da8566e51d83447ead_400x400.jpeg",
+      host: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahogehoge.com",
+    });
+    return;
     fetch(`https://api.microlink.io/?url=${ this.props.url }`)
       .then(res => res.json())
       .then(
