@@ -5,8 +5,7 @@ date: "2018-08-04T00:00Z"
 
 ### GatsbyJS
 
-[https://www.gatsbyjs.org/]( https://www.gatsbyjs.org/ )
-> Blazing-fast static site generator for React
+<preview-link url="https://www.gatsbyjs.org/"></preview-link>
 
 今までブログは[ Jekyll ]( https://jekyllrb.com/ )で生成してましたが、GatsbyJSに移行してみました。
 

@@ -11,28 +11,35 @@ class PreviewLink extends React.Component {
   render() {
     return (
       <a href={this.props.url} target={`_blank`}
-         style={{textDecoration: "none"}}>
+         style={{textDecoration: "none", border: "0"}}>
         <div style={{
           verticalAlign: "middle",
           display: "flex",
           alignItems: "center",
-          border: "1px solid #ccc",
+          border: "1px solid #eee",
           borderRadius: radius
         }}>
-          <div style={{width: "5rem", height: "5rem", margin: "-1px"}}>
+          <div style={{
+            width: "5rem",
+            height: "5rem",
+            background:"#eee",
+            borderBottomLeftRadius: radius,
+            borderTopLeftRadius: radius,
+            margin: "-1px"
+          }}>
             <img
-              src={this.state.imageUrl}
+              src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII=" }
               style={{
                 borderBottomLeftRadius: radius,
                 borderTopLeftRadius: radius,
                 float: "left",
                 objectFit: "cover",
                 width: "5rem",
-                height: "5rem"
+                height: "5rem",
               }}
             />
           </div>
-          <div style={{marginLeft: ".75rem", marginRight:".5rem"}}>
+          <div style={{marginLeft: ".75rem", marginRight: ".5rem"}}>
             <p style={{
               fontSize: "0.85rem",
               textOverflow: "ellipsis",
@@ -40,7 +47,7 @@ class PreviewLink extends React.Component {
               margin: 0,
               lineHeight: "1.2em",
               height: "1.2em",
-              overflow: "hidden"
+              overflow: "hidden",
             }}>
               {this.state.title}
             </p>
@@ -58,7 +65,7 @@ class PreviewLink extends React.Component {
             <p style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
-              wordBreak:"break-all",
+              wordBreak: "break-all",
               fontSize: ".7em",
               color: "#666",
               margin: ".2rem 0 0 0",
@@ -74,13 +81,6 @@ class PreviewLink extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      imageUrl: "https://pbs.twimg.com/profile_images/378800000220029324/fe66faeca20115da8566e51d83447ead_400x400.jpeg",
-      host: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahogehoge.com",
-    });
-    return;
     fetch(`https://api.microlink.io/?url=${ this.props.url }`)
       .then(res => res.json())
       .then(

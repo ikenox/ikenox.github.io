@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import FaTwitter from 'react-icons/lib/fa/twitter'
 import FaMail from 'react-icons/lib/fa/envelope-o'
+import PreviewLink from '../components/PreviewLink'
 
 class About extends React.Component {
   render() {

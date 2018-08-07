@@ -6,6 +6,13 @@ import Bio from '../components/Bio'
 import SocialButtons from '../components/SocialButtons'
 import styled from 'styled-components';
 
+import rehypeReact from "rehype-react"
+import PreviewLink from "../components/PreviewLink"
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  components: { "preview-link": PreviewLink },
+}).Compiler
+
 require('./blog-post.css')
 
 const Pager = styled.div`
@@ -39,9 +46,10 @@ class BlogPostTemplate extends React.Component {
         <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
         <p className={`date-text`} style={{marginTop: 0}}>{post.frontmatter.date}</p>
         <SocialButtons path={this.props.location.pathname} />
-        <div className={`content`} dangerouslySetInnerHTML={{__html: post.html}}
-             style={{marginTop: "2rem", marginBottom: "2rem"}}/>
-        {post.html.length > 1000 && (
+        <div className={`content`} style={{marginTop: "2rem", marginBottom: "2rem"}}>
+          {renderAst(post.htmlAst)}
+        </div>
+        {post.htmlAst.length > 1000 && (
           // ある程度長いページならページ下部にもBio
           <Bio/>
         )}
@@ -81,7 +89,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
-      html
+      htmlAst
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
