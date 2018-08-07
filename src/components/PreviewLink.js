@@ -17,7 +17,8 @@ class PreviewLink extends React.Component {
           display: "flex",
           alignItems: "center",
           border: "1px solid #eee",
-          borderRadius: radius
+          borderRadius: radius,
+          maxWidth:"500px"
         }}>
           <div style={{
             width: "5rem",
