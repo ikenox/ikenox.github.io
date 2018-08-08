@@ -7,8 +7,8 @@ date: "2017-12-25T00:00Z"
 
 ## IdeaVimとは
 
-- [IdeaVim](https://plugins.jetbrains.com/plugin/164-ideavim)  
-- Github: [JetBrains/ideavim](https://github.com/JetBrains/ideavim)
+<preview-link title="IdeaVim" url="https://plugins.jetbrains.com/plugin/164-ideavim"></preview-link>
+Github: [JetBrains/ideavim](https://github.com/JetBrains/ideavim)
 
 IdeaVimは、**IntelliJやAndroid StudioなどのJetBrains系列のIDEで使えるVimプラグイン** です。このプラグインを導入することでIntelliJなどをVimっぽく操作できるようになります。  
 リポジトリ名を見るとわかるように、JetBrainsの公式プラグインです。IntelliJの初回起動時にもオススメされます。

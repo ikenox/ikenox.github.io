@@ -10,23 +10,16 @@ class PreviewLink extends React.Component {
 
   render() {
     return (
-      <a href={this.props.url} target={`_blank`}
-         style={{textDecoration: "none", border: "0"}}>
-        <div style={{
-          verticalAlign: "middle",
-          display: "flex",
-          alignItems: "center",
-          border: "1px solid #eee",
-          borderRadius: radius,
-          maxWidth:"500px"
-        }}>
+      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+        <a href={this.props.url} target={`_blank`}
+           style={{textDecoration: "none", border: "0"}}>
           <div style={{
-            width: "5rem",
-            height: "5rem",
-            background: "#eee",
-            borderBottomLeftRadius: radius,
-            borderTopLeftRadius: radius,
-            margin: "-1px"
+            verticalAlign: "middle",
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid #eee",
+            borderRadius: radius,
+            maxWidth: "500px"
           }}>
             <img
               src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
@@ -39,45 +32,45 @@ class PreviewLink extends React.Component {
                 height: "5rem",
               }}
             />
+            <div style={{marginLeft: ".75rem", marginRight: ".5rem"}}>
+              <p style={{
+                fontSize: "0.85rem",
+                textOverflow: "ellipsis",
+                fontWeight: "700",
+                margin: 0,
+                lineHeight: "1.2em",
+                height: "1.2em",
+                overflow: "hidden",
+              }}>
+                {this.state.title ? this.state.title : this.props.title}
+              </p>
+              <p style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                fontSize: ".7rem",
+                color: "#666",
+                margin: ".2rem 0 0 0",
+                lineHeight: "1.4em",
+                height: "2.8em"
+              }}>
+                {this.state.description}
+              </p>
+              <p style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                wordBreak: "break-all",
+                fontSize: ".7em",
+                color: "#666",
+                margin: ".2rem 0 0 0",
+                lineHeight: "1.2em",
+                height: "1.2em"
+              }}>
+                {this.props.url.toString().replace(/^.*\/\/([^\/?#]*).*$/,"$1")}
+              </p>
+            </div>
           </div>
-          <div style={{marginLeft: ".75rem", marginRight: ".5rem"}}>
-            <p style={{
-              fontSize: "0.85rem",
-              textOverflow: "ellipsis",
-              fontWeight: "700",
-              margin: 0,
-              lineHeight: "1.2em",
-              height: "1.2em",
-              overflow: "hidden",
-            }}>
-              {this.state.title ? this.state.title : this.props.title}
-            </p>
-            <p style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              fontSize: ".7rem",
-              color: "#666",
-              margin: ".2rem 0 0 0",
-              lineHeight: "1.4em",
-              height: "2.8em"
-            }}>
-              {this.state.description}
-            </p>
-            <p style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              wordBreak: "break-all",
-              fontSize: ".7em",
-              color: "#666",
-              margin: ".2rem 0 0 0",
-              lineHeight: "1.2em",
-              height: "1.2em"
-            }}>
-              {(new URL(this.props.url)).hostname}
-            </p>
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     )
   }
 
