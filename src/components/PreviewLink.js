@@ -90,7 +90,7 @@ class PreviewLink extends React.Component {
             this.setState({
               title: result.data.title,
               description: result.data.description,
-              imageUrl: result.data.image ? result.data.image.url : null,
+              imageUrl: result.data.logo ? result.data.logo.url : null,
               host: result.data.publisher,
             });
           }
