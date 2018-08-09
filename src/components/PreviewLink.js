@@ -19,26 +19,12 @@ class PreviewLink extends React.Component {
             alignItems: "center",
             border: "1px solid #eee",
             borderRadius: radius,
-            maxWidth: "500px"
+            width:"100%",
           }}>
-            <div style={{ width: "5rem", height: "5rem", }}>
-              <img
-                src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
-                style={{
-                  borderBottomLeftRadius: radius,
-                  borderTopLeftRadius: radius,
-                  float: "left",
-                  objectFit: "cover",
-                  width: "5rem",
-                  height: "5rem",
-                }}
-              />
-            </div>
-            <div style={{marginLeft: ".75rem", marginRight: ".5rem"}}>
+            <div style={{marginLeft: ".75rem", marginRight: ".5rem", width:"100%"}}>
               <p style={{
-                fontSize: "0.85rem",
-                textOverflow: "ellipsis",
-                fontWeight: "700",
+                fontSize: "1rem",
+                fontWeight: "600",
                 margin: 0,
                 lineHeight: "1.2em",
                 height: "1.2em",
@@ -48,27 +34,39 @@ class PreviewLink extends React.Component {
               </p>
               <p style={{
                 overflow: "hidden",
-                textOverflow: "ellipsis",
-                fontSize: ".7rem",
+                fontSize: ".85rem",
                 color: "#666",
-                margin: ".2rem 0 0 0",
+                margin: ".4rem 0 0 0",
                 lineHeight: "1.4em",
-                height: "2.8em"
+                height: "2.8em",
+                lineClamp:"2",
               }}>
                 {this.state.description}
               </p>
               <p style={{
                 overflow: "hidden",
-                textOverflow: "ellipsis",
                 wordBreak: "break-all",
                 fontSize: ".7em",
                 color: "#666",
-                margin: ".2rem 0 0 0",
+                margin: ".6rem 0 0 0",
                 lineHeight: "1.2em",
-                height: "1.2em"
+                height: "1.2em",
+                lineClamp:"1",
               }}>
                 {this.props.url.toString().replace(/^.*\/\/([^\/?#]*).*$/, "$1")}
               </p>
+            </div>
+            <div style={{width: "7rem", height: "7rem" }}>
+              <img
+                src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
+                style={{
+                  borderBottomRightRadius: radius,
+                  borderTopRightRadius: radius,
+                  objectFit: "cover",
+                  width: "7rem",
+                  height: "7rem",
+                }}
+              />
             </div>
           </div>
         </a>
