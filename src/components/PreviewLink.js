@@ -21,17 +21,19 @@ class PreviewLink extends React.Component {
             borderRadius: radius,
             maxWidth: "500px"
           }}>
-            <img
-              src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
-              style={{
-                borderBottomLeftRadius: radius,
-                borderTopLeftRadius: radius,
-                float: "left",
-                objectFit: "cover",
-                width: "5rem",
-                height: "5rem",
-              }}
-            />
+            <div style={{ width: "5rem", height: "5rem", }}>
+              <img
+                src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
+                style={{
+                  borderBottomLeftRadius: radius,
+                  borderTopLeftRadius: radius,
+                  float: "left",
+                  objectFit: "cover",
+                  width: "5rem",
+                  height: "5rem",
+                }}
+              />
+            </div>
             <div style={{marginLeft: ".75rem", marginRight: ".5rem"}}>
               <p style={{
                 fontSize: "0.85rem",
@@ -65,7 +67,7 @@ class PreviewLink extends React.Component {
                 lineHeight: "1.2em",
                 height: "1.2em"
               }}>
-                {this.props.url.toString().replace(/^.*\/\/([^\/?#]*).*$/,"$1")}
+                {this.props.url.toString().replace(/^.*\/\/([^\/?#]*).*$/, "$1")}
               </p>
             </div>
           </div>
