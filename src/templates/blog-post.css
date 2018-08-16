@@ -3,8 +3,7 @@ ol p {
 }
 
 ol {
-  font-size: .8rem;
-  padding-left:0;
+  padding-left:1em;
   list-style-position:inside;
 }
 
@@ -37,6 +36,7 @@ p {
 
 li > p {
   margin:0;
+  font-size: 1rem;
 }
 
 .content table, td, th {
