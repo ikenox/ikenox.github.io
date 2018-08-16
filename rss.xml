@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Thu, 16 Aug 2018 15:49:05 GMT</lastBuildDate><item><title><![CDATA[ブログをGatsbyJSに載せ替えました]]></title><description><![CDATA[GatsbyJS 今までブログは  Jekyll  で生成してましたが、GatsbyJSに移行してみました。 GatsbyJSを使うとReact.jsベースの静的PWA…]]></description><link>https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</link><guid isPermaLink="false">https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</guid><pubDate>Sat, 04 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;GatsbyJS&lt;/h3&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Thu, 16 Aug 2018 18:25:31 GMT</lastBuildDate><item><title><![CDATA[ブログをGatsbyJSに載せ替えました]]></title><description><![CDATA[GatsbyJS 今までブログは  Jekyll  で生成してましたが、GatsbyJSに移行してみました。 GatsbyJSを使うとReact.jsベースの静的PWA…]]></description><link>https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</link><guid isPermaLink="false">https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</guid><pubDate>Sat, 04 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;GatsbyJS&lt;/h3&gt;
 &lt;p&gt;&lt;preview-link title=&quot;GatsbyJS&quot; url=&quot;https://www.gatsbyjs.org/&quot;&gt;&lt;/preview-link&gt;&lt;/p&gt;
 &lt;p&gt;今までブログは&lt;a href=&quot;https://jekyllrb.com/&quot;&gt; Jekyll &lt;/a&gt;で生成してましたが、GatsbyJSに移行してみました。&lt;/p&gt;
 &lt;p&gt;GatsbyJSを使うとReact.jsベースの静的PWAサイトを生成できます。
@@ -92,7 +92,9 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 &lt;p&gt;※ 以下、IntelliJを例にして進めますが、JetBrains系列のIDEであれば基本的に一緒なはずですので自身の使っているものに置き換えてお読みください。&lt;/p&gt;
 &lt;h3&gt;雰囲気&lt;/h3&gt;
 &lt;p&gt;※キーマップはカスタマイズ済です。&lt;/p&gt;
-&lt;p&gt;&lt;video controls=&quot;controls&quot; src=&quot;/assets/ideavim.mp4&quot; type=&quot;video/mp4&quot;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;center&gt;
+    &lt;img src=&quot;/overview-828bf0eedcf2d63fd07896aec3ce83e6.gif&quot; style=&quot;max-width:100%;&quot;&gt;
+&lt;/center&gt;
 &lt;h3&gt;なぜIdeaVimを使うか&lt;/h3&gt;
 &lt;p&gt;個人的には、IntelliJとVimのそれぞれに対して以下の点に良さを感じています。&lt;/p&gt;
 &lt;ul&gt;
@@ -254,7 +256,22 @@ IntelliJ内から&lt;code class=&quot;language-text&quot;&gt;[Settings] &amp;gt;
 &lt;h3&gt;VimとIdeaVimのキーマップの一元管理&lt;/h3&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;map&lt;/code&gt;コマンドが本家vimと同じ記述で利用可能なため、&lt;code class=&quot;language-text&quot;&gt;nnoremap L $&lt;/code&gt;などとといったような基本的なキーマップは、通常の&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;から切り出して&lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;という独立したファイルにしておき、&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;それぞれから&lt;code class=&quot;language-text&quot;&gt;source&lt;/code&gt;コマンドを使って読み込むのがおすすめです。&lt;br&gt;
 こうすることで、VimとIdeaVimで共通して設定しておきたいような基本的なキーマップを一元管理できるようになります。これは&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;が&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;とほとんど同じ文法で記述できるからこそのメリットですね。&lt;/p&gt;
-&lt;p&gt;参考までに、自分の&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;を以下に載せておきます。&lt;/p&gt;
+&lt;h5&gt;.ideavimrc&lt;/h5&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;&quot; 切り出しておいた共通keymapファイルをロード&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;.&lt;/span&gt;vimrc&lt;span class=&quot;token operator&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;keymap&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;&quot; IdeaVim特有の設定はここに書き足していく&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h5&gt;.vimrc.keymap&lt;/h5&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;&quot; IdeaVimとvimどちらでも共通のキーマップはここに書く&lt;/span&gt;
+
+nnoremap L $
+nnoremap H ^
+&lt;span class=&quot;token builtin&quot;&gt;noremap&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;参考までに、自分の&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;も以下に載せておきます。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/ikenox/dotfiles/blob/master/vimrc.keymap&quot;&gt;.vimrc.keymap&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/ikenox/dotfiles/blob/master/ideavimrc&quot;&gt;.ideavimrc&lt;/a&gt;&lt;/li&gt;
@@ -263,7 +280,7 @@ IntelliJ内から&lt;code class=&quot;language-text&quot;&gt;[Settings] &amp;gt;
 &lt;p&gt;基本的なキーマップは&lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;に切り出したので、&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;にはIdeaVim特有の設定が残ることになります。
 筆者の&lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;を見てもらうと、たとえば以下のように、&lt;code class=&quot;language-text&quot;&gt;nnoremap XXX :action YYY&lt;/code&gt;という記述が多くあることがわかります。&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
-      &lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nnoremap gd :action GotoDeclaration&lt;/code&gt;&lt;/pre&gt;
+      &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;nnoremap &lt;span class=&quot;token builtin&quot;&gt;gd&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoDeclaration&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt;はIdeaVimオリジナルのコマンドで、このコマンドを使うとIntelliJの機能を呼び出すことができます。&lt;code class=&quot;language-text&quot;&gt;GotoDeclaration&lt;/code&gt;はIntelliJの機能の一つであり、「カーソル上の変数や関数の定義元に飛ぶ」という操作です。&lt;br&gt;
 つまり上記の1行は、「&lt;code class=&quot;language-text&quot;&gt;gd&lt;/code&gt;をキーストロークするとカーソル上の変数や関数の定義元に飛ぶ」という設定となります。
@@ -335,39 +352,76 @@ IntelliJ内から&lt;code class=&quot;language-text&quot;&gt;[Settings] &amp;gt;
 &lt;/table&gt;
 &lt;h4&gt;設定例&lt;/h4&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
-      &lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;nnoremap ,e :action SearchEverywhere&amp;lt;CR&amp;gt;
-nnoremap ,g :action FindInPath&amp;lt;CR&amp;gt;
-nnoremap ,s :action FileStructurePopup&amp;lt;CR&amp;gt;
+      &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;nnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action SearchEverywhere&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+nnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;g &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action FindInPath&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+nnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;s &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action FileStructurePopup&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 
-nnoremap gd :action GotoDeclaration&amp;lt;CR&amp;gt;
-nnoremap gs :action GotoSuperMethod&amp;lt;CR&amp;gt;
-nnoremap gi :action GotoImplementation&amp;lt;CR&amp;gt;
-nnoremap gb :action JumpToLastChange&amp;lt;CR&amp;gt;
+nnoremap &lt;span class=&quot;token builtin&quot;&gt;gd&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoDeclaration&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+nnoremap gs &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoSuperMethod&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+nnoremap gi &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoImplementation&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+nnoremap gb &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action JumpToLastChange&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 
-nnoremap U :action FindUsages&amp;lt;CR&amp;gt;
-nnoremap R :action RenameElement&amp;lt;CR&amp;gt;
+nnoremap U &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action FindUsages&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+nnoremap R &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action RenameElement&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 
-nnoremap == :action ReformatCode&amp;lt;CR&amp;gt;
-vnoremap == :action ReformatCode&amp;lt;CR&amp;gt;
+nnoremap &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action ReformatCode&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+vnoremap &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action ReformatCode&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 
-nnoremap cc :action CommentByLineComment&amp;lt;CR&amp;gt;
-vnoremap cc :action CommentByLineComment&amp;lt;CR&amp;gt;
+nnoremap &lt;span class=&quot;token keyword&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action CommentByLineComment&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+vnoremap &lt;span class=&quot;token keyword&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action CommentByLineComment&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 
-nnoremap &amp;lt;C-CR&amp;gt; :action ShowIntentionActions&amp;lt;CR&amp;gt;
+nnoremap &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;C&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action ShowIntentionActions&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
 
-nnoremap ,a :action GotoAction&amp;lt;CR&amp;gt;
-vnoremap ,a :action GotoAction&amp;lt;CR&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+nnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoAction&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoAction&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
 &lt;p&gt;※ ビジュアルモードでの範囲選択に対する&lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt;コマンドの適用については、バージョン0.49.3以降で利用可能です。2018年2月現在ではEAPビルドの最新版で利用できます。&lt;/p&gt;
 &lt;h3&gt;アクションの検索&lt;/h3&gt;
 &lt;p&gt;「自分がいつも使ってるあの機能のアクション名を知りたい」といった際に、直接的に探す方法は無いのが現在の難点です。
 ただ、下記の手順を踏むとだいたいはそこまで苦労せずに見つかるかと思います。&lt;/p&gt;
-&lt;p&gt;1.
-IntelliJの&lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Keymap]&lt;/code&gt;から、設定したい機能を探します。その機能にIntelliJデフォルトで割り当てられているショートカットキーから探すと早いです。&lt;br&gt;
+&lt;p&gt;まず、IntelliJの&lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Keymap]&lt;/code&gt;から、設定したい機能を探します。その機能にIntelliJデフォルトで割り当てられているショートカットキーから探すと早いです。&lt;br&gt;
 見つかったら、その機能の名前を確認します。&lt;/p&gt;
-&lt;p&gt;2.
-&lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;コマンドを使うと、IdeaVimで呼び出し可能なアクションの一覧を確認することができます。 また、&lt;code class=&quot;language-text&quot;&gt;:actionlist XXX&lt;/code&gt;とすると、名前に&lt;code class=&quot;language-text&quot;&gt;XXX&lt;/code&gt;を含むアクションを検索することもできます。&lt;br&gt;
-さきほど確認した機能の名前の一部や、その機能を連想するような単語（検索関連の機能なら&lt;code class=&quot;language-text&quot;&gt;search&lt;/code&gt;とか）で検索して、それっぽいのがヒットしたら試してみる、というのを当たるまで繰り返します。&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-cde58.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 74.2462311557789%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAAC9ElEQVQ4y6WSTW8bRRjHXZAAqbYQ4gtwQ1RUVYhfdudlZ2d3Yzv2rh07IYncpi0REbFES0Mj+hK7pAj6FSpV6gGLM1+DCxeQuCBxgwsBqS1O/badP4+dNE6JEAdG+umZeVb67V/zTCJBa/jzL2/99uhX56/+U7vfG7Jeb8D2n/bZ/v4+e/L4Mdvb+539+cce6/d6bNDvn2A4GMjhoP9u4vlqX/nkQevLFm62bg/b7bZpEe07d8znu3fNF1/dM1vXt82Va1vmxq0dc/N2i9g5TtzevYvtz258fyQ8K6qdwtJH8KsfjET5EpzwEt7Tq5iVRbj+HITrgysPWS6RtjgytjiAifH5mSUUZjLWj6R6dSJ8u3KvE25/C7XxcHhm5b4517hv3ll9aDLlTaNdZpTnGq2V8bwDtOdM99qJ83kP0hFTYY65ndryGvLzCyPpFsAcSqXmwP0KeK0Jq7KBmfw66Aewqx8jXW5ittQ8rJuxXb2GjLs4FQpd6jQuN7G23hytXPgQ1aWLqNTPQ+aX4K1sYWFjF3MXdnCudBXp6CoU9Qpr1+E3PoVe3YpL67dgzzemQqaKndrKZYS1xqgQLSOqN5APl+nuAnBhw1EShWIA15WEhVLRwkJkoVK2UJ634vfrnPq5qTArgs44VVQ/P/KLddhqHlyHEDoPpjRdgYYl3Um1HY/2NCDhIXdAbNMVZWw5FWa43/GKi1Bz1ZEKKpB+RFQoIQkdlyasj+H+k9jxfOT4saFkedDRhTqEF44IyDEkPSE8IZ+kj6UXvCjM8ODrA2E0FH5kqBpKaEhomKMITbj/Br0MjRzjP0yfjfC/8UuLlKr8zAlCOH4Z4yq9AqXUhHeEQ2mUH0BqH5LOXAdwChFy0v3pSJi2+YPxhyzjj3Jcdin+IfIFskx0dZDvFsNKl5J1haO6aR0+SVc34xkVfkeq18a+U6eTybPJVKp2Opla+C+SY1KH+0lNUi9ZT6VSNrleScymMxMp8RLx8v/g1OtvvJn4G/u4yZ/l7WNHAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;actionlist&quot;
+        title=&quot;&quot;
+        src=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-fb8a0.png&quot;
+        srcset=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-1a291.png 148w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-2bc4a.png 295w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-fb8a0.png 590w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-526de.png 885w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-fa2eb.png 1180w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-cde58.png 1592w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;コマンドを使うと、IdeaVimで呼び出し可能なアクションの一覧を確認することができます。 また、&lt;code class=&quot;language-text&quot;&gt;:actionlist XXX&lt;/code&gt;とすると、名前に&lt;code class=&quot;language-text&quot;&gt;XXX&lt;/code&gt;を含むアクションを検索することもできます。&lt;br&gt;
+さきほど確認した機能の名前とアクション名は似ていることが多いため、機能名の一部や、その機能を連想するような単語（検索関連の機能なら&lt;code class=&quot;language-text&quot;&gt;search&lt;/code&gt;とか）で検索して、それっぽいのがヒットしたら試してみる、というのを当たるまで繰り返します。&lt;/p&gt;
+&lt;center&gt;
+    &lt;img src=&quot;/actionlist-25c4a08714b0cbdc134d5b0b0bf519ae.gif&quot; style=&quot;max-width:100%;&quot;&gt;
+&lt;/center&gt;
 &lt;h2&gt;おわりに&lt;/h2&gt;
 &lt;p&gt;本記事ではIdeaVimの機能や設定方法について紹介しました。&lt;br&gt;
 IdeaVimはまだ発展途上な部分もありますが、IntelliJの強力な機能をそのまま活かしつつVimの操作性を取り入れることができる素晴らしいプラグインだと思います。&lt;br&gt;
