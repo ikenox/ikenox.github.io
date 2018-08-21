@@ -36,7 +36,7 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
     const {previous, next} = this.props.pathContext
 
-    const title = `${post.frontmatter.title} | ${siteTitle}`
+    const title = `${post.frontmatter.title}`
 
     return (
       <div>
