@@ -23,10 +23,15 @@ class About extends React.Component {
 
           <h2 id="skills">Skills</h2>
           <ul>
-            <li>Server-side Development (Perl, Python, Java, SQL)</li>
+            <li>Server-side Development (Perl, Go, Python, Java, SQL)</li>
             <li>Android App Development (Java)</li>
             <li>Data Analysis and Visualization (Python)</li>
             <li>Others (Git, HTML, CSS)</li>
+          </ul>
+          <h3>Now studying</h3>
+          <ul>
+            <li>Microservices Application Design (on AWS/GCP)</li>
+            <li>Use Case Driven Development (ICONIX Process)</li>
           </ul>
 
           <h2 id="interests">Interests</h2>
