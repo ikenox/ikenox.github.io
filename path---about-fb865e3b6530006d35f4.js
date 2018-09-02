@@ -1,2 +1,2 @@
-webpackJsonp([0xf927f8900006],{377:function(t,e){t.exports={data:{site:{siteMetadata:{title:"ikenox.info",sns:{twitter:"https://twitter.com/ikenoxx"}}}},pathContext:{}}}});
+webpackJsonp([0xf927f8900006],{379:function(t,e){t.exports={data:{site:{siteMetadata:{title:"ikenox.info",sns:{twitter:"https://twitter.com/ikenoxx"}}}},pathContext:{}}}});
 //# sourceMappingURL=path---about-fb865e3b6530006d35f4.js.map

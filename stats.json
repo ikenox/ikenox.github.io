@@ -4,6 +4,10 @@
       "component---src-pages-index-js-7408838e0e8b066ea90b.js",
       "component---src-pages-index-js-7408838e0e8b066ea90b.js.map"
     ],
+    "path---2018-09-02-inheritance-and-delegation-and-interface": [
+      "path---2018-09-02-inheritance-and-delegation-and-interface-c020b6fbbb01988c888f.js",
+      "path---2018-09-02-inheritance-and-delegation-and-interface-c020b6fbbb01988c888f.js.map"
+    ],
     "path---": [
       "path----557518bd178906f8d58a.js",
       "path----557518bd178906f8d58a.js.map"
@@ -25,8 +29,8 @@
       "path---2017-12-25-ideavim-introduction-5a890ab67ebea1272f83.js.map"
     ],
     "path---index": [
-      "path---index-243e53d5e309d4aa44b7.js",
-      "path---index-243e53d5e309d4aa44b7.js.map"
+      "path---index-a1bd1e5333bd9a266dd7.js",
+      "path---index-a1bd1e5333bd9a266dd7.js.map"
     ],
     "path---2018-05-20-perl-mousex-types-enum": [
       "path---2018-05-20-perl-mousex-types-enum-7c1b9881de3cb998f15d.js",
@@ -39,8 +43,8 @@
       "build-js-styles.css.map"
     ],
     "path---2018-08-04-replaced-blog-with-gatsbyjs": [
-      "path---2018-08-04-replaced-blog-with-gatsbyjs-d5907e0c0d7e883b1569.js",
-      "path---2018-08-04-replaced-blog-with-gatsbyjs-d5907e0c0d7e883b1569.js.map"
+      "path---2018-08-04-replaced-blog-with-gatsbyjs-36184ddeccfb59582e6c.js",
+      "path---2018-08-04-replaced-blog-with-gatsbyjs-36184ddeccfb59582e6c.js.map"
     ],
     "path---offline-plugin-app-shell-fallback": [
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js",
@@ -51,14 +55,14 @@
       "path---2017-10-15-first-commit-278699488466ae20cf11.js.map"
     ],
     "app": [
-      "app-02ff38a8607127383fab.js",
+      "app-d94df5f27bbf967320e1.js",
       "build-js-styles.css",
-      "app-02ff38a8607127383fab.js.map",
+      "app-d94df5f27bbf967320e1.js.map",
       "build-js-styles.css.map"
     ],
     "component---src-pages-about-js": [
-      "component---src-pages-about-js-f95dd3d1e0aebf15deeb.js",
-      "component---src-pages-about-js-f95dd3d1e0aebf15deeb.js.map"
+      "component---src-pages-about-js-f3aa46359385e052d415.js",
+      "component---src-pages-about-js-f3aa46359385e052d415.js.map"
     ],
     "path---about": [
       "path---about-fb865e3b6530006d35f4.js",

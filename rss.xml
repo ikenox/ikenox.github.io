@@ -1,4 +1,173 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Tue, 21 Aug 2018 14:48:29 GMT</lastBuildDate><item><title><![CDATA[ブログをGatsbyJSに載せ替えました]]></title><description><![CDATA[GatsbyJS 今までブログは  Jekyll  で生成してましたが、GatsbyJSに移行してみました。 GatsbyJSを使うとReact.jsベースの静的PWA…]]></description><link>https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</link><guid isPermaLink="false">https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</guid><pubDate>Sat, 04 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;GatsbyJS&lt;/h3&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 02 Sep 2018 13:42:09 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;子に親と同じ役割が期待される場合、親と同様に振る舞えるようになる継承を使うのが良い&lt;/li&gt;
+&lt;li&gt;子に親と同じ役割が期待されない場合、子にとって親は単なるツールである可能性が高いため委譲を使うのが良い&lt;/li&gt;
+&lt;li&gt;インターフェースを使うことで責務の分離を強制することができ、その結果テストの容易性を得られたりする&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;委譲の使いどき&lt;/h2&gt;
+&lt;p&gt;例として、「SQLデータベースからユーザー情報を取り出したり保存したりする機能」を作ろうとしたとき、ぱっと思いつく方針としては、&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBの接続状態を保持したりSQLクエリを実行したりする部分のロジックは、ユーザー情報の取得に限らず、データベースから情報を取得するとき全般で使いまわせそう&lt;br&gt;
+⇒ DBの操作周辺に関して使いまわせそうな部分はクラスに切り出しておいて(ここでは&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスとする)、ユーザー情報の取得や保存をするためのクラス&lt;code class=&quot;language-text&quot;&gt;UserDatabse&lt;/code&gt;から&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスを何らかの方法で利用するようにすれば、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスのDB操作機能を使いまわせて良い感じ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;という感じになるかと思います。
+ここで、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;から&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスを利用する方法としては、継承または委譲が思い浮かびます。&lt;/p&gt;
+&lt;p&gt;結論から言うと委譲を使ったほうが良いのですが、継承を使って以下のようにやってしまいたくなるかもしれません。&lt;/p&gt;
+&lt;h4&gt;委譲を使うべき場面で継承を使った例&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;connectToDatabase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String dbHost&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; String dbName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// DBへの接続ロジック&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    Result &lt;span class=&quot;token function&quot;&gt;doSQL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String sql&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// 接続しているDBにクエリを投げ、その結果を返すロジック&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// そのほかデータベースの接続状態の管理など&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserDatabase&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    User &lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        String sql &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;SELECT * FROM users WHERE user_id=%d&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        Result result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;doSQL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// クエリの実行結果をもとにユーザーオブジェクトを作って返す&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;継承を使ったこの実装だと、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt; は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承しているので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;と同等の振る舞いをできるようになります。&lt;br&gt;
+が、そのことによって不自然な点が生じてしまいます。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;は、「特定のuserを取得する」という本来持たせたかった役割の他に、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;の持つ「DBとの接続状態の保持や、DBへのSQLクエリ送信」といった役割も獲得してしまっています。これは&lt;a href=&quot;https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E5%8E%9F%E5%89%87/&quot;&gt;単一責務の原則&lt;/a&gt;に反することになります。&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側が&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;に期待している役割は「特定のオブジェクト(この場合はuser)を取得する」ことであり、直接データベースの操作をしたり、データベースとの接続状態を管理してほしい訳ではないはずです。また&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;からすると、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;はDB接続のための単なるツールとして使いたいだけで、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;自身になりたいわけではありません。  &lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のように&lt;strong&gt;期待される役割が異なっている2つのクラス間で継承関係を持つと、上記のような歪みが発生してしまいます。&lt;/strong&gt;&lt;br&gt;
+そういう場合は代わりに委譲を使うのが適していると言えます。&lt;/p&gt;
+&lt;h4&gt;委譲を使って書き直した例&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;は先程と同じ実装のままで、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が変更になります。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserDatabase&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    Database database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;UserDatabase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Database database&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// UserDatabaseのインスタンス生成時にDatabaseのインスタンスをセット&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;database &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    User &lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        String sql &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;SELECT * FROM users WHERE user_id=%d&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        Result result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;database&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;doSQL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// クエリの実行結果をもとにユーザーオブジェクトを作って返す&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;継承はせず、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のインスタンスを保持しておいて、必要に応じてそれを呼び出す(&lt;strong&gt;委譲&lt;/strong&gt;)ようになっています。&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のインスタンスは、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;のオブジェクト生成時のコンストラクタなどで渡すようにします。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承していないので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;としては振る舞えず、DBからユーザーを取得するための最小限のロジックのみ知っている状態になっています。&lt;br&gt;
+&lt;strong&gt;「期待される役割が異なっている」クラスの機能を利用したい際は、継承ではなく委譲を用いるのが適切&lt;/strong&gt;と言えます。&lt;/p&gt;
+&lt;h2&gt;継承の使いどき&lt;/h2&gt;
+&lt;p&gt;逆に「子には親と同じ役割が期待される」場合には継承が適しています。&lt;/p&gt;
+&lt;p&gt;たとえば、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;(車)クラスと&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;(電気自動車)クラスを考えます。
+&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;のほうが&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;よりも意味が広く抽象度は高いですが、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;を利用するときも&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;を利用するときも「加速する/減速する」「窓を開ける/閉める」といった基本的な動作は共通して可能であることが期待されます。&lt;br&gt;
+「ハイブリッドカーを運転する」ことを、「車を運転する」と言い換えても間違いではないように、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;に期待される役割は基本的な部分では一緒であると言えます。&lt;/p&gt;
+&lt;p&gt;このような場合に委譲を使うと以下のようになります。&lt;/p&gt;
+&lt;h4&gt;継承を使うべき場面で委譲を使った例&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SpeedUp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;OpenWindow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ElectoricCar&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    Car car&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SpeedUp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        car&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;SpeedUp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;OpenWindow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        car&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;OpenWindow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// 電気自動車特有のロジック&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Charge&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;加速や減速、窓の開閉など、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;の持っている機能の数だけ&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;にボイラープレートコードが増えていきます。&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;に「ライトを点ける」動作が増えた場合には&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;にも変更を加えなくてはいけません。新たに&lt;code class=&quot;language-text&quot;&gt;HybridCar&lt;/code&gt;を増やそうとすると更に辛くなっていきます。
+また、2つのクラスは継承関係に無いので、ダックタイピングを許さないような言語だと&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;を&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;として扱うこともできません。&lt;/p&gt;
+&lt;h4&gt;継承を使って書き直した例&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;は先程と同じ実装のままで、&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;が変更になります。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ElectoricCar&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Charge&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;委譲を使った際と比べて圧倒的にスッキリします。&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;に新たなメソッドが増えるなどの変更が入っても&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;に変更を入れる必要はありません。&lt;strong&gt;「子には親と同じ役割が期待される」場合は、委譲ではなく継承を用いるのが適切&lt;/strong&gt;と言えます。&lt;/p&gt;
+&lt;h2&gt;ここまでのまとめ&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;子に親と同じ役割が期待される場合、親と同様に振る舞えるようになる継承を使うのが良い&lt;/li&gt;
+&lt;li&gt;子に親と同じ役割が期待されない場合、子にとって親は単なるツールである可能性が高いため委譲を使うのが良い&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;インターフェースの使いどころ&lt;/h2&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;について再び考えると、極端な話&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側は、userさえ取得できればそれで良くて、その裏側にあるのがデータベースだろうが、&lt;code class=&quot;language-text&quot;&gt;.txt&lt;/code&gt;ファイルに保存されていようが、オンメモリだろうがなんだって良いはずです。
+こういう「裏の実装は複雑な状態などを取りうるかもしれないが、使う側としては目的が達成できれば何でもいい」場合はインターフェースの出番であることが多いです。&lt;br&gt;
+そこで、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;という「ユーザーを取得・保存する」役割のインターフェースを作り、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;を実装するようにしてみます。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    User &lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;saveUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;User user&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserDatabase&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    Database database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token function&quot;&gt;UserDatabase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Database database&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;database &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    User &lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        String sql &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;SELECT * FROM users WHERE user_id=%d&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;の利用側のロジックは例えば以下のようになります。  &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;SomeApplicationService&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    UserRepository userRepository&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;changeUserEmail&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String email&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        User user &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; userRepository&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        user&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;setEmail&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;email&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        userRepository&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;saveUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;はインターフェースのため、実装に関して全く言及をしていません。そのため、&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;を利用している&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;側としては、「とにかくuserが取得できることを期待しており、実装は何でも良い」ということをコードで表明している&lt;/strong&gt;ことになります。&lt;br&gt;
+結果、以下のようなメリットを得られるようになります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ユーザーデータのハンドリングが主な役割である&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;がデータベースへの接続などについて言及することはなくなり(できなくなり)、責務の分離を強制することができます。  &lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;はDBについては言及していないので、例えば&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;のテスト用に&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;を実装したインメモリの&lt;code class=&quot;language-text&quot;&gt;InMemoryUserDatabase&lt;/code&gt;を用意しておいて、テストのときだけ&lt;code class=&quot;language-text&quot;&gt;userRepository&lt;/code&gt;の実装を差し替えるようなことが可能となり、よりテストが容易になります。&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[ブログをGatsbyJSに載せ替えました]]></title><description><![CDATA[GatsbyJS 今までブログは  Jekyll  で生成してましたが、GatsbyJSに移行してみました。 GatsbyJSを使うとReact.jsベースの静的PWA…]]></description><link>https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</link><guid isPermaLink="false">https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</guid><pubDate>Sat, 04 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;GatsbyJS&lt;/h3&gt;
 &lt;p&gt;&lt;preview-link title=&quot;GatsbyJS&quot; url=&quot;https://www.gatsbyjs.org/&quot;&gt;&lt;/preview-link&gt;&lt;/p&gt;
 &lt;p&gt;今までブログは&lt;a href=&quot;https://jekyllrb.com/&quot;&gt; Jekyll &lt;/a&gt;で生成してましたが、GatsbyJSに移行してみました。&lt;/p&gt;
 &lt;p&gt;GatsbyJSを使うとReact.jsベースの静的PWAサイトを生成できます。
