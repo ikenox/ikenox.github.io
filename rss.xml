@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 02 Sep 2018 13:42:09 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Sep 2018 08:30:40 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;子に親と同じ役割が期待される場合、親と同様に振る舞えるようになる継承を使うのが良い&lt;/li&gt;
@@ -39,9 +39,12 @@
       &lt;/div&gt;
 &lt;p&gt;継承を使ったこの実装だと、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt; は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承しているので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;と同等の振る舞いをできるようになります。&lt;br&gt;
 が、そのことによって不自然な点が生じてしまいます。&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;は、「特定のuserを取得する」という本来持たせたかった役割の他に、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;の持つ「DBとの接続状態の保持や、DBへのSQLクエリ送信」といった役割も獲得してしまっています。これは&lt;a href=&quot;https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E5%8E%9F%E5%89%87/&quot;&gt;単一責務の原則&lt;/a&gt;に反することになります。&lt;br&gt;
-&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側が&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;に期待している役割は「特定のオブジェクト(この場合はuser)を取得する」ことであり、直接データベースの操作をしたり、データベースとの接続状態を管理してほしい訳ではないはずです。また&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;からすると、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;はDB接続のための単なるツールとして使いたいだけで、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;自身になりたいわけではありません。  &lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のように&lt;strong&gt;期待される役割が異なっている2つのクラス間で継承関係を持つと、上記のような歪みが発生してしまいます。&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;は、「特定のユーザーを取得する」という本来持たせたかった役割の他に、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;の持つ「DBとの接続状態の保持や、DBへのSQLクエリ送信」といった役割も獲得してしまっています。これは&lt;a href=&quot;https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E5%8E%9F%E5%89%87/&quot;&gt;単一責務の原則&lt;/a&gt;に反することになります。&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側が&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;に期待している役割は「特定のオブジェクト(この場合はユーザー)を取得する」ことであり、直接データベースの操作をしたり、データベースとの接続状態を管理してほしい訳ではないはずです。&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;からすると、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;はDB接続のための単なるツールとして使いたいだけで、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;自身になりたいわけではありません。&lt;/p&gt;
+&lt;p&gt;1つのクラスが複数の責務を持つと、それぞれの責務に関係した変更があった際に影響を受けてしまうようになり、改修の影響範囲が大きくなってしまいます。&lt;br&gt;
+また、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;がパブリックメソッドを持つような場合、それらのメソッドは&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;のメソッドとしても呼び出せるようになります。結果、ユーザーの取得には関係のないDB操作のメソッドも&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側が使えるようになり、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が意図とは異なる使い方をされてしまう可能性が出てきます。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のように&lt;strong&gt;期待される役割が異なっている2つのクラス間で継承関係を持つと、上記のようにいくつか不自然な点が出てしまいます。&lt;/strong&gt;&lt;br&gt;
 そういう場合は代わりに委譲を使うのが適していると言えます。&lt;/p&gt;
 &lt;h4&gt;委譲を使って書き直した例&lt;/h4&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;は先程と同じ実装のままで、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が変更になります。&lt;/p&gt;
@@ -548,8 +551,7 @@ vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;spa
 &lt;h3&gt;アクションの検索&lt;/h3&gt;
 &lt;p&gt;「自分がいつも使ってるあの機能のアクション名を知りたい」といった際に、直接的に探す方法は無いのが現在の難点です。
 ただ、下記の手順を踏むとだいたいはそこまで苦労せずに見つかるかと思います。&lt;/p&gt;
-&lt;p&gt;まず、IntelliJの&lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Keymap]&lt;/code&gt;から、設定したい機能を探します。その機能にIntelliJデフォルトで割り当てられているショートカットキーから探すと早いです。&lt;br&gt;
-見つかったら、その機能の名前を確認します。&lt;/p&gt;
+&lt;p&gt;まず、IntelliJの&lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Keymap]&lt;/code&gt;から、設定したい機能を探します。その機能にIntelliJデフォルトで割り当てられているショートカットキーから探すと早いです。  &lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -586,8 +588,11 @@ vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;spa
   
   &lt;/a&gt;
     &lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;コマンドを使うと、IdeaVimで呼び出し可能なアクションの一覧を確認することができます。 また、&lt;code class=&quot;language-text&quot;&gt;:actionlist XXX&lt;/code&gt;とすると、名前に&lt;code class=&quot;language-text&quot;&gt;XXX&lt;/code&gt;を含むアクションを検索することもできます。&lt;br&gt;
-さきほど確認した機能の名前とアクション名は似ていることが多いため、機能名の一部や、その機能を連想するような単語（検索関連の機能なら&lt;code class=&quot;language-text&quot;&gt;search&lt;/code&gt;とか）で検索して、それっぽいのがヒットしたら試してみる、というのを当たるまで繰り返します。&lt;/p&gt;
+&lt;p&gt;見つかったら、その機能の名前を確認しておきます。&lt;/p&gt;
+&lt;p&gt;次に、&lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;コマンドを使うことで、IdeaVimで呼び出し可能なアクションの一覧を確認することができます。 また、&lt;code class=&quot;language-text&quot;&gt;:actionlist XXX&lt;/code&gt;とすると、名前に&lt;code class=&quot;language-text&quot;&gt;XXX&lt;/code&gt;を含むアクションを検索することもできます。&lt;br&gt;
+さきほど確認した機能名とアクション名は似ていることが多いため、機能名の一部や、その機能を連想するような単語（検索関連の機能なら&lt;code class=&quot;language-text&quot;&gt;search&lt;/code&gt;とか）で検索して、それっぽいのがヒットしたら試してみる、というのを当たるまで繰り返します。&lt;br&gt;
+検索結果には現在そのアクションに割り当てられているショートカットキーも表示されるため、それも参考にすると見つけやすいかと思います。
+(ショートカットキーでアクションの検索ができるようになってくれると便利そうですね…)&lt;/p&gt;
 &lt;center&gt;
     &lt;img src=&quot;/actionlist-25c4a08714b0cbdc134d5b0b0bf519ae.gif&quot; style=&quot;max-width:100%;&quot;&gt;
 &lt;/center&gt;
