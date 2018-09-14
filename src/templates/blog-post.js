@@ -3,6 +3,7 @@ import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 
 import Bio from '../components/Bio'
+import Comments from '../components/Comments'
 import SocialButtons from '../components/SocialButtons'
 import styled from 'styled-components';
 
@@ -33,7 +34,6 @@ padding:5px;
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
-    const siteTitle = this.props.data.site.siteMetadata.title
     const {previous, next} = this.props.pathContext
 
     const title = `${post.frontmatter.title}`
@@ -54,6 +54,7 @@ class BlogPostTemplate extends React.Component {
           <Bio/>
         )}
         <hr/>
+        <Comments pageId={this.props.location.pathname.replace(/^\/|\/$/g, '')}/>
         <Pager>
           {previous && (
             <div className={`linkPrevious`}>
