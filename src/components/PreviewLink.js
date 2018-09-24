@@ -10,7 +10,7 @@ class PreviewLink extends React.Component {
 
   render() {
     return (
-      <span style={{marginTop: "1rem", marginBottom: "1rem", display:"inline-block"}}>
+      <span style={{marginTop: "1rem", marginBottom: "1rem", display:"block"}}>
         <a href={this.props.url} target={`_blank`}
            style={{textDecoration: "none", border: "0"}}>
           <span style={{
@@ -33,6 +33,7 @@ class PreviewLink extends React.Component {
               }}>
                 {this.state.title ? this.state.title : this.props.title}
               </span>
+              <br/>
               <span style={{
                 overflow: "hidden",
                 fontSize: ".85rem",
@@ -45,6 +46,7 @@ class PreviewLink extends React.Component {
               }}>
                 {this.state.description}
               </span>
+              <br/>
               <span style={{
                 overflow: "hidden",
                 wordBreak: "break-all",
