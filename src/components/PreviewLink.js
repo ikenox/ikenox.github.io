@@ -10,10 +10,10 @@ class PreviewLink extends React.Component {
 
   render() {
     return (
-      <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+      <span style={{marginTop: "1rem", marginBottom: "1rem", display:"inline-block"}}>
         <a href={this.props.url} target={`_blank`}
            style={{textDecoration: "none", border: "0"}}>
-          <div style={{
+          <span style={{
             verticalAlign: "middle",
             display: "flex",
             alignItems: "center",
@@ -21,18 +21,19 @@ class PreviewLink extends React.Component {
             borderRadius: radius,
             width:"100%",
           }}>
-            <div style={{marginLeft: ".75rem", marginRight: ".5rem", width:"100%"}}>
-              <p style={{
+            <span style={{marginLeft: ".75rem", marginRight: ".5rem", width:"100%", display:"inline-block", lineHeight:0}}>
+              <span style={{
                 fontSize: "1rem",
                 fontWeight: "600",
                 margin: 0,
                 lineHeight: "1.2em",
                 height: "1.2em",
                 overflow: "hidden",
+                display:"inline-block",
               }}>
                 {this.state.title ? this.state.title : this.props.title}
-              </p>
-              <p style={{
+              </span>
+              <span style={{
                 overflow: "hidden",
                 fontSize: ".85rem",
                 color: "#666",
@@ -40,10 +41,11 @@ class PreviewLink extends React.Component {
                 lineHeight: "1.4em",
                 height: "2.8em",
                 lineClamp:"2",
+                display:"inline-block",
               }}>
                 {this.state.description}
-              </p>
-              <p style={{
+              </span>
+              <span style={{
                 overflow: "hidden",
                 wordBreak: "break-all",
                 fontSize: ".7em",
@@ -52,11 +54,12 @@ class PreviewLink extends React.Component {
                 lineHeight: "1.2em",
                 height: "1.2em",
                 lineClamp:"1",
+                display:"inline-block",
               }}>
                 {this.props.url.toString().replace(/^.*\/\/([^\/?#]*).*$/, "$1")}
-              </p>
-            </div>
-            <div style={{width: "7rem", height: "7rem" }}>
+              </span>
+            </span>
+            <span style={{width: "7rem", height: "7rem" }}>
               <img
                 src={this.state.imageUrl ? this.state.imageUrl : "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89x8AAuEB74Y0o2cAAAAASUVORK5CYII="}
                 style={{
@@ -67,10 +70,10 @@ class PreviewLink extends React.Component {
                   height: "7rem",
                 }}
               />
-            </div>
-          </div>
+            </span>
+          </span>
         </a>
-      </div>
+      </span>
     )
   }
 
