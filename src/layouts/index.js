@@ -6,14 +6,15 @@ import Helmet from 'react-helmet'
 
 require("./prism.css");
 require("./base.css");
+require("firebaseui");
 
 class Template extends React.Component {
+
   render() {
     const {location, children} = this.props
     let header
     if (location.pathname === '/') {
-      header = (
-        <div>
+      header = (<div>
           <h1 style={{fontSize: "1.5rem", marginTop: ".5rem", display: "inline-block"}}>
             <Link to={'/'}>
               ikenox.info
@@ -21,11 +22,10 @@ class Template extends React.Component {
           </h1>
           <a href={'/rss.xml'} target={`_blank`}
              style={{display: "block", fontSize: "1.5rem", float: "right", marginTop: "0.6rem"}}><FaRSS/></a>
-        </div>
-      )
-    } else {
-      header = (
-        <div>
+        </div>)
+    }
+    else {
+      header = (<div>
           <h3 style={{fontSize: "1.5rem", marginTop: ".5rem", display: "inline-block"}}>
             <Link to={'/'}>
               ikenox.info
@@ -33,11 +33,9 @@ class Template extends React.Component {
           </h3>
           <a href={'/rss.xml'} target={`_blank`}
              style={{display: "block", fontSize: "1.5rem", float: "right", marginTop: "0.6rem"}}><FaRSS/></a>
-        </div>
-      )
+        </div>)
     }
-    return (
-      <div className={`content-wrapper`}>
+    return (<div className={`content-wrapper`}>
         <Helmet>
           <meta name={`og:image`} content={`https://ikenox.info/icon.png`}/>
           <meta name={`og:type`} content={`website`}/>
@@ -45,15 +43,12 @@ class Template extends React.Component {
         {header}
         <Bio/>
         {children()}
-      </div>
-    )
+      </div>)
   }
 }
 
 Template.propTypes = {
-  children: React.PropTypes.func,
-  location: React.PropTypes.object,
-  route: React.PropTypes.object,
+  children: React.PropTypes.func, location: React.PropTypes.object, route: React.PropTypes.object,
 }
 
 export default Template
