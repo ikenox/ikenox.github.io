@@ -42,7 +42,11 @@ class Bio extends React.Component {
     })
       .then(res => res.json())
       .then((result) => {
-        this.setState({text: "", name: ""});
+        this.setState({
+                        text: "",
+                        name: "",
+                        comments: [...this.state.comments, result.data],
+                      });
       }, (error) => {
         console.error(error)
       })
