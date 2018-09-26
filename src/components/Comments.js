@@ -1,17 +1,16 @@
 import React from 'react'
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import firebaseui from 'firebaseui';
+import { debugLog } from '../util'
 
-export const firebaseApp = firebase.initializeApp({
-                                                    apiKey: "AIzaSyD7ZnEyTPtv8UXaJa1F4E_D9r9lFyamq5U",
-                                                    authDomain: "comment-api-dev.firebaseapp.com",
-                                                    databaseURL: "https://comment-api-dev.firebaseio.com",
-                                                    projectId: "comment-api-dev",
-                                                    storageBucket: "comment-api-dev.appspot.com",
-                                                    messagingSenderId: "158688950686",
-                                                  });
+// todo move to repository
+firebase.initializeApp({
+                         apiKey: process.env.FIREBASE_API_KEY,
+                         authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+                         projectId: process.env.FIREBASE_PROJECT_ID,
+                       });
 
-const COMMENT_API_URL = "http://localhost:8080"
+const COMMENT_API_URL = process.env.COMMENT_API_URL
 
 class Comments extends React.Component {
   constructor(props) {
@@ -26,22 +25,24 @@ class Comments extends React.Component {
   render() {
     return (<div>
       {this.state.comments.map(e => (<div key={e.comment.commentId}>
-        <p>name: {e.commenter.name}</p>
-        <div>text: {e.comment.text}</div>
+        <span>name: {e.commenter.name}</span>
+        <p style={{ margin:"0" }}>text: {e.comment.text}</p>
       </div>))}
       <form onSubmit={this.postComment}>
         <label>
           Name:
-          <input type="textarea" value={this.state.name} onChange={this.handleNameChange}
+          <input type="text" value={this.state.name} onChange={this.handleNameChange}
                  disabled={this.state.isPosting}/>
         </label>
+        <br/>
         <label>
           Text:
-          <input type="text" value={this.state.text} onChange={this.handleTextChange} disabled={this.state.isPosting}/>
+          <textarea value={this.state.text} onChange={this.handleTextChange} disabled={this.state.isPosting}/>
         </label>
+        <br/>
         <input type="submit" value="Submit" disabled={this.state.isPosting}/>
       </form>
-      <button onClick={this.login}/>
+      {/*<button onClick={this.login}/>*/}
       <div id={`firebaseui-auth-container`}/>
     </div>)
   }
@@ -73,6 +74,7 @@ class Comments extends React.Component {
     let user = firebase.auth().currentUser;
 
     this.setState({isPosting: true});
+    // todo move to repository
     (new Promise((resolve, reject) => {
       resolve("")
       // todo login
@@ -118,23 +120,23 @@ class Comments extends React.Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         if (user.isAnonymous) {
-          console.log("logged in as anonymous user " + user.uid)
+          debugLog("logged in as anonymous user " + user.uid)
         }
         else {
-          console.log("logged in as user " + user.uid)
+          debugLog("logged in as user " + user.uid)
         }
       }
     })
     this.setState({
                     name: localStorage.getItem('commenter.name') || "",
                     text: localStorage.getItem(this.props.pageId + ".text") || ""
-    })
+                  })
 
     let pageId = this.props.pageId;
     fetch(COMMENT_API_URL + `/comment?pageId=` + pageId, {mode: 'cors'})
       .then(res => res.json())
       .then((result) => {
-        console.log(result.data)
+        debugLog(result.data)
         this.setState({comments: result.data});
       }, (error) => {
         console.error(error)
