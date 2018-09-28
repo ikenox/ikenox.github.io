@@ -3,10 +3,16 @@ import Link from 'gatsby-link'
 import FaRSS from 'react-icons/lib/fa/feed'
 import Bio from '../components/Bio'
 import Helmet from 'react-helmet'
+import firebase from 'firebase/app';
 
 require("./prism.css");
 require("./base.css");
-require("firebaseui");
+
+firebase.initializeApp({
+                         apiKey: process.env.FIREBASE_API_KEY,
+                         authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+                         projectId: process.env.FIREBASE_PROJECT_ID,
+                       });
 
 class Template extends React.Component {
 

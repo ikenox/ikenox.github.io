@@ -1,21 +1,23 @@
 import React from 'react'
 import firebase from 'firebase/app';
 import firebaseui from 'firebaseui';
-import { debugLog } from '../util'
+import {debugLog} from '../util'
+import dateformat from 'dateformat';
 
-// todo move to repository
-firebase.initializeApp({
-                         apiKey: process.env.FIREBASE_API_KEY,
-                         authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-                         projectId: process.env.FIREBASE_PROJECT_ID,
-                       });
+import nl2br from 'react-nl2br'
 
 const COMMENT_API_URL = process.env.COMMENT_API_URL
+const TEXTAREA_MIN_LINE_NUM = 5
+
+let inputStyle = {
+  border: "none", overflow: "auto", outline: "none", boxShadow: "none",
+}
 
 class Comments extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentUser: null, text: '', name: '', isPosting: false, comments: []};
+    this.state =
+      {currentUser: null, text: '', name: '', isPosting: false, comments: [], textAreaLineNum: TEXTAREA_MIN_LINE_NUM};
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -24,26 +26,72 @@ class Comments extends React.Component {
 
   render() {
     return (<div>
-      {this.state.comments.map(e => (<div key={e.comment.commentId}>
-        <span>name: {e.commenter.name}</span>
-        <p style={{ margin:"0" }}>text: {e.comment.text}</p>
-      </div>))}
-      <form onSubmit={this.postComment}>
-        <label>
-          Name:
-          <input type="text" value={this.state.name} onChange={this.handleNameChange}
-                 disabled={this.state.isPosting}/>
-        </label>
-        <br/>
-        <label>
-          Text:
-          <textarea value={this.state.text} onChange={this.handleTextChange} disabled={this.state.isPosting}/>
-        </label>
-        <br/>
-        <input type="submit" value="Submit" disabled={this.state.isPosting}/>
-      </form>
+      <h3 style={{marginTop: "1rem"}}>{this.state.comments.length} Comments</h3>
+      <div style={{marginBottom: "1.5rem"}}>
+        {this.state.comments.map(
+          e => (<div key={e.comment.commentId} style={{fontSize: ".9rem", marginBottom: ".75rem", paddingLeft: ".5rem"}}>
+            <h4 style={{marginTop: "1.5rem", marginBottom: "0", fontWeight: "600"}}>{e.commenter.name}</h4>
+            <p style={{margin: "0", lineHeight: "1.6em", fontSize: ".85em", color: "#666"}}>{dateformat(
+              new Date(e.comment.commentedAt), "yyyy-mm-dd HH:MM:ss")}</p>
+            <p style={{margin: "0", lineHeight: "1.6em"}}>{nl2br(e.comment.text)}</p>
+          </div>))}
+
+        <div style={{
+          marginTop: "1rem",
+          backgroundColor: "#f5f5f5",
+          borderRadius: ".25rem",
+          padding: ".5rem",
+        }}>
+          <form onSubmit={this.postComment}>
+            <input type="text" value={this.state.name} onChange={this.handleNameChange}
+                   disabled={this.state.isPosting} placeholder="Name"
+                   style={{
+                     overflow: "auto",
+                     background: "none",
+                     outline: "none",
+                     letterSpacing: "0.04em",
+                     boxShadow: "none",
+                     fontSize: "1rem",
+                     height:"1.6rem",
+                     width: "100%",
+                     lineHeight: "0",
+                     padding:"0",
+                     boxSizing: "border-box",
+                     color: "#0a0a0a",
+                     border: "none",
+                     fontKerning: "normal",
+                     fontSmoothing: "antialiased",
+                     fontWeight: "600",
+                     fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif',
+                   }}/>
+            <textarea id="comment-text" placeholder="Comment" rows={this.state.textAreaLineNum}
+                      style={{
+                        padding:"0",
+                        overflow: "auto",
+                        outline: "none",
+                        resize: "none",
+                        color: "#0a0a0a",
+                        background: "none",
+                        boxShadow: "none",
+                        lineHeight: "1.6em",
+                        fontSize: ".9rem",
+                        width: "100%",
+                        boxSizing: "border-box",
+                        border: "none",
+                        fontKerning: "normal",
+                        fontSmoothing: "antialiased",
+                        fontWeight: "lighter",
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif',
+                      }}
+                      value={this.state.text} onChange={this.handleTextChange} disabled={this.state.isPosting}/>
+            <br/>
+            <input style={{ cursor: "pointer", padding:".5rem .75rem",border:"none",marginTop:".5rem",background:"#eee", color:"#666", fontWeight:"bold", fontSize:".75rem" }} type="submit" value="SUBMIT" disabled={this.state.isPosting}/>
+          </form>
+        </div>
+
+      </div>
       {/*<button onClick={this.login}/>*/}
-      <div id={`firebaseui-auth-container`}/>
+      {/*<div id={`firebaseui-auth-container`}/>*/}
     </div>)
   }
 
@@ -108,12 +156,13 @@ class Comments extends React.Component {
 
   handleTextChange(event) {
     localStorage.setItem(this.props.pageId + ".text", event.target.value);
-    this.setState({text: event.target.value});
+    let lineNum = event.target.value.split("\n").length
+    this.setState({text: event.target.value, textAreaLineNum: lineNum < 5 ? 5 : lineNum});
   }
 
   handleNameChange(event) {
-    localStorage.setItem('commenter.name', event.target.value);
-    this.setState({name: event.target.value});
+    localStorage.setItem('commenter.name', event.target.value)
+    this.setState({name: event.target.value})
   }
 
   componentDidMount() {

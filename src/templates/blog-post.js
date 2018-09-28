@@ -9,10 +9,10 @@ import styled from 'styled-components';
 
 import rehypeReact from "rehype-react"
 import PreviewLink from "../components/PreviewLink"
+
 const renderAst = new rehypeReact({
-  createElement: React.createElement,
-  components: { "preview-link": PreviewLink },
-}).Compiler
+                                    createElement: React.createElement, components: {"preview-link": PreviewLink},
+                                  }).Compiler
 
 require('./blog-post.css')
 
@@ -38,63 +38,44 @@ class BlogPostTemplate extends React.Component {
 
     const title = `${post.frontmatter.title}`
 
-    return (
-      <div>
-        <Helmet title={title}>
-          <meta name={`og:title`} content={title}/>
-        </Helmet>
-        <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
-        <p className={`date-text`} style={{marginTop: 0}}>{post.frontmatter.date}</p>
-        <SocialButtons path={this.props.location.pathname} />
-        <div className={`content`} style={{marginTop: "2rem", marginBottom: "2rem"}}>
-          {renderAst(post.htmlAst)}
-        </div>
-        {post.htmlAst.length > 1000 && (
-          // ある程度長いページならページ下部にもBio
-          <Bio/>
-        )}
-        <hr/>
-        <Comments pageId={this.props.location.pathname.replace(/^\/|\/$/g, '')}/>
-        <Pager>
-          {previous && (
-            <div className={`linkPrevious`}>
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            </div>
-          )}
-
-          {next && (
-            <div className={`linkNext`}>
-              <Link to={next.fields.slug} rel="next">
-                → {next.frontmatter.title}
-              </Link>
-            </div>
-          )}
-        </Pager>
-        <hr/>
+    return (<div>
+      <Helmet title={title}>
+        <meta name={`og:title`} content={title}/>
+      </Helmet>
+      <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
+      <p className={`date-text`} style={{marginTop: 0}}>{post.frontmatter.date}</p>
+      <SocialButtons path={this.props.location.pathname}/>
+      <div className={`content`} style={{marginTop: "2rem", marginBottom: "2rem"}}>
+        {renderAst(post.htmlAst)}
       </div>
-    )
+      <Bio/>
+      <hr/>
+      <Comments pageId={this.props.location.pathname.replace(/^\/|\/$/g, '')}/>
+      <hr/>
+      <Pager style={{ marginBottom:"40px" }}>
+        {previous && (<div className={`linkPrevious`}>
+          <Link to={previous.fields.slug} rel="prev">
+            ← {previous.frontmatter.title}
+          </Link>
+        </div>)}
+
+        {next && (<div className={`linkNext`}>
+          <Link to={next.fields.slug} rel="next">
+            → {next.frontmatter.title}
+          </Link>
+        </div>)}
+      </Pager>
+    </div>)
   }
 }
 
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      id
-      htmlAst
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-      }
-    }
-  }
-`
+  query BlogPostBySlug($slug: String!) {site {siteMetadata {title
+    author}}
+    markdownRemark(fields: {slug: {eq: $slug}}) {id
+    htmlAst
+    frontmatter {title
+    date(formatString: "MMMM DD, YYYY")}}}
+  `

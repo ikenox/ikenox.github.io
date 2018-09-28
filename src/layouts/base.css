@@ -116,8 +116,7 @@ h6 {
 pre[class*="language-"] {
   padding: 24px 36px;
   line-height: 1.4em;
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
+  font-size: 13px;
 }
 
 @media only screen and (max-device-width: 480px) {
