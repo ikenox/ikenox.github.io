@@ -1,6 +1,6 @@
 import React from 'react'
 import firebase from 'firebase/app';
-import firebaseui from 'firebaseui';
+// import firebaseui from 'firebaseui';
 import {debugLog} from '../util'
 import dateformat from 'dateformat';
 
@@ -96,30 +96,30 @@ class Comments extends React.Component {
   }
 
   login() {
-    let firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
-    firebaseUI.start('#firebaseui-auth-container', {
-      callbacks: {
-        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-          // User successfully signed in.
-          // Return type determines whether we continue the redirect automatically
-          // or whether we leave that to developer to handle.
-          return true;
-        }, uiShown: function () {
-          // The widget is rendered.
-          // Hide the loader.
-          // document.getElementById('loader').style.display = 'none';
-        }
-      }, // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-      signInFlow: 'popup', signInOptions: [// Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID, firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID, firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID, firebase.auth.PhoneAuthProvider.PROVIDER_ID],
-    });
+    // let firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
+    // firebaseUI.start('#firebaseui-auth-container', {
+    //   callbacks: {
+    //     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+    //       // User successfully signed in.
+    //       // Return type determines whether we continue the redirect automatically
+    //       // or whether we leave that to developer to handle.
+    //       return true;
+    //     }, uiShown: function () {
+    //       // The widget is rendered.
+    //       // Hide the loader.
+    //       // document.getElementById('loader').style.display = 'none';
+    //     }
+    //   }, // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    //   signInFlow: 'popup', signInOptions: [// Leave the lines as is for the providers you want to offer your users.
+    //     firebase.auth.GoogleAuthProvider.PROVIDER_ID, firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    //     firebase.auth.TwitterAuthProvider.PROVIDER_ID, firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    //     firebase.auth.EmailAuthProvider.PROVIDER_ID, firebase.auth.PhoneAuthProvider.PROVIDER_ID],
+    // });
   }
 
   postComment(event) {
     // todo user may be null
-    let user = firebase.auth().currentUser;
+    // let user = firebase.auth().currentUser;
 
     this.setState({isPosting: true});
     // todo move to repository
@@ -166,16 +166,16 @@ class Comments extends React.Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        if (user.isAnonymous) {
-          debugLog("logged in as anonymous user " + user.uid)
-        }
-        else {
-          debugLog("logged in as user " + user.uid)
-        }
-      }
-    })
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     if (user.isAnonymous) {
+    //       debugLog("logged in as anonymous user " + user.uid)
+    //     }
+    //     else {
+    //       debugLog("logged in as user " + user.uid)
+    //     }
+    //   }
+    // })
     this.setState({
                     name: localStorage.getItem('commenter.name') || "",
                     text: localStorage.getItem(this.props.pageId + ".text") || ""
