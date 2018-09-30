@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Sep 2018 08:30:40 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 30 Sep 2018 15:56:01 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;子に親と同じ役割が期待される場合、親と同様に振る舞えるようになる継承を使うのが良い&lt;/li&gt;
@@ -282,18 +282,18 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&quot;left&quot;&gt;機能&lt;/th&gt;
-&lt;th align=&quot;left&quot;&gt;対応状況&lt;/th&gt;
+&lt;th&gt;機能&lt;/th&gt;
+&lt;th&gt;対応状況&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;モード&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;ノーマルモード、インサートモード、ビジュアルモードが存在&lt;/td&gt;
+&lt;td&gt;モード&lt;/td&gt;
+&lt;td&gt;ノーマルモード、インサートモード、ビジュアルモードが存在&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;モーション&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;ヤンク(
+&lt;td&gt;モーション&lt;/td&gt;
+&lt;td&gt;ヤンク(
 &lt;code class=&quot;language-text&quot;&gt;y&lt;/code&gt;
 ), 削除(
 &lt;code class=&quot;language-text&quot;&gt;d&lt;/code&gt;
@@ -312,16 +312,16 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 , …) などなど&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;検索&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;Vimと同様に
+&lt;td&gt;検索&lt;/td&gt;
+&lt;td&gt;Vimと同様に
 &lt;code class=&quot;language-text&quot;&gt;/&lt;/code&gt;
 による検索が可能、
 &lt;code class=&quot;language-text&quot;&gt;:set incsearch&lt;/code&gt;
 によるインクリメンタルサーチも&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;置換&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;Vimと同様に
+&lt;td&gt;置換&lt;/td&gt;
+&lt;td&gt;Vimと同様に
 &lt;code class=&quot;language-text&quot;&gt;:s&lt;/code&gt;
 ,
 &lt;code class=&quot;language-text&quot;&gt;:%s&lt;/code&gt;
@@ -330,8 +330,8 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 などで正規表現による置換が可能&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;コマンド&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;:w&lt;/code&gt;
+&lt;td&gt;コマンド&lt;/td&gt;
+&lt;td&gt;&lt;code class=&quot;language-text&quot;&gt;:w&lt;/code&gt;
 , 
 &lt;code class=&quot;language-text&quot;&gt;:q&lt;/code&gt;
 , 
@@ -343,8 +343,8 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 オプション などなど&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;設定・キーマップ&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;
+&lt;td&gt;設定・キーマップ&lt;/td&gt;
+&lt;td&gt;&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;
 と同様の文法で各種
 &lt;code class=&quot;language-text&quot;&gt;map&lt;/code&gt;
 や一部
@@ -356,16 +356,16 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 また、IntelliJの機能をキーマッピングすることも可能(後の章で詳しく説明)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;マクロ&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;利用可能&lt;/td&gt;
+&lt;td&gt;マクロ&lt;/td&gt;
+&lt;td&gt;利用可能&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;レジスタ&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;利用可能&lt;/td&gt;
+&lt;td&gt;レジスタ&lt;/td&gt;
+&lt;td&gt;利用可能&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;その他&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;:set surround&lt;/code&gt;
+&lt;td&gt;その他&lt;/td&gt;
+&lt;td&gt;&lt;code class=&quot;language-text&quot;&gt;:set surround&lt;/code&gt;
 することで
 &lt;a href=&quot;https://github.com/tpope/vim-surround&quot;&gt;vim-surround&lt;/a&gt;
 を再現した機能を利用可能&lt;/td&gt;
@@ -463,62 +463,62 @@ nnoremap H ^
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&quot;left&quot;&gt;Action&lt;/th&gt;
-&lt;th align=&quot;left&quot;&gt;概要&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;th&gt;概要&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;SearchEverywhere&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;任意のクラス・関数・ファイルを検索・ジャンプ&lt;/td&gt;
+&lt;td&gt;SearchEverywhere&lt;/td&gt;
+&lt;td&gt;任意のクラス・関数・ファイルを検索・ジャンプ&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;FindInPath&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;開いているプロジェクト内の任意の文字列を検索(grep的な)&lt;/td&gt;
+&lt;td&gt;FindInPath&lt;/td&gt;
+&lt;td&gt;開いているプロジェクト内の任意の文字列を検索(grep的な)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;FileStructurePopup&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;編集しているファイル内の任意の関数を検索・ジャンプ&lt;/td&gt;
+&lt;td&gt;FileStructurePopup&lt;/td&gt;
+&lt;td&gt;編集しているファイル内の任意の関数を検索・ジャンプ&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;GotoDeclaration&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;カーソル上の関数や変数の定義元にジャンプ&lt;/td&gt;
+&lt;td&gt;GotoDeclaration&lt;/td&gt;
+&lt;td&gt;カーソル上の関数や変数の定義元にジャンプ&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;GotoSuperMethod&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;カーソル上の関数のスーパーメソッドにジャンプ&lt;/td&gt;
+&lt;td&gt;GotoSuperMethod&lt;/td&gt;
+&lt;td&gt;カーソル上の関数のスーパーメソッドにジャンプ&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;GotoImplementation&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;カーソル上のインターフェースの実装にジャンプ&lt;/td&gt;
+&lt;td&gt;GotoImplementation&lt;/td&gt;
+&lt;td&gt;カーソル上のインターフェースの実装にジャンプ&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;JumpToLastChange&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;最後に編集した箇所にジャンプ&lt;/td&gt;
+&lt;td&gt;JumpToLastChange&lt;/td&gt;
+&lt;td&gt;最後に編集した箇所にジャンプ&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;FindUsages&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;カーソル上の関数や変数の使用箇所一覧を表示&lt;/td&gt;
+&lt;td&gt;FindUsages&lt;/td&gt;
+&lt;td&gt;カーソル上の関数や変数の使用箇所一覧を表示&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;RenameElement&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;カーソル上の関数や変数のrename&lt;/td&gt;
+&lt;td&gt;RenameElement&lt;/td&gt;
+&lt;td&gt;カーソル上の関数や変数のrename&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;ReformatCode&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;コードの整形&lt;/td&gt;
+&lt;td&gt;ReformatCode&lt;/td&gt;
+&lt;td&gt;コードの整形&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;CommentByLineComment&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;コメントアウト&lt;/td&gt;
+&lt;td&gt;CommentByLineComment&lt;/td&gt;
+&lt;td&gt;コメントアウト&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;ShowIntentionActions&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;クイックフィックス&lt;/td&gt;
+&lt;td&gt;ShowIntentionActions&lt;/td&gt;
+&lt;td&gt;クイックフィックス&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&quot;left&quot;&gt;GotoAction&lt;/td&gt;
-&lt;td align=&quot;left&quot;&gt;なんでも呼び出し&lt;/td&gt;
+&lt;td&gt;GotoAction&lt;/td&gt;
+&lt;td&gt;なんでも呼び出し&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
