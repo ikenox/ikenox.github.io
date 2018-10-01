@@ -28,8 +28,8 @@ class Comments extends React.Component {
     return (<div>
       <h3 style={{marginTop: "1rem"}}>{this.state.comments.length} Comments</h3>
       <div style={{marginBottom: "1.5rem"}}>
-        {this.state.comments.map(
-          e => (<div key={e.comment.commentId} style={{fontSize: ".9rem", marginBottom: ".75rem", paddingLeft: ".5rem"}}>
+        {this.state.comments.map(e => (
+          <div key={e.comment.commentId} style={{fontSize: ".9rem", marginBottom: ".75rem", paddingLeft: ".5rem"}}>
             <h4 style={{marginTop: "1.5rem", marginBottom: "0", fontWeight: "600"}}>{e.commenter.name}</h4>
             <p style={{margin: "0", lineHeight: "1.6em", fontSize: ".85em", color: "#666"}}>{dateformat(
               new Date(e.comment.commentedAt), "yyyy-mm-dd HH:MM:ss")}</p>
@@ -37,56 +37,62 @@ class Comments extends React.Component {
           </div>))}
 
         <div style={{
-          marginTop: "1rem",
-          backgroundColor: "#f5f5f5",
-          borderRadius: ".25rem",
-          padding: ".5rem",
+          marginTop: "1rem", backgroundColor: "#f5f5f5", padding: ".5rem",
         }}>
-          <form onSubmit={this.postComment}>
-            <input type="text" value={this.state.name} onChange={this.handleNameChange}
-                   disabled={this.state.isPosting} placeholder="Name"
-                   style={{
-                     overflow: "auto",
-                     background: "none",
-                     outline: "none",
-                     letterSpacing: "0.04em",
-                     boxShadow: "none",
-                     fontSize: "1rem",
-                     height:"1.6rem",
-                     width: "100%",
-                     lineHeight: "0",
-                     padding:"0",
-                     boxSizing: "border-box",
-                     color: "#0a0a0a",
-                     border: "none",
-                     fontKerning: "normal",
-                     fontSmoothing: "antialiased",
-                     fontWeight: "600",
-                     fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif',
-                   }}/>
-            <textarea id="comment-text" placeholder="Comment" rows={this.state.textAreaLineNum}
-                      style={{
-                        padding:"0",
-                        overflow: "auto",
-                        outline: "none",
-                        resize: "none",
-                        color: "#0a0a0a",
-                        background: "none",
-                        boxShadow: "none",
-                        lineHeight: "1.6em",
-                        fontSize: ".9rem",
-                        width: "100%",
-                        boxSizing: "border-box",
-                        border: "none",
-                        fontKerning: "normal",
-                        fontSmoothing: "antialiased",
-                        fontWeight: "lighter",
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif',
-                      }}
-                      value={this.state.text} onChange={this.handleTextChange} disabled={this.state.isPosting}/>
-            <br/>
-            <input style={{ cursor: "pointer", padding:".5rem .75rem",border:"none",marginTop:".5rem",background:"#eee", color:"#666", fontWeight:"bold", fontSize:".75rem" }} type="submit" value="SUBMIT" disabled={this.state.isPosting}/>
-          </form>
+          <input type="text" value={this.state.name} onChange={this.handleNameChange}
+                 disabled={this.state.isPosting} placeholder="Name"
+                 style={{
+                   overflow: "auto",
+                   background: "none",
+                   outline: "none",
+                   letterSpacing: "0.04em",
+                   boxShadow: "none",
+                   fontSize: "1rem",
+                   height: "1.6rem",
+                   width: "100%",
+                   lineHeight: "normal",
+                   padding: "0",
+                   boxSizing: "border-box",
+                   color: "#0a0a0a",
+                   border: "none",
+                   fontKerning: "normal",
+                   fontSmoothing: "antialiased",
+                   fontWeight: "600",
+                   fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif',
+                 }}/>
+          <textarea id="comment-text" placeholder="Comment" rows={this.state.textAreaLineNum}
+                    style={{
+                      padding: "0",
+                      overflow: "auto",
+                      outline: "none",
+                      resize: "none",
+                      color: "#0a0a0a",
+                      background: "none",
+                      boxShadow: "none",
+                      lineHeight: "1.6em",
+                      fontSize: ".9rem",
+                      width: "100%",
+                      boxSizing: "border-box",
+                      border: "none",
+                      fontKerning: "normal",
+                      fontSmoothing: "antialiased",
+                      fontWeight: "lighter",
+                      fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif',
+                    }}
+                    value={this.state.text} onChange={this.handleTextChange}
+                    disabled={this.state.isPosting}/>
+          <br/>
+          <button style={{
+            appearance: "button",
+            cursor: "pointer",
+            padding: ".5rem .75rem",
+            border: "none",
+            marginTop: ".5rem",
+            background: "#eee",
+            color: "#666",
+            fontWeight: "bold",
+            fontSize: ".75rem"
+          }} disabled={this.state.isPosting} onClick={this.postComment}>SUBMIT</button>
         </div>
 
       </div>
