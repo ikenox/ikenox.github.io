@@ -8,16 +8,20 @@ import nl2br from 'react-nl2br'
 
 const COMMENT_API_URL = process.env.COMMENT_API_URL
 const TEXTAREA_MIN_LINE_NUM = 5
-
-let inputStyle = {
-  border: "none", overflow: "auto", outline: "none", boxShadow: "none",
-}
+const MAX_COMMENT_LENGTH = 1000
 
 class Comments extends React.Component {
   constructor(props) {
     super(props);
-    this.state =
-      {currentUser: null, text: '', name: '', isPosting: false, comments: [], textAreaLineNum: TEXTAREA_MIN_LINE_NUM};
+    this.state = {
+      currentUser: null,
+      text: '',
+      name: '',
+      isPosting: false,
+      comments: [],
+      textAreaLineNum: TEXTAREA_MIN_LINE_NUM,
+      error: ""
+    };
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -92,8 +96,11 @@ class Comments extends React.Component {
             color: "#666",
             fontWeight: "bold",
             fontSize: ".75rem"
-          }} disabled={this.state.isPosting} onClick={this.postComment}>SUBMIT</button>
+          }} disabled={this.state.isPosting} onClick={this.postComment}>SUBMIT
+          </button>
+          <span style={{color: "#666", fontSize:".75rem", marginLeft:"1em"}}>{this.state.text.length} / {MAX_COMMENT_LENGTH}</span>
         </div>
+        <p style={{fontSize: ".75rem", height:"2.4em", lineHeight: "1.2em", margin: ".25rem .5rem", color: "red"}}>{this.state.error}</p>
 
       </div>
       {/*<button onClick={this.login}/>*/}
@@ -127,7 +134,7 @@ class Comments extends React.Component {
     // todo user may be null
     // let user = firebase.auth().currentUser;
 
-    this.setState({isPosting: true});
+    this.setState({isPosting: true, error: ""});
     // todo move to repository
     (new Promise((resolve, reject) => {
       resolve("")
@@ -144,14 +151,26 @@ class Comments extends React.Component {
           }, body: JSON.stringify(body),
         })
       })
-      .then(res => res.json())
-      .then((result) => {
-        localStorage.setItem(this.props.pageId + ".text", "");
-        this.setState({
-                        text: "", comments: [...this.state.comments, result.data],
-                      });
-      }, (error) => {
-        console.error(error)
+      .then(res => Promise.all([res.ok, res.json()]))
+      .then(([ok, json]) => {
+        if (ok) {
+          this.setComment("")
+          this.setState({
+                          comments: [...this.state.comments, json.data],
+                        });
+        }
+        else {
+          let err
+          try {
+            err = json.message
+          }
+          catch (e) {
+            err = "sorry, an unknown error occured."
+          }
+          this.setState({
+                          error: err,
+                        });
+        }
       })
       .finally(() => {
         this.setState({isPosting: false});
@@ -161,14 +180,22 @@ class Comments extends React.Component {
   }
 
   handleTextChange(event) {
-    localStorage.setItem(this.props.pageId + ".text", event.target.value);
-    let lineNum = event.target.value.split("\n").length
-    this.setState({text: event.target.value, textAreaLineNum: lineNum < 5 ? 5 : lineNum});
+    this.setComment(event.target.value)
   }
 
   handleNameChange(event) {
-    localStorage.setItem('commenter.name', event.target.value)
-    this.setState({name: event.target.value})
+    this.setName(event.target.value)
+  }
+
+  setComment(comment) {
+    localStorage.setItem(this.props.pageId + ".text", comment);
+    let lineNum = comment.split("\n").length
+    this.setState({text: comment, textAreaLineNum: lineNum < 5 ? 5 : lineNum});
+  }
+
+  setName(name) {
+    localStorage.setItem('commenter.name', name)
+    this.setState({name: name})
   }
 
   componentDidMount() {
@@ -182,10 +209,8 @@ class Comments extends React.Component {
     //     }
     //   }
     // })
-    this.setState({
-                    name: localStorage.getItem('commenter.name') || "",
-                    text: localStorage.getItem(this.props.pageId + ".text") || ""
-                  })
+    this.setName(localStorage.getItem('commenter.name') || "")
+    this.setComment(localStorage.getItem(this.props.pageId + ".text") || "")
 
     let pageId = this.props.pageId;
     fetch(COMMENT_API_URL + `/comment?pageId=` + pageId, {mode: 'cors'})
