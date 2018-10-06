@@ -39,7 +39,8 @@ class Comments extends React.Component {
             <p style={{margin: "0", lineHeight: "1.6em", fontSize: ".85em", color: "#666"}}>
               {dateformat(new Date(comment.commentedAt), "yyyy-mm-dd HH:MM:ss")}
               {comment.commenter.userId === this.state.currentUserId ? <span
-                style={{ textDecoration:"underline", marginLeft: "1em"}} onClick={() => this.deleteComment(comment.commentId)}>削除</span> : null}
+                style={{cursor: "pointer", textDecoration: "underline", marginLeft: "1em"}}
+                onClick={() => this.deleteComment(comment.commentId)}>削除</span> : null}
             </p>
             <p style={{margin: "0", lineHeight: "1.6em"}}>{nl2br(comment.text)}</p>
           </div>))}
@@ -139,10 +140,13 @@ class Comments extends React.Component {
   }
 
   deleteComment(commentId) {
+    let ok = confirm("Are you sure you want to delete this comment?");
+    if(!ok){
+      return;
+    }
 
     let user = firebase.auth().currentUser;
 
-    this.setState({isPosting: true});
     (new Promise((resolve, reject) => {
       resolve(user != null ? user.getIdToken() : "")
     }))
@@ -156,12 +160,11 @@ class Comments extends React.Component {
       .then(res => {
         if (res.ok) {
           this.setState({
-                          comments: this.state.comments.filter(comment => { return comment.commentId !== commentId }),
+                          comments: this.state.comments.filter(comment => {
+                            return comment.commentId !== commentId
+                          }),
                         });
         }
-      })
-      .finally(() => {
-        this.setState({isPosting: false});
       })
   }
 
