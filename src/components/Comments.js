@@ -1,6 +1,6 @@
 import React from 'react'
 import firebase from 'firebase/app';
-// import firebaseui from 'firebaseui';
+import 'firebase/auth';
 import {debugLog} from '../util'
 import dateformat from 'dateformat';
 
@@ -14,7 +14,7 @@ class Comments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: null,
+      currentUserId: null,
       text: '',
       name: '',
       isPosting: false,
@@ -25,6 +25,7 @@ class Comments extends React.Component {
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
     this.postComment = this.postComment.bind(this);
   }
 
@@ -32,12 +33,15 @@ class Comments extends React.Component {
     return (<div>
       <h3 style={{marginTop: "1rem"}}>{this.state.comments.length} Comments</h3>
       <div style={{marginBottom: "1.5rem"}}>
-        {this.state.comments.map(e => (
-          <div key={e.comment.commentId} style={{fontSize: ".9rem", marginBottom: ".75rem", paddingLeft: ".5rem"}}>
-            <h4 style={{marginTop: "1.5rem", marginBottom: "0", fontWeight: "600"}}>{e.commenter.name}</h4>
-            <p style={{margin: "0", lineHeight: "1.6em", fontSize: ".85em", color: "#666"}}>{dateformat(
-              new Date(e.comment.commentedAt), "yyyy-mm-dd HH:MM:ss")}</p>
-            <p style={{margin: "0", lineHeight: "1.6em"}}>{nl2br(e.comment.text)}</p>
+        {this.state.comments.map(comment => (
+          <div key={comment.commentId} style={{fontSize: ".9rem", marginBottom: ".75rem", paddingLeft: ".5rem"}}>
+            <h4 style={{marginTop: "1.5rem", marginBottom: "0", fontWeight: "600"}}>{comment.name}</h4>
+            <p style={{margin: "0", lineHeight: "1.6em", fontSize: ".85em", color: "#666"}}>
+              {dateformat(new Date(comment.commentedAt), "yyyy-mm-dd HH:MM:ss")}
+              {comment.commenter.userId === this.state.currentUserId ? <span
+                style={{ textDecoration:"underline", marginLeft: "1em"}} onClick={() => this.deleteComment(comment.commentId)}>削除</span> : null}
+            </p>
+            <p style={{margin: "0", lineHeight: "1.6em"}}>{nl2br(comment.text)}</p>
           </div>))}
 
         <div style={{
@@ -98,9 +102,13 @@ class Comments extends React.Component {
             fontSize: ".75rem"
           }} disabled={this.state.isPosting} onClick={this.postComment}>SUBMIT
           </button>
-          <span style={{color: "#666", fontSize:".75rem", marginLeft:"1em"}}>{this.state.text.length} / {MAX_COMMENT_LENGTH}</span>
+          <span style={{
+            color: "#666", fontSize: ".75rem", marginLeft: "1em"
+          }}>{this.state.text.length} / {MAX_COMMENT_LENGTH}</span>
         </div>
-        <p style={{fontSize: ".75rem", height:"2.4em", lineHeight: "1.2em", margin: ".25rem .5rem", color: "red"}}>{this.state.error}</p>
+        <p style={{
+          fontSize: ".75rem", height: "2.4em", lineHeight: "1.2em", margin: ".25rem .5rem", color: "red"
+        }}>{this.state.error}</p>
 
       </div>
       {/*<button onClick={this.login}/>*/}
@@ -130,24 +138,49 @@ class Comments extends React.Component {
     // });
   }
 
+  deleteComment(commentId) {
+
+    let user = firebase.auth().currentUser;
+
+    this.setState({isPosting: true});
+    (new Promise((resolve, reject) => {
+      resolve(user != null ? user.getIdToken() : "")
+    }))
+      .then(idToken => {
+        return fetch(COMMENT_API_URL + `/comment/` + commentId, {
+          mode: 'cors', method: "DELETE", headers: {
+            "Content-Type": "application/json; charset=utf-8", "IdToken": idToken,
+          }, body: ""
+        })
+      })
+      .then(res => {
+        if (res.ok) {
+          this.setState({
+                          comments: this.state.comments.filter(comment => { return comment.commentId !== commentId }),
+                        });
+        }
+      })
+      .finally(() => {
+        this.setState({isPosting: false});
+      })
+  }
+
   postComment(event) {
     // todo user may be null
-    // let user = firebase.auth().currentUser;
+    let user = firebase.auth().currentUser;
 
     this.setState({isPosting: true, error: ""});
     // todo move to repository
     (new Promise((resolve, reject) => {
-      resolve("")
-      // todo login
-      // resolve(user != null ? user.getIdToken() : "")
+      resolve(user != null ? user.getIdToken() : "")
     }))
       .then(idToken => {
         let body = {
-          pageId: this.props.pageId, idToken: idToken, name: this.state.name, text: this.state.text,
+          pageId: this.props.pageId, name: this.state.name, text: this.state.text,
         }
         return fetch(COMMENT_API_URL + `/comment`, {
           mode: 'cors', method: "POST", headers: {
-            "Content-Type": "application/json; charset=utf-8",
+            "Content-Type": "application/json; charset=utf-8", "IdToken": idToken,
           }, body: JSON.stringify(body),
         })
       })
@@ -165,12 +198,17 @@ class Comments extends React.Component {
             err = json.message
           }
           catch (e) {
-            err = "sorry, an unknown error occured."
+            err = "sorry, an unexpected error occurred."
           }
           this.setState({
                           error: err,
                         });
         }
+      })
+      .catch((e) => {
+        this.setState({
+                        error: "sorry, an unexpected error occurred.",
+                      });
       })
       .finally(() => {
         this.setState({isPosting: false});
@@ -199,16 +237,23 @@ class Comments extends React.Component {
   }
 
   componentDidMount() {
-    // firebase.auth().onAuthStateChanged(user => {
-    //   if (user) {
-    //     if (user.isAnonymous) {
-    //       debugLog("logged in as anonymous user " + user.uid)
-    //     }
-    //     else {
-    //       debugLog("logged in as user " + user.uid)
-    //     }
-    //   }
-    // })
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({currentUserId: user.uid})
+        if (user.isAnonymous) {
+          debugLog("logged in as anonymous user " + user.uid)
+        }
+        else {
+          debugLog("logged in as user " + user.uid)
+        }
+      }
+      else {
+        firebase.auth().signInAnonymously().catch(function (error) {
+          console.error(error)
+        });
+      }
+    })
+
     this.setName(localStorage.getItem('commenter.name') || "")
     this.setComment(localStorage.getItem(this.props.pageId + ".text") || "")
 
