@@ -27,7 +27,7 @@ class Bio extends React.Component {
           </p>
           <p style={{ fontSize:"1.2em", margin:0, lineHeight:"1.2em" }}>
             <a href={`https://github.com/ikenox`} target={`_blank`}><FaGithub/></a>
-            <a href={`https://twitter.com/ikenoxx`} target={`_blank`}><FaTwitter/></a>
+            <a href={`https://twitter.com/ikenox_`} target={`_blank`}><FaTwitter/></a>
           </p>
         </div>
       </div>

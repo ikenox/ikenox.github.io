@@ -47,7 +47,7 @@ class About extends React.Component {
 
           <p>
             <FaMail/> ikenox[at]gmail.com<br/>
-            <FaTwitter/> <a href="https://twitter.com/ikenoxx" target={`_blank`}> @ikenoxx </a>
+            <FaTwitter/> <a href="https://twitter.com/ikenox_" target={`_blank`}> @ikenox_ </a>
           </p>
         </div>
       </div>

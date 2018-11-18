@@ -5,7 +5,7 @@ module.exports = {
     description: "ikenox's Tech blog",
     author: "Naoto Ikeno",
     sns: {
-      "twitter": "https://twitter.com/ikenoxx"
+      "twitter": "https://twitter.com/ikenox_"
     }
   },
   plugins: [
