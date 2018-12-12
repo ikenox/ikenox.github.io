@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 18 Nov 2018 12:11:19 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Wed, 12 Dec 2018 14:32:29 GMT</lastBuildDate><item><title><![CDATA[継承と委譲の使い分けと、インターフェースのメリット]]></title><description><![CDATA[継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。 TL;DR…]]></description><link>https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</link><guid isPermaLink="false">https://ikenox.info/2018-09-02-inheritance-and-delegation-and-interface/</guid><pubDate>Tue, 28 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;継承、委譲、インターフェースは普段特に悩むことなく使い分けができていたのですが、いざ「継承と委譲はどういった基準で使い分けているか？」「インターフェースは何が嬉しいのか？」と聞かれると意外ときちんと言語化できなかったので、この記事に書き起こして言語化を試みました。&lt;/p&gt;
 &lt;h2&gt;TL;DR&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;子に親と同じ役割が期待される場合、親と同様に振る舞えるようになる継承を使うのが良い&lt;/li&gt;
@@ -6,15 +6,14 @@
 &lt;li&gt;インターフェースを使うことで責務の分離を強制することができ、その結果テストの容易性を得られたりする&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;委譲の使いどき&lt;/h2&gt;
-&lt;p&gt;例として、「SQLデータベースからユーザー情報を取り出したり保存したりする機能」を作ろうとしたとき、ぱっと思いつく方針としては、&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DBの接続状態を保持したりSQLクエリを実行したりする部分のロジックは、ユーザー情報の取得に限らず、データベースから情報を取得するとき全般で使いまわせそう&lt;br&gt;
-⇒ DBの操作周辺に関して使いまわせそうな部分はクラスに切り出しておいて(ここでは&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスとする)、ユーザー情報の取得や保存をするためのクラス&lt;code class=&quot;language-text&quot;&gt;UserDatabse&lt;/code&gt;から&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスを何らかの方法で利用するようにすれば、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスのDB操作機能を使いまわせて良い感じ&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;という感じになるかと思います。
-ここで、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;から&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスを利用する方法としては、継承または委譲が思い浮かびます。&lt;/p&gt;
+&lt;p&gt;例として、「SQLデータベースからユーザー情報を取り出したり保存したりする機能」を作ろうとしたときに、以下のような実装方針になったとします。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;DBの接続状態を保持したりSQLクエリを実行したりする部分のロジックは、ユーザー情報の取得に限らず、データベースから情報を取得するとき全般で使い回せそう（使いまわしたい）&lt;/li&gt;
+&lt;li&gt;DBの操作周辺に関して使い回せそうな部分はクラスに切り出しておいて(ここでは&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスとする)、ユーザー情報の取得や保存をするためのクラス&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;から&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスを何らかの方法で利用するようにすれば、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスのDB操作機能を使いまわせて良い感じ&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;ここで、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;から&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;クラスを利用する方法としては、継承または委譲が思い浮かびます。&lt;/p&gt;
 &lt;p&gt;結論から言うと委譲を使ったほうが良いのですが、継承を使って以下のようにやってしまいたくなるかもしれません。&lt;/p&gt;
-&lt;h4&gt;委譲を使うべき場面で継承を使った例&lt;/h4&gt;
+&lt;h3&gt;委譲を使うべき場面で継承を使った例&lt;/h3&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;connectToDatabase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String dbHost&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; String dbName&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -29,7 +28,7 @@
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
-      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserDatabase&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Database&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     User &lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
         String sql &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; String&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;SELECT * FROM users WHERE user_id=%d&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
         Result result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;doSQL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;sql&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
@@ -37,24 +36,35 @@
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;p&gt;継承を使ったこの実装だと、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt; は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承しているので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;と同等の振る舞いをできるようになります。&lt;br&gt;
-が、そのことによって不自然な点が生じてしまいます。&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;は、「特定のユーザーを取得する」という本来持たせたかった役割の他に、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;の持つ「DBとの接続状態の保持や、DBへのSQLクエリ送信」といった役割も獲得してしまっています。これは&lt;a href=&quot;https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E5%8E%9F%E5%89%87/&quot;&gt;単一責務の原則&lt;/a&gt;に反することになります。&lt;br&gt;
-&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側が&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;に期待している役割は「特定のオブジェクト(この場合はユーザー)を取得する」ことであり、直接データベースの操作をしたり、データベースとの接続状態を管理してほしい訳ではないはずです。&lt;br&gt;
-&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;からすると、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;はDB接続のための単なるツールとして使いたいだけで、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;自身になりたいわけではありません。&lt;/p&gt;
-&lt;p&gt;1つのクラスが複数の責務を持つと、とある責務を期待してそのクラスを使いたいときに期待していない機能までくっついてくることになり、クラスの再利用性が低くなる傾向があります。
-また、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;がパブリックメソッドを持つような場合、それらのメソッドは&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;のメソッドとしても呼び出せるようになります。結果、「ユーザーの取得」とには直接は関係のないDB操作のメソッドも&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側が使えるようになり、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が意図とは異なる使い方をされてしまう可能性が出てきます。&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のように&lt;strong&gt;期待される役割が異なっている2つのクラス間で継承関係を持つと、上記のようにいくつか不自然な点が出てしまいます。&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;継承を使ったこの実装だと、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt; は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承しているので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;と同等の振る舞いをできるようになります。&lt;br&gt;
+が、そのことによっていくつか不自然な点が生じてしまいます。&lt;/p&gt;
+&lt;h3&gt;継承によって生じた歪み&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;は、「特定のユーザーを取得する」という本来持たせたかった役割の他に、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;の持つ「DBとの接続状態の保持や、DBへのSQLクエリ送信」といった役割も獲得してしまっています。これは&lt;a href=&quot;https://xn--97-273ae6a4irb6e2hsoiozc2g4b8082p.com/%E3%82%A8%E3%83%83%E3%82%BB%E3%82%A4/%E5%8D%98%E4%B8%80%E8%B2%AC%E4%BB%BB%E5%8E%9F%E5%89%87/&quot;&gt;単一責務の原則&lt;/a&gt;に反することになります。&lt;br&gt;
+本来 &lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;からすると、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;はDB接続のための単なるツールとして使いたいだけで、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;自身になりたいわけではありません。&lt;/p&gt;
+&lt;h3&gt;1つのクラスが複数責務を持ってしまうとどうなるか&lt;/h3&gt;
+&lt;p&gt;継承などによって1つのクラスが複数の責務を持ってしまうと、以下のようなデメリットが生じる場合があります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;とある責務を期待してそのクラスを使いたいときに、期待していない機能までくっついてくることになり、クラスの再利用性が低くなる。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;単体テストがしずらくなる。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;今回の例だと、DBとの接続機能だけをモックしてテストするということが困難なため、UserRepositoryのテストのためには実際のDBを用意しなくてはいけない。&lt;/li&gt;
+&lt;li&gt;1つの操作に対して複数の責務それぞれから起因する仕様が同時に絡んでくることになり、それらの責務を独立してテストできる場合に比べてテストケースが膨らむ。&lt;code class=&quot;language-text&quot;&gt;m + n&lt;/code&gt;ケースで良かったところが、&lt;code class=&quot;language-text&quot;&gt;m × n&lt;/code&gt;ケースになったりする。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;親クラスがパブリックメソッドを持つような場合、それらのメソッドは子クラスのメソッドとしても呼び出せるようになってしまう。今回の例だと、「ユーザーの取得」とは直接は関係のないDB操作のメソッドも&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;の利用側が使えるようになり、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;が意図とは異なる使い方をされてしまう可能性が生じる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のように&lt;strong&gt;期待される役割が異なっている2つのクラス間で継承関係を持つと、上記のようにいくつか不自然な点が出てしまいます。&lt;/strong&gt;&lt;br&gt;
 そういう場合は代わりに委譲を使うのが適していると言えます。&lt;/p&gt;
-&lt;h4&gt;委譲を使って書き直した例&lt;/h4&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;は先程と同じ実装のままで、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が変更になります。&lt;/p&gt;
+&lt;h3&gt;委譲を使って書き直した例&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;は先程と同じ実装のままで、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;が変更になります。&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
-      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserDatabase&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 
     Database database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-    &lt;span class=&quot;token function&quot;&gt;UserDatabase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Database database&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;token comment&quot;&gt;// UserDatabaseのインスタンス生成時にDatabaseのインスタンスをセット&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;UserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Database database&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// UserRepositoryのインスタンス生成時にDatabaseのインスタンスをセット&lt;/span&gt;
         &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;database &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
@@ -66,8 +76,9 @@
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
 &lt;p&gt;継承はせず、&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のインスタンスを保持しておいて、必要に応じてそれを呼び出す(&lt;strong&gt;委譲&lt;/strong&gt;)ようになっています。&lt;br&gt;
-&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のインスタンスは、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;のオブジェクト生成時のコンストラクタなどで渡すようにします。&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承していないので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;としては振る舞えず、DBからユーザーを取得するための最小限のロジックのみ知っている状態になっています。&lt;br&gt;
+&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;のインスタンスは、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;のオブジェクト生成時のコンストラクタなどで渡すようにします。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;は&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;を継承していないので&lt;code class=&quot;language-text&quot;&gt;Database&lt;/code&gt;としては振る舞えず、DB接続ロジックなどの実装についてもよく知りません。DBのデータ⇔Userオブジェクトの変換ロジックにのみ責任を負っています。
+このように、移譲を使うことで単一責務の原則を守ることができ、前述した継承を用いた際のデメリットについても解消できます。&lt;br&gt;
 &lt;strong&gt;「期待される役割が異なっている」クラスの機能を利用したい際は、継承ではなく委譲を用いるのが適切&lt;/strong&gt;と言えます。&lt;/p&gt;
 &lt;h2&gt;継承の使いどき&lt;/h2&gt;
 &lt;p&gt;逆に「子には親と同じ役割が期待される」場合には継承が適しています。&lt;/p&gt;
@@ -75,7 +86,7 @@
 &lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;のほうが&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;よりも意味が広く抽象度は高いですが、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;を利用するときも&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;を利用するときも「加速する/減速する」「窓を開ける/閉める」といった基本的な動作は共通して可能であることが期待されます。&lt;br&gt;
 「電気自動車を運転する」ことを、「車を運転する」と言い換えても間違いではないように、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;に期待される役割は基本的な部分では一緒であると言えます。&lt;/p&gt;
 &lt;p&gt;このような場合に委譲を使うと以下のようになります。&lt;/p&gt;
-&lt;h4&gt;継承を使うべき場面で委譲を使った例&lt;/h4&gt;
+&lt;h3&gt;継承を使うべき場面で委譲を使った例&lt;/h3&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SpeedUp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
@@ -109,39 +120,41 @@
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;p&gt;加速や減速、窓の開閉など、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;の持っている機能の数だけ&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;にボイラープレートコードが増えていきます。&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;に「ライトを点ける」動作が増えた場合には&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;にも変更を加えなくてはいけません。新たに&lt;code class=&quot;language-text&quot;&gt;HybridCar&lt;/code&gt;を増やそうとしたりすると更に辛くなっていきます。
-また、2つのクラスは継承関係に無いので、ダックタイピングを許さないような言語だと&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;を&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;として扱うこともできません。&lt;/p&gt;
-&lt;h4&gt;継承を使って書き直した例&lt;/h4&gt;
+&lt;p&gt;加速や減速、窓の開閉など、&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;の持っている機能の数だけ&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;にボイラープレートコードが増えていきます。&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;に「ライトを点ける」動作が増えた場合には&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;にも変更を加えなくてはいけません。新たに&lt;code class=&quot;language-text&quot;&gt;HybridCar&lt;/code&gt;を増やそうとしたりすると目も当てられない感じになっていきます。&lt;br&gt;
+また、2つのクラスは継承関係に無いので、ダックタイピングを許さないような言語だとこのままでは&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;を&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;として扱うこともできません。&lt;/p&gt;
+&lt;h3&gt;継承を使って書き直した例&lt;/h3&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;は先程と同じ実装のままで、&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;が変更になります。&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ElectoricCar&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// 電気自動車特有のロジック&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Charge&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;p&gt;委譲を使った際と比べて圧倒的にスッキリします。&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;に新たなメソッドが増えるなどの変更が入っても&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;に変更を入れる必要はありません。&lt;strong&gt;「子には親と同じ役割が期待される」場合は、委譲ではなく継承を用いるのが適切&lt;/strong&gt;と言えます。&lt;/p&gt;
+&lt;p&gt;当然といえば当然ですが委譲を使った際と比べて圧倒的にスッキリします。&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;に新たなメソッドが増えるなどの変更が入っても基本的には&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;に変更を入れる必要はありません。継承関係を持っているため&lt;code class=&quot;language-text&quot;&gt;ElectoricCar&lt;/code&gt;は&lt;code class=&quot;language-text&quot;&gt;Car&lt;/code&gt;型としても振る舞えます。&lt;br&gt;
+&lt;strong&gt;「子には親と同じ役割が期待される」場合は、委譲ではなく継承を用いるのが適切&lt;/strong&gt;と言えます。&lt;/p&gt;
 &lt;h2&gt;ここまでのまとめ&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;子に親と同じ役割が期待される場合、親と同様に振る舞えるようになる継承を使うのが良い&lt;/li&gt;
 &lt;li&gt;子に親と同じ役割が期待されない場合、子にとって親は単なるツールである可能性が高いため委譲を使うのが良い&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;インターフェースの使いどころ&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;について再び考えると、極端な話&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;の利用側は、userさえ取得できればそれで良くて、その裏側にあるのがデータベースだろうが、&lt;code class=&quot;language-text&quot;&gt;.txt&lt;/code&gt;ファイルに保存されていようが、オンメモリだろうがなんだって良いはずです。
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;について再び考えると、極端な話&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;の利用側は、userさえ取得できればそれで良くて、その裏側にあるのがデータベースだろうが、&lt;code class=&quot;language-text&quot;&gt;.txt&lt;/code&gt;ファイルに保存されていようが、オンメモリだろうがなんだって良いはずです。
 こういう「裏の実装は複雑な状態などを取りうるかもしれないが、使う側としては目的が達成できれば何でもいい」場合はインターフェースの出番であることが多いです。&lt;br&gt;
-そこで、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;という「ユーザーを取得・保存する」役割のインターフェースを作り、&lt;code class=&quot;language-text&quot;&gt;UserDatabase&lt;/code&gt;が&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;を実装するようにしてみます。&lt;/p&gt;
+そこで、&lt;code class=&quot;language-text&quot;&gt;IUserRepository&lt;/code&gt;という「ユーザーを取得・保存する」役割のインターフェースを作り、&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;が&lt;code class=&quot;language-text&quot;&gt;IUserRepository&lt;/code&gt;を実装するようにしてみます。&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
-      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;IUserRepository&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     User &lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;int&lt;/span&gt; userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;saveUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;User user&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
-      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserDatabase&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;UserRepository&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;IUserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
 
     Database database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
-    &lt;span class=&quot;token function&quot;&gt;UserDatabase&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Database database&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;UserRepository&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Database database&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;database &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; database&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
@@ -156,7 +169,7 @@
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;の利用側のロジックは例えば以下のようになります。  &lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;SomeApplicationService&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
-    UserRepository userRepository&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    IUserRepository userRepository&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 
     &lt;span class=&quot;token keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;changeUserEmail&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;String email&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
         User user &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; userRepository&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;userId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -165,12 +178,25 @@
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;はインターフェースのため、実装に関して全く言及をしていません。そのため、&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;を利用している&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;側としては、「とにかくuserが取得できることを期待しており、実装は何でも良い」ということをコードで表明している&lt;/strong&gt;ことになります。&lt;br&gt;
-結果、以下のようなメリットを得られるようになります。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ユーザーデータのハンドリングが主な役割である&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;がデータベースへの接続などについて言及することはなくなり(できなくなり)、責務の分離を強制することができます。  &lt;/li&gt;
-&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;はDBについては言及していないので、例えば&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;のテスト用に&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;を実装したインメモリの&lt;code class=&quot;language-text&quot;&gt;InMemoryUserDatabase&lt;/code&gt;を用意しておいて、テストのときだけ&lt;code class=&quot;language-text&quot;&gt;userRepository&lt;/code&gt;の実装を差し替えるようなことが可能となり、よりテストが容易になります。&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[ブログをGatsbyJSに載せ替えました]]></title><description><![CDATA[GatsbyJS 今までブログは  Jekyll  で生成してましたが、GatsbyJSに移行してみました。 GatsbyJSを使うとReact.jsベースの静的PWA…]]></description><link>https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</link><guid isPermaLink="false">https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</guid><pubDate>Sat, 04 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;GatsbyJS&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;IUserRepository&lt;/code&gt;はインターフェースのため、実装に関して全く言及をしていません。そのため、&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;IUserRepository&lt;/code&gt;を利用している&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;側としては、「とにかくuserが取得できることを期待しており、実装は問わない（実装の違いによって&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;が影響を受けることはない）」ということをコードで表明している&lt;/strong&gt;ことになります。&lt;br&gt;
+インターフェースは、&lt;strong&gt;何を公開し、何を隠すべきか？ということを明示的に定義し、それを強制させることができる&lt;/strong&gt;というのが大きな魅力です。  &lt;/p&gt;
+&lt;h3&gt;インターフェースの恩恵&lt;/h3&gt;
+&lt;p&gt;インターフェース&lt;code class=&quot;language-text&quot;&gt;IUserRepository&lt;/code&gt;は、DBの接続、状態管理、難しいSQLクエリといった色々な辛さがある外部世界をフィルタリングし、&lt;strong&gt;「なんか知らんけどuserIdを投げるといい感じにuserを返してくれるし、userを投げるといい感じにuserを保存してくれる」という、キレイで抽象的な世界だけを見えるようにしてくれている&lt;/strong&gt;と言えます。  &lt;/p&gt;
+&lt;p&gt;インターフェースを挟むことで、&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;は&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;への依存から開放されています。&lt;br&gt;
+このことによって、もし&lt;code class=&quot;language-text&quot;&gt;UserRepository&lt;/code&gt;の内部ロジックに何らかの大規模な変更が入ったとしても、仮にDBがMySQLからNoSQLに変わったとしても、インターフェースが変わらない限りは、&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;まで連鎖的に変更が波及するようなことはありません。&lt;/p&gt;
+&lt;p&gt;この性質はテストの際にも大いに役立ちます。例えば&lt;code class=&quot;language-text&quot;&gt;SomeApplicationService&lt;/code&gt;のテスト用に&lt;code class=&quot;language-text&quot;&gt;IUserRepository&lt;/code&gt;を実装したインメモリの&lt;code class=&quot;language-text&quot;&gt;InMemoryUserRepository&lt;/code&gt;を用意しておいて、テストのときだけそれに差し替えるといったことも可能となるため、よりテストが容易になります。&lt;br&gt;
+同じ要領で、インターフェースを使うと、たとえば「ユーザーにメールを飛ばす」といったクラスを、テストのときだけは「送っているように見えて実際には何もしない」クラスに差し替えるようなことも可能です。&lt;/p&gt;
+&lt;h3&gt;インターフェースはとても大事&lt;/h3&gt;
+&lt;p&gt;インターフェースは、大規模な開発においては非常に重要な役割を果たします。
+インターフェースだけきちんとしてればその内部実装はまぁある程度雑でも案外困らないな、というのが最近の自分の考えです。&lt;br&gt;
+逆に、初期にインターフェースの設計をミスると、いざ改修が必要になった時には既に手遅れになっているような場合も多く、その場合は大いなる苦しみを伴いながら作りかえを行うことになります。&lt;br&gt;
+インターフェースの設計がその後のシステムの保守性・堅牢性の明暗を分けると言っても過言では無いため、インターフェースを設計するときは、抽象度は本当に適切なのか？余計な情報まで受け取ったり渡したりしてしまってないか？など、慎重に考えるとよいです。  &lt;/p&gt;
+&lt;h4&gt;インターフェースの要不要について&lt;/h4&gt;
+&lt;p&gt;ここまで、インターフェースと言った際になんとなくJavaのinterfaceを意識して書いてきましたが、ダックタイピングが可能な言語ではわざわざ実装と別にインターフェースクラスを定義する必要性が薄い場合もあります。&lt;br&gt;
+ただその場合でも、「どういう情報を公開情報としてクラス同士が通信するか」が大事という点は変わりません。&lt;/p&gt;
+&lt;h2&gt;おわりに&lt;/h2&gt;
+&lt;p&gt;自分なりに継承/委譲/インターフェースについて解説してみました。&lt;br&gt;
+わからない点や質問などあればぜひコメントいただけると嬉しいです。&lt;/p&gt;</content:encoded></item><item><title><![CDATA[ブログをGatsbyJSに載せ替えました]]></title><description><![CDATA[GatsbyJS 今までブログは  Jekyll  で生成してましたが、GatsbyJSに移行してみました。 GatsbyJSを使うとReact.jsベースの静的PWA…]]></description><link>https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</link><guid isPermaLink="false">https://ikenox.info/2018-08-04-replaced-blog-with-gatsbyjs/</guid><pubDate>Sat, 04 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;GatsbyJS&lt;/h3&gt;
 &lt;p&gt;&lt;preview-link title=&quot;GatsbyJS&quot; url=&quot;https://www.gatsbyjs.org/&quot;&gt;&lt;/preview-link&gt;&lt;/p&gt;
 &lt;p&gt;今までブログは&lt;a href=&quot;https://jekyllrb.com/&quot;&gt; Jekyll &lt;/a&gt;で生成してましたが、GatsbyJSに移行してみました。&lt;/p&gt;
 &lt;p&gt;GatsbyJSを使うとReact.jsベースの静的PWAサイトを生成できます。
