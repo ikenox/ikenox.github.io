@@ -11,7 +11,7 @@ const Div = styled.div`
 class SocialButtons extends React.Component {
   render() {
     return (
-      <Div style={{height: "25px"}}>
+      <Div>
         <div style={{width: "115px", height: "25px !important"}}>
           <HatenabookmarkButton layout={`standard-balloon`} url={`https://ikenox.info`+this.props.path}/>
         </div>
