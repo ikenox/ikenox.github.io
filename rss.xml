@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 Jan 2019 07:37:58 GMT</lastBuildDate><item><title><![CDATA[データベースという名のグローバル変数との向き合い方(Repository Pattern)]]></title><description><![CDATA[…]]></description><link>https://ikenox.info/2019-01-10-database-is-like-global-variable/</link><guid isPermaLink="false">https://ikenox.info/2019-01-10-database-is-like-global-variable/</guid><pubDate>Sat, 12 Jan 2019 16:30:00 GMT</pubDate><content:encoded>&lt;h2&gt;グローバル変数&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 Jan 2019 07:42:35 GMT</lastBuildDate><item><title><![CDATA[データベースという名のグローバル変数との向き合い方(Repository Pattern)]]></title><description><![CDATA[…]]></description><link>https://ikenox.info/2019-01-10-database-is-like-global-variable/</link><guid isPermaLink="false">https://ikenox.info/2019-01-10-database-is-like-global-variable/</guid><pubDate>Sat, 12 Jan 2019 16:30:00 GMT</pubDate><content:encoded>&lt;h2&gt;グローバル変数&lt;/h2&gt;
 &lt;p&gt;スコープ関係なく、プログラム中のどこからでもアクセスが可能な変数のこと。
 その性質上、扱いには気をつけないといけない。扱いを間違えると、「いつどこで変数が書き換えられるかの把握が難しく、プログラムの見通しが悪くなる」といった問題が生じる場合がある。&lt;/p&gt;
 &lt;h2&gt;データベースはグローバル変数&lt;/h2&gt;
@@ -60,7 +60,7 @@ Repositoryパターンを用いた簡単な疑似コードを書いてみる。&
 &lt;p&gt;そして、これらの特徴は、データベースがグローバル変数であるがゆえの弊害を以下のように緩和してくれる。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;DBとの接点が最小限に抑えられている。DBとのやり取りの窓口は&lt;code class=&quot;language-text&quot;&gt;get&lt;/code&gt;と&lt;code class=&quot;language-text&quot;&gt;save&lt;/code&gt;の2箇所のみに限られるため、「いつどこで&lt;code class=&quot;language-text&quot;&gt;Hoge&lt;/code&gt;テーブルが書き換えられたり参照されるか」の把握が容易&lt;/li&gt;
-&lt;li&gt;ロジックが散らばらない。「&lt;code class=&quot;language-text&quot;&gt;Hoge&lt;/code&gt;テーブルの各値は、どういう条件・状態のときにどういう値に書き換わり、どこでどう使われるのか」は、Hogeオブジェクトのロジックの内部を見ればでわかる&lt;/li&gt;
+&lt;li&gt;ロジックが散らばらない。「&lt;code class=&quot;language-text&quot;&gt;Hoge&lt;/code&gt;テーブルの各値は、どういう条件・状態のときにどういう値に書き換わり、どこでどう使われるのか」は、Hogeオブジェクトのロジックの内部を見れば大体わかる&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;そのほか、Repositoryパターンには以下のようなメリットもある。&lt;/p&gt;
 &lt;ul&gt;
