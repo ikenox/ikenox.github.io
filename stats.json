@@ -5,8 +5,8 @@
       "component---src-pages-index-js-7408838e0e8b066ea90b.js.map"
     ],
     "path---2018-09-02-inheritance-and-delegation-and-interface": [
-      "path---2018-09-02-inheritance-and-delegation-and-interface-e7696da1206e4a70ba43.js",
-      "path---2018-09-02-inheritance-and-delegation-and-interface-e7696da1206e4a70ba43.js.map"
+      "path---2018-09-02-inheritance-and-delegation-and-interface-d62674a69955b50232f9.js",
+      "path---2018-09-02-inheritance-and-delegation-and-interface-d62674a69955b50232f9.js.map"
     ],
     "path---": [
       "path----557518bd178906f8d58a.js",
@@ -29,8 +29,8 @@
       "path---2017-12-25-ideavim-introduction-e2cb5969c4f208fb20cf.js.map"
     ],
     "path---index": [
-      "path---index-25301b3d7dbc8641c2fd.js",
-      "path---index-25301b3d7dbc8641c2fd.js.map"
+      "path---index-b25f36bb5c1d6b7533ea.js",
+      "path---index-b25f36bb5c1d6b7533ea.js.map"
     ],
     "path---2018-05-20-perl-mousex-types-enum": [
       "path---2018-05-20-perl-mousex-types-enum-7c1b9881de3cb998f15d.js",
@@ -41,6 +41,10 @@
       "build-js-styles.css",
       "commons-ba4cb63d6a7a0250cd9f.js.map",
       "build-js-styles.css.map"
+    ],
+    "path---2019-01-10-database-is-like-global-variable": [
+      "path---2019-01-10-database-is-like-global-variable-2f7b40248598fe7f13b3.js",
+      "path---2019-01-10-database-is-like-global-variable-2f7b40248598fe7f13b3.js.map"
     ],
     "path---2018-08-04-replaced-blog-with-gatsbyjs": [
       "path---2018-08-04-replaced-blog-with-gatsbyjs-1cad3f33d7f48286eacb.js",
@@ -55,9 +59,9 @@
       "path---2017-10-15-first-commit-278699488466ae20cf11.js.map"
     ],
     "app": [
-      "app-d94df5f27bbf967320e1.js",
+      "app-d680a6aefce96af01dd6.js",
       "build-js-styles.css",
-      "app-d94df5f27bbf967320e1.js.map",
+      "app-d680a6aefce96af01dd6.js.map",
       "build-js-styles.css.map"
     ],
     "component---src-pages-about-js": [
