@@ -8,9 +8,13 @@
       "path---2018-09-02-inheritance-and-delegation-and-interface-d62674a69955b50232f9.js",
       "path---2018-09-02-inheritance-and-delegation-and-interface-d62674a69955b50232f9.js.map"
     ],
+    "path---2019-01-25-getting-started-ideavim": [
+      "path---2019-01-25-getting-started-ideavim-808fa5e66508f54406cb.js",
+      "path---2019-01-25-getting-started-ideavim-808fa5e66508f54406cb.js.map"
+    ],
     "path---2019-01-21-made-corne-keyboard": [
-      "path---2019-01-21-made-corne-keyboard-48a4dd6a9f5c315aa6a1.js",
-      "path---2019-01-21-made-corne-keyboard-48a4dd6a9f5c315aa6a1.js.map"
+      "path---2019-01-21-made-corne-keyboard-495e23f7700d604d6079.js",
+      "path---2019-01-21-made-corne-keyboard-495e23f7700d604d6079.js.map"
     ],
     "path---": [
       "path----557518bd178906f8d58a.js",
@@ -33,8 +37,8 @@
       "path---2017-12-25-ideavim-introduction-e2cb5969c4f208fb20cf.js.map"
     ],
     "path---index": [
-      "path---index-70298ccb660acfa703bc.js",
-      "path---index-70298ccb660acfa703bc.js.map"
+      "path---index-d78cbf20681c6a634bda.js",
+      "path---index-d78cbf20681c6a634bda.js.map"
     ],
     "path---2018-05-20-perl-mousex-types-enum": [
       "path---2018-05-20-perl-mousex-types-enum-7c1b9881de3cb998f15d.js",
@@ -63,9 +67,9 @@
       "path---2017-10-15-first-commit-278699488466ae20cf11.js.map"
     ],
     "app": [
-      "app-4d479816fac67fac845d.js",
+      "app-dab0d8fad0ff13f5afcc.js",
       "build-js-styles.css",
-      "app-4d479816fac67fac845d.js.map",
+      "app-dab0d8fad0ff13f5afcc.js.map",
       "build-js-styles.css.map"
     ],
     "component---src-pages-about-js": [
