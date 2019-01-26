@@ -148,7 +148,7 @@ The followings are my recommended actions.
 |ShowIntentionActions|Quick fix|
 |GotoAction|Call anything|
 
-#### 設定例
+#### An example
 
 ```vim
 nnoremap ,e :action SearchEverywhere<CR>
