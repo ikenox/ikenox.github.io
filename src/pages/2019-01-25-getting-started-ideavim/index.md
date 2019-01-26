@@ -120,7 +120,7 @@ The following is an example.
 nnoremap gd :action GotoDeclaration
 ```
 
-`GotoDeclaration` is called "action". It corresponds a one of the IntelliJ features. It navigates to the declaration of a symbol on a your text cursor.  
+`GotoDeclaration` is called "action". It corresponds to a one of the IntelliJ features. It navigates to the declaration of a symbol on a your text cursor.  
 So, `nnoremap gd :action GotoDeclaration` means, "When you type `gd`, then you'll be navigate to the declaration of a symbol on the cursor".
 
 Thus, by using `:action` command, **you can define a vim-like keymap to any IntelliJ features, even very powerful code modification, code navigation, refactoring, and more features.** 
