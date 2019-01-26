@@ -7,7 +7,7 @@ Corne Cherry Keyboardは、<a href="https://twitter.com/foostan" target="_blank"
 設計図はオープンソースになっており、GitHubにて公開されている。(<a href="https://github.com/foostan/crkbd/" target="_blank">foostan/crkbd</a>)  
 また、現在は<a href="https://yushakobo.jp/news/2018/12/07/storeopen/" target="_blank">遊舎工房</a>さんの実店舗にてCorne Cherry Keyboardのキットが販売されている様子。
 
-今回自分もキットを購入させていただいて実際にCorne Cherryを組み上げたので、実際に作ったり使ったりしてみての感想を書いていきます。
+自分もキットを購入して実際にCorne Cherryを組み上げたので、実際に作ったり使ったりしてみての感想を書いていきます。
 
 ## 完成物
 
@@ -25,7 +25,7 @@ Corne Cherry Keyboardは、<a href="https://twitter.com/foostan" target="_blank"
 
 ## Corne Cherryのいいところ
 
-### 3列 + 親指キーしか無い
+### 3行 + 親指用キーしか無い
 
 写真を見ての通り、数字列が無いという潔さ。Touch BarモデルのMacBookProのキーボードが64キーなのに対してCorne Cherryは42キーと、約2/3になっている。  
 そのため、数字、記号、カーソルあたりの入力はレイヤ切り替え機能を使って同時押しで行うことになるが、もともとホームポジションから遠いカーソルキーはctrlとhjkl同時押しで代用したりしてたので、個人的にはそこまで問題とは感じなかった。むしろ、どのキーにもホームポジションから1キー以内で到達できるので、使い慣れれば最もストレスなく速く打てるレイアウトなのではないか、と思った。
