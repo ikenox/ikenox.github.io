@@ -1,5 +1,5 @@
 ---
-title: Getting Started IdeaVim
+title: Getting Started with IdeaVim
 date: "2019-01-25T00:00Z"
 ---
 
@@ -20,125 +20,133 @@ Keymap has been personally customized.
 
 ### Why use IdeaVim
 
-個人的には、IntelliJとVimのそれぞれに対して以下の点に良さを感じています。
+The followings are advantages in each of IntelliJ and Vim, I think.
 
-- **IntelliJ**: 補完、コードジャンプ、リファクタ機能などの強力さ、またそれらの設定の容易さ
-- **Vim**: テキストエディタとしての編集操作の効率の良さ、キーマップやモードの概念
+- **IntelliJ**: Very powerful code completeion, code navigation, refactoring, and so on with easy and simple settings.
+- **Vim**: Very various and efficient operations as Text Editor. An concept of mode(normal/insert/visual) and keymap.
 
-**IntelliJにIdeaVimプラグインを導入することで、上記の双方の利点を同時に享受することができる**と考えています。
-細かい部分の挙動などはまだまだ本家Vimとの差分もありますが、**自分のような比較的ライトなVimユーザーがVimに求めている機能については、IdeaVimはその多くをカバーできているのではないか** と思います。  
+So, **IntelliJ with Vim-like operation can take both of those advantages**. IdeaVim supports the majority of Vim features, even though it hasn't yet been able to support the details.
 
-この記事ではIdeaVimの機能や設定方法の説明を通じて、IdeaVimの良さをお伝えしていきます。
+In this blog post, I'll introduce what features IdeaVim supports, how to setup IdeaVim, and how great IdeaVim is.
 
+## Supported Vim features
 
-## IdeaVimがサポートしている機能の一例
+The followings are frequently used Vim features supported by IdeaVim.
 
-細かい機能まで列挙するのは難しいため、普段自分がよく使う機能に絞ってその対応状況をまとめました。  
-行いたい操作が未実装だったという経験は筆者は無いですが、これはvimのヘビーユース度合いにもよるのかなとも思います。
-
-|機能|対応状況|
+|Feature|Supported|
 |-------|---|
-|モード|ノーマルモード、インサートモード、ビジュアルモードが存在|
-|モーション|ヤンク(`y`), 削除(`d`), 変更(`c`), Undo(`u`), Redo(`Ctrl-r`),<br>テキストオブジェクト操作(`ciw`,`vi(`, ...) などなど|
-|検索| Vimと同様に`/`による検索が可能、`:set incsearch`によるインクリメンタルサーチも|
-|置換| Vimと同様に`:s`,`:%s`,`:'<,'>s`などで正規表現による置換が可能|
-|コマンド|`:w`, `:q`, `:tabnew`, `:split`, 一部`:set`オプション などなど |
-|設定・キーマップ|`.vimrc`と同様の文法で各種`map`や一部`set`オプションを`.ideavimrc`に記述可能<br>また、IntelliJの機能をキーマッピングすることも可能(後の章で詳しく説明)|
-|マクロ|利用可能|
-|レジスタ|利用可能|
-|その他|`:set surround`することで[vim-surround](https://github.com/tpope/vim-surround)を再現した機能を利用可能|
+|Mode|NORMAL, INSERT and VISUAL mode|
+|Motions|yank(`y`), delete(`d`), change(`c`), undo(`u`), redo(`Ctrl-r`), <br>text object operation(`ciw`,`ci'`, ... ) and so on|
+|Search| textsearch and highlight by `/`, incremental search by `:set incsearch`|
+|Replace| `:s`,`:%s`,`:'<,'>s` and so on|
+|Commands|`:w`, `:q`, `:tabnew`, `:split`, a part of `:set` command and so on |
+|Keymap|We can customize keymaps by same syntax with `.vimrc`. We can use `map`, `set` and other some commands. The details of this feature will be introduced later of this blog post.|
+|Macro|available|
+|Register|available|
+|Others|`:set surround` enables [vim-surround](https://github.com/tpope/vim-surround) emulation|
 
-より詳しく知りたいという方は、
-[GitHubのレポジトリ](https://github.com/JetBrains/ideavim)
-のREADMEなどご覧になってみてください。
+You can see more details at README.md of [GitHub repositoy](https://github.com/JetBrains/ideavim).
 
 
-## IdeaVimのインストール方法
+## Install IdeaVim
 
-通常のIntelliJプラグインと同じく、`[Preferences] > [Plugins]`からインストールできます。  
-インストール後にIntelliJを再起動するとIdeaVimが有効になります。
+In IntelliJ or other Jetbrains IDEs, you can install IdeaVim from `[Preferences] > [Plugins]`.
+After install, you have to restart IDE to enable IdeaVim.
 
 ![Install IdeaVim](./install-ideavim.png)
 
-### EAPビルド
+### EAP build
 
-IdeaVimのアップデートは現状だと年に数回程度しか行われていません。
-IntelliJ内から`[Settings] > [Plugins] > [Browse Repositories] > [Manage Repositories]`に下記のURLを追加することで、まだ正式にはリリースされていないEAP[^1]ビルドのIdeaVimを利用することができます。  
-[https://plugins.jetbrains.com/plugins/eap/ideavim](https://plugins.jetbrains.com/plugins/eap/ideavim)  
-不便だと思っていた不具合がEAPビルドでは直っているみたいなケースも少なくないので、筆者は常に最新のEAPビルドを利用しています。
+You can install EAP (Early Access Program) build of IdeaVim by adding the following URL to `[Settings] > [Plugins] > [Browse Repositories] > [Manage Repositories]`.
 
-[^1]: Early Access Program
+[https://plugins.jetbrains.com/plugins/eap/ideavim](https://plugins.jetbrains.com/plugins/eap/ideavim)
 
-## IdeaVimの設定方法
+Currently, a new version of IdeaVim is officially released about a few times for a year, so sometimes bug fixes or new features are not released soon.
+So I normally use EAP build.
+
+## How to setup IdeaVim
 
 ### .ideavimrc
 
-IdeaVimでは、`.ideavimrc`というファイルに設定を記述してホームディレクトリに設置しておくことで、IntelliJ起動時にその設定を読み込んでくれます。  
-`.ideavimrc`には **本家Vimの`.vimrc`と同様、各種mapコマンドやsetコマンドを記述することが可能です。**  
+IdeaVim loads `~/.ideavimrc` when IDE started. We can write settings to `.ideavimrc`, with same syntax as `.vimrc`. A list of supported `set` commands is [here](https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md).  
+In addition, `set surround` enables a [vim-surround](https://github.com/tpope/vim-surround) emulation.
 
-利用できる`set`コマンドのオプション一覧は[こちら](https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md)にあります。  
-また、IdeaVim独自のオプションとして`set surround`というものが存在し、本家Vimで言うところの[vim-surround](https://github.com/tpope/vim-surround)を一部再現した機能が利用可能となっています。
-
-### VimとIdeaVimのキーマップの一元管理
-
-`map`コマンドが本家vimと同じ記述で利用可能なため、`nnoremap L $`などとといったような基本的なキーマップは、通常の`.vimrc`から切り出して`.vimrc.keymap`という独立したファイルにしておき、`.vimrc`と`.ideavimrc`それぞれから`source`コマンドを使って読み込むのがおすすめです。  
-こうすることで、VimとIdeaVimで共通して設定しておきたいような基本的なキーマップを一元管理できるようになります。これは`.ideavimrc`が`.vimrc`とほとんど同じ文法で記述できるからこそのメリットですね。
-
-##### .ideavimrc
 ```vim
-" 切り出しておいた共通keymapファイルをロード
-source .vimrc.keymap
-
-" IdeaVim特有の設定はここに書き足していく
-```
-
-##### .vimrc.keymap
-```vim
-" IdeaVimとvimどちらでも共通のキーマップはここに書く
+set incsearch
+set ignorecase
+set smartcase
 
 nnoremap L $
 nnoremap H ^
 noremap ; :
 ```
 
+### DRY in Vim and IdeaVim keymaps
 
-参考までに、自分の`.ideavimrc`と`.vimrc.keymap`も以下に載せておきます。
+`.vimrc` and `.ideavimrc` can be written as same syntax. This is a large advantage, because you don't need to learn new specific syntax, and you can share the settings of the common basic keymaps (e.g. `nnoremap ; :`) between both of them.  
 
-- [.vimrc.keymap](https://github.com/ikenox/dotfiles/blob/master/vimrc.keymap)
+To share the settings, I prepared a shared keymaps file `.vimrc.keymap`. It is loaded in `.vimrc` and `.ideavimrc` by a `source` command.  
+Thus you can centralize the common basic keymaps to one file. You can keep DRY principle.
+
+##### .ideavimrc
+
+```vim
+" Load common basic keymaps
+source .vimrc.keymap
+
+" IdeaVim specific settings are here
+```
+
+##### .vimrc.keymap
+```vim
+" Common basic keymaps
+nnoremap L $
+nnoremap H ^
+noremap ; :
+```
+
+The followngs are my `.ideavimrc` and `.vimrc.keymap`.
+
 - [.ideavimrc](https://github.com/ikenox/dotfiles/blob/master/ideavimrc)
+- [.vimrc.keymap](https://github.com/ikenox/dotfiles/blob/master/vimrc.keymap)
 
-### IntelliJの機能をキーマッピング
+### Vim-like keymap to IntelliJ features
 
-基本的なキーマップは`.vimrc.keymap`に切り出したので、`.ideavimrc`にはIdeaVim特有の設定が残ることになります。
-筆者の`.ideavimrc`を見てもらうと、たとえば以下のように、`nnoremap XXX :action YYY`という記述が多くあることがわかります。
+In my `.ideavimrc`, a statement `map XXX :action YYY` often appears.  
+`:action` is a IdeaVim-specific command. By using `:action` command, you can call IntelliJ features.  
+The following is an example.
 
 ```vim
 nnoremap gd :action GotoDeclaration
 ```
 
-`:action`はIdeaVimオリジナルのコマンドで、このコマンドを使うとIntelliJの機能を呼び出すことができます。`GotoDeclaration`はIntelliJの機能の一つであり、「カーソル上の変数や関数の定義元に飛ぶ」という操作です。  
-つまり上記の1行は、「`gd`をキーストロークするとカーソル上の変数や関数の定義元に飛ぶ」という設定となります。
-このように、**IdeaVimでは`:action`コマンドでIntelliJの機能(アクション)を呼び出して使用することができます。IntelliJの強力なコードジャンプやリファクタ機能についても、Vimのキーマップ的な設定や呼び出しが可能ということになります**。    
-カーソルの移動などの単純な操作から、リファクタやコードジャンプ等のもっと高次な機能まで、IntelliJがAPIとして提供しているアクションや、インストールしているプラグインで定義されているアクションは全て呼び出せるようです。  
-このアクション呼び出し機能によって、IdeaVimとIntelliJの連携の自由度が格段に上がりました。以下に、筆者が高頻度で使うおすすめのアクションの一例を載せておきます。
+`GotoDeclaration` is called "action". It corresponds a one of the IntelliJ features. It navigates to the declaration of a symbol on a your text cursor.  
+So, `nnoremap gd :action GotoDeclaration` means, "When you type `gd`, then you'll be navigate to the declaration of a symbol on the cursor".
 
-#### 設定しておくと幸せになれそうなアクションの一例
+Thus, by using `:action` command, **you can define a vim-like keymap to any IntelliJ features, even very powerful code modification, code navigation, refactoring, and more features.** 
+
+You can call any IntelliJ features, from high-level features (e.g. refactoring) to low-level features (e.g. move text cursor). You can also call features of IntelliJ Plugin you've installed.
+
+The `:action` command dramatically boosts the convinience of IdeaVim-ed IntelliJ.  
+The followings are my recommended actions.
+
+#### Examples of Action
 
 |Action|概要|
 |----|----|
-|SearchEverywhere|任意のクラス・関数・ファイルを検索・ジャンプ|
-|FindInPath|開いているプロジェクト内の任意の文字列を検索(grep的な)|
-|FileStructurePopup|編集しているファイル内の任意の関数を検索・ジャンプ|
-|GotoDeclaration|カーソル上の関数や変数の定義元にジャンプ|
-|GotoSuperMethod|カーソル上の関数のスーパーメソッドにジャンプ|
-|GotoImplementation|カーソル上のインターフェースの実装にジャンプ|
-|JumpToLastChange|最後に編集した箇所にジャンプ|
-|FindUsages|カーソル上の関数や変数の使用箇所一覧を表示|
-|RenameElement|カーソル上の関数や変数のrename|
-|ReformatCode|コードの整形|
-|CommentByLineComment|コメントアウト|
-|ShowIntentionActions|クイックフィックス|
-|GotoAction|なんでも呼び出し|
+|SearchEverywhere|Navigate to any symbol|
+|FindInPath|Find text in the whole project|
+|FileStructurePopup|Navigate to any symbol in current file|
+|GotoDeclaration|Navigate to the declaration of a symbol|
+|GotoSuperMethod|Navigate to the super method of a symbol|
+|GotoImplementation|Navigate to the implementation of an interface|
+|JumpToLastChange|Navigate to the place changed at last|
+|FindUsages|List the usages of a symbol|
+|RenameElement|Rename symbol|
+|ReformatCode|Format code|
+|CommentByLineComment|Comment out|
+|ShowIntentionActions|Quick fix|
+|GotoAction|Call anything|
 
 #### 設定例
 
@@ -167,30 +175,19 @@ nnoremap ,a :action GotoAction<CR>
 vnoremap ,a :action GotoAction<CR>
 ```
 
-※ ビジュアルモードでの範囲選択に対する`:action`コマンドの適用については、バージョン0.49.3以降で利用可能です。2018年2月現在ではEAPビルドの最新版で利用できます。
+### Search an action name
 
-### アクションの検索
-
-「自分がいつも使ってるあの機能のアクション名を知りたい」といった際に、直接的に探す方法は無いのが現在の難点です。
-ただ、下記の手順を踏むとだいたいはそこまで苦労せずに見つかるかと思います。
-
-まず、IntelliJの`[Preferences] > [Keymap]`から、設定したい機能を探します。その機能にIntelliJデフォルトで割り当てられているショートカットキーから探すと早いです。  
-
-![actionlist](./keymap.png)
-
-見つかったら、その機能の名前を確認しておきます。
-
-次に、`:actionlist`コマンドを使うことで、IdeaVimで呼び出し可能なアクションの一覧を確認することができます。 また、`:actionlist XXX`とすると、名前に`XXX`を含むアクションを検索することもできます。  
-さきほど確認した機能名とアクション名は似ていることが多いため、機能名の一部や、その機能を連想するような単語（検索関連の機能なら`search`とか）で検索して、それっぽいのがヒットしたら試してみる、というのを当たるまで繰り返します。  
-検索結果には現在そのアクションに割り当てられているショートカットキーも表示されるため、それも参考にすると見つけやすいかと思います。
-(ショートカットキーでアクションの検索ができるようになってくれると便利そうですね…)
+If you want to know the action name of some IntelliJ features, you can use a .
+You can search an action by words, by using `:actionlist` command.
 
 <center>
     <img src="./actionlist.gif" style="max-width:100%;"></img>
 </center>
 
-## おわりに
+But, currently, there is no way to know the action name of IntelliJ functions which you want to call from IdeaVim.  
+When called `:actionlist`, the shortcut key binding of the each action is displayed. It may be a hint of corresponded IntelliJ features.
 
-本記事ではIdeaVimの機能や設定方法について紹介しました。  
-IdeaVimはまだ発展途上な部分もありますが、IntelliJの強力な機能をそのまま活かしつつVimの操作性を取り入れることができる素晴らしいプラグインだと思います。  
-IdeaVimを使いこなして、快適なIntelliJライフを送りましょう！  
+## Conclusion
+
+In this blog post I introduced IdeaVim. IdeaVim hasn't emulated Vim completely yet, but still great plugin.  
+Let's enjoy IdeaVim!
