@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 10:18:45 GMT</lastBuildDate><item><title><![CDATA[Getting Started with IdeaVim]]></title><description><![CDATA[IdeaVim 
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 10:25:04 GMT</lastBuildDate><item><title><![CDATA[Getting Started with IdeaVim]]></title><description><![CDATA[IdeaVim 
 Github:  JetBrains/ideavim IdeaVim is a Vim emulation plugin for IntelliJ or other Jetbrains IDEs. This plugin are officially…]]></description><link>https://ikenox.info/2019-01-25-getting-started-ideavim/</link><guid isPermaLink="false">https://ikenox.info/2019-01-25-getting-started-ideavim/</guid><pubDate>Fri, 25 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;IdeaVim&lt;/h2&gt;
 &lt;p&gt;&lt;preview-link title=&quot;IdeaVim&quot; url=&quot;https://plugins.jetbrains.com/plugin/164-ideavim&quot;&gt;&lt;/preview-link&gt;
 Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains/ideavim&lt;/a&gt;&lt;/p&gt;
@@ -340,7 +340,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-a3430.jpg&quot;
+    href=&quot;/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-a3430.jpg&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -359,14 +359,14 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;My Corne Cherry Keyboard&quot;
         title=&quot;&quot;
-        src=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-bdbbe.jpg&quot;
-        srcset=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-3f537.jpg 175w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-120d3.jpg 350w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-bdbbe.jpg 700w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-b838f.jpg 1050w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-5c0c3.jpg 1400w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-0e8d4.jpg 2100w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-a3430.jpg 4032w&quot;
+        src=&quot;/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-bdbbe.jpg&quot;
+        srcset=&quot;/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-3f537.jpg 175w,
+/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-120d3.jpg 350w,
+/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-bdbbe.jpg 700w,
+/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-b838f.jpg 1050w,
+/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-5c0c3.jpg 1400w,
+/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-0e8d4.jpg 2100w,
+/static/my-corne2-2-05d54c3c9cc15c6683ee16030c99556e-a3430.jpg 4032w&quot;
         sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
