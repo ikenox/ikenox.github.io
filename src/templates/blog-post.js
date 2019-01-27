@@ -41,7 +41,7 @@ class BlogPostTemplate extends React.Component {
     return (<div>
       <Helmet title={title}>
         <meta name={`og:title`} content={title}/>
-        {post.frontmatter.thumbnail ? <meta name={`og:image`} content={post.frontmatter.thumbnail.absolutePath}/> : ""}
+        {post.frontmatter.thumbnail ? <meta name={`og:image`} content={post.frontmatter.thumbnail.publicURL}/> : ""}
       </Helmet>
       <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
       <p className={`date-text`} style={{marginTop: 0}}>{post.frontmatter.date}</p>
@@ -79,7 +79,7 @@ export const pageQuery = graphql`
     htmlAst
     frontmatter {title
       thumbnail{
-        absolutePath
+        publicURL
       }
     date(formatString: "MMMM DD, YYYY")}}}
   `
