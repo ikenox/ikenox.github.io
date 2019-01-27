@@ -24,7 +24,7 @@ Keymap is personally customized.
 The advantages in each of IntelliJ and Vim are as follows, I think.
 
 - **IntelliJ**: Very powerful code completeion, code navigation, refactoring, and so on with easy and simple settings.
-- **Vim**: Very various and efficient operations as Text Editor. An concept of mode(normal/insert/visual) and keymap.
+- **Vim**: Very various and efficient operations as a text editor. A concept of the mode(normal/insert/visual).
 
 So, **IntelliJ with Vim-like operation can take both of these advantages**. IdeaVim supports many Vim features.
 
