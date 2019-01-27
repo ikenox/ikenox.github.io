@@ -17,12 +17,21 @@ h3,
 h4,
 h5,
 h6 {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+h1,
+h2 {
   margin-top: 2rem;
+  margin-bottom: 0;
   font-weight: 700;
 }
 
 p {
-  line-height: 2rem;
+  margin-top:.5em;
+  line-height: 1.8rem;
   word-wrap: break-word;
   word-break: break-word;
   box-sizing: border-box;
