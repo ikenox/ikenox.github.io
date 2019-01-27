@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 10:09:04 GMT</lastBuildDate><item><title><![CDATA[Getting Started with IdeaVim]]></title><description><![CDATA[IdeaVim 
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 10:18:45 GMT</lastBuildDate><item><title><![CDATA[Getting Started with IdeaVim]]></title><description><![CDATA[IdeaVim 
 Github:  JetBrains/ideavim IdeaVim is a Vim emulation plugin for IntelliJ or other Jetbrains IDEs. This plugin are officially…]]></description><link>https://ikenox.info/2019-01-25-getting-started-ideavim/</link><guid isPermaLink="false">https://ikenox.info/2019-01-25-getting-started-ideavim/</guid><pubDate>Fri, 25 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;IdeaVim&lt;/h2&gt;
 &lt;p&gt;&lt;preview-link title=&quot;IdeaVim&quot; url=&quot;https://plugins.jetbrains.com/plugin/164-ideavim&quot;&gt;&lt;/preview-link&gt;
 Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains/ideavim&lt;/a&gt;&lt;/p&gt;
@@ -113,7 +113,7 @@ After install, you have to restart the IDE to enable IdeaVim.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-ab1f1.png&quot;
+    href=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-10eed.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -121,7 +121,7 @@ After install, you have to restart the IDE to enable IdeaVim.&lt;/p&gt;
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -132,14 +132,14 @@ After install, you have to restart the IDE to enable IdeaVim.&lt;/p&gt;
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;Install IdeaVim&quot;
         title=&quot;&quot;
-        src=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fb8a0.png&quot;
-        srcset=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-1a291.png 148w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-2bc4a.png 295w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fb8a0.png 590w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-526de.png 885w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fa2eb.png 1180w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-ab1f1.png 1650w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-05c11.png&quot;
+        srcset=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-0c960.png 175w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-6ae4b.png 350w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-05c11.png 700w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-f4650.png 1050w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-a58bd.png 1400w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-10eed.png 1650w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
@@ -303,7 +303,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/my-corne-ff9f94171a417bd4c07b44c404be7195-4d406.jpg&quot;
+    href=&quot;/static/my-corne-ff9f94171a417bd4c07b44c404be7195-dfce0.jpg&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -311,7 +311,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -322,15 +322,15 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;My Corne Cherry Keyboard&quot;
         title=&quot;&quot;
-        src=&quot;/static/my-corne-ff9f94171a417bd4c07b44c404be7195-f8fb9.jpg&quot;
-        srcset=&quot;/static/my-corne-ff9f94171a417bd4c07b44c404be7195-e8976.jpg 148w,
-/static/my-corne-ff9f94171a417bd4c07b44c404be7195-63df2.jpg 295w,
-/static/my-corne-ff9f94171a417bd4c07b44c404be7195-f8fb9.jpg 590w,
-/static/my-corne-ff9f94171a417bd4c07b44c404be7195-85e3d.jpg 885w,
-/static/my-corne-ff9f94171a417bd4c07b44c404be7195-d1924.jpg 1180w,
-/static/my-corne-ff9f94171a417bd4c07b44c404be7195-9452e.jpg 1770w,
-/static/my-corne-ff9f94171a417bd4c07b44c404be7195-4d406.jpg 3991w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/my-corne-ff9f94171a417bd4c07b44c404be7195-bdbbe.jpg&quot;
+        srcset=&quot;/static/my-corne-ff9f94171a417bd4c07b44c404be7195-3f537.jpg 175w,
+/static/my-corne-ff9f94171a417bd4c07b44c404be7195-120d3.jpg 350w,
+/static/my-corne-ff9f94171a417bd4c07b44c404be7195-bdbbe.jpg 700w,
+/static/my-corne-ff9f94171a417bd4c07b44c404be7195-b838f.jpg 1050w,
+/static/my-corne-ff9f94171a417bd4c07b44c404be7195-5c0c3.jpg 1400w,
+/static/my-corne-ff9f94171a417bd4c07b44c404be7195-0e8d4.jpg 2100w,
+/static/my-corne-ff9f94171a417bd4c07b44c404be7195-dfce0.jpg 3991w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
@@ -340,7 +340,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-01800.jpg&quot;
+    href=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-a3430.jpg&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -348,7 +348,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -359,15 +359,15 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;My Corne Cherry Keyboard&quot;
         title=&quot;&quot;
-        src=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-f8fb9.jpg&quot;
-        srcset=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-e8976.jpg 148w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-63df2.jpg 295w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-f8fb9.jpg 590w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-85e3d.jpg 885w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-d1924.jpg 1180w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-9452e.jpg 1770w,
-/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-01800.jpg 4032w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-bdbbe.jpg&quot;
+        srcset=&quot;/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-3f537.jpg 175w,
+/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-120d3.jpg 350w,
+/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-bdbbe.jpg 700w,
+/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-b838f.jpg 1050w,
+/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-5c0c3.jpg 1400w,
+/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-0e8d4.jpg 2100w,
+/static/my-corne2-05d54c3c9cc15c6683ee16030c99556e-a3430.jpg 4032w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
@@ -377,7 +377,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-7aff2.jpg&quot;
+    href=&quot;/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-44988.jpg&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -385,7 +385,7 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -396,15 +396,15 @@ Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[C
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;My Corne Cherry Keyboard&quot;
         title=&quot;&quot;
-        src=&quot;/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-f8fb9.jpg&quot;
-        srcset=&quot;/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-e8976.jpg 148w,
-/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-63df2.jpg 295w,
-/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-f8fb9.jpg 590w,
-/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-85e3d.jpg 885w,
-/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-d1924.jpg 1180w,
-/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-9452e.jpg 1770w,
-/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-7aff2.jpg 3988w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-bdbbe.jpg&quot;
+        srcset=&quot;/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-3f537.jpg 175w,
+/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-120d3.jpg 350w,
+/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-bdbbe.jpg 700w,
+/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-b838f.jpg 1050w,
+/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-5c0c3.jpg 1400w,
+/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-0e8d4.jpg 2100w,
+/static/my-corne3-533c7499391297aa6bc8f8c2f0aec957-44988.jpg 3988w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
@@ -526,7 +526,7 @@ L2 layer
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/stock-0a08fd728f586415ecdb88c7de1983c0-01800.jpg&quot;
+    href=&quot;/static/stock-0a08fd728f586415ecdb88c7de1983c0-a3430.jpg&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -534,7 +534,7 @@ L2 layer
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -545,15 +545,15 @@ L2 layer
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;ストック&quot;
         title=&quot;&quot;
-        src=&quot;/static/stock-0a08fd728f586415ecdb88c7de1983c0-f8fb9.jpg&quot;
-        srcset=&quot;/static/stock-0a08fd728f586415ecdb88c7de1983c0-e8976.jpg 148w,
-/static/stock-0a08fd728f586415ecdb88c7de1983c0-63df2.jpg 295w,
-/static/stock-0a08fd728f586415ecdb88c7de1983c0-f8fb9.jpg 590w,
-/static/stock-0a08fd728f586415ecdb88c7de1983c0-85e3d.jpg 885w,
-/static/stock-0a08fd728f586415ecdb88c7de1983c0-d1924.jpg 1180w,
-/static/stock-0a08fd728f586415ecdb88c7de1983c0-9452e.jpg 1770w,
-/static/stock-0a08fd728f586415ecdb88c7de1983c0-01800.jpg 4032w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/stock-0a08fd728f586415ecdb88c7de1983c0-bdbbe.jpg&quot;
+        srcset=&quot;/static/stock-0a08fd728f586415ecdb88c7de1983c0-3f537.jpg 175w,
+/static/stock-0a08fd728f586415ecdb88c7de1983c0-120d3.jpg 350w,
+/static/stock-0a08fd728f586415ecdb88c7de1983c0-bdbbe.jpg 700w,
+/static/stock-0a08fd728f586415ecdb88c7de1983c0-b838f.jpg 1050w,
+/static/stock-0a08fd728f586415ecdb88c7de1983c0-5c0c3.jpg 1400w,
+/static/stock-0a08fd728f586415ecdb88c7de1983c0-0e8d4.jpg 2100w,
+/static/stock-0a08fd728f586415ecdb88c7de1983c0-a3430.jpg 4032w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
@@ -1081,7 +1081,7 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-ab1f1.png&quot;
+    href=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-10eed.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -1089,7 +1089,7 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -1100,14 +1100,14 @@ Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;Install IdeaVim&quot;
         title=&quot;&quot;
-        src=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fb8a0.png&quot;
-        srcset=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-1a291.png 148w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-2bc4a.png 295w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fb8a0.png 590w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-526de.png 885w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-fa2eb.png 1180w,
-/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-ab1f1.png 1650w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-05c11.png&quot;
+        srcset=&quot;/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-0c960.png 175w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-6ae4b.png 350w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-05c11.png 700w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-f4650.png 1050w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-a58bd.png 1400w,
+/static/install-ideavim-b32f9bd25f3571250e649aff74888ed0-10eed.png 1650w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
@@ -1255,7 +1255,7 @@ vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;spa
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-cde58.png&quot;
+    href=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-4d60a.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -1263,7 +1263,7 @@ vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;spa
   
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
-    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+    style=&quot;position: relative; display: block; ; max-width: 700px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
@@ -1274,14 +1274,14 @@ vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;spa
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;actionlist&quot;
         title=&quot;&quot;
-        src=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-fb8a0.png&quot;
-        srcset=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-1a291.png 148w,
-/static/keymap-01377eeb808c82ecba0fa79a7981f39c-2bc4a.png 295w,
-/static/keymap-01377eeb808c82ecba0fa79a7981f39c-fb8a0.png 590w,
-/static/keymap-01377eeb808c82ecba0fa79a7981f39c-526de.png 885w,
-/static/keymap-01377eeb808c82ecba0fa79a7981f39c-fa2eb.png 1180w,
-/static/keymap-01377eeb808c82ecba0fa79a7981f39c-cde58.png 1592w&quot;
-        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        src=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-05c11.png&quot;
+        srcset=&quot;/static/keymap-01377eeb808c82ecba0fa79a7981f39c-0c960.png 175w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-6ae4b.png 350w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-05c11.png 700w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-f4650.png 1050w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-a58bd.png 1400w,
+/static/keymap-01377eeb808c82ecba0fa79a7981f39c-4d60a.png 1592w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
       /&gt;
     &lt;/span&gt;
   &lt;/span&gt;
