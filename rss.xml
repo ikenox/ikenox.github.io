@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sat, 26 Jan 2019 11:32:45 GMT</lastBuildDate><item><title><![CDATA[Getting Started with IdeaVim]]></title><description><![CDATA[IdeaVim 
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ikenox.info]]></title><description><![CDATA[ikenox's Tech blog]]></description><link>https://ikenox.info</link><generator>RSS for Node</generator><lastBuildDate>Sun, 27 Jan 2019 08:39:36 GMT</lastBuildDate><item><title><![CDATA[Getting Started with IdeaVim]]></title><description><![CDATA[IdeaVim 
 Github:  JetBrains/ideavim IdeaVim is a Vim emulation plugin for IntelliJ or other Jetbrains IDEs. This plugin are officially…]]></description><link>https://ikenox.info/2019-01-25-getting-started-ideavim/</link><guid isPermaLink="false">https://ikenox.info/2019-01-25-getting-started-ideavim/</guid><pubDate>Fri, 25 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;IdeaVim&lt;/h2&gt;
 &lt;p&gt;&lt;preview-link title=&quot;IdeaVim&quot; url=&quot;https://plugins.jetbrains.com/plugin/164-ideavim&quot;&gt;&lt;/preview-link&gt;
 Github: &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;JetBrains/ideavim&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;IdeaVim is a Vim emulation plugin for IntelliJ or other Jetbrains IDEs. This plugin are officially developed by Jetbrains as you can see the repository owner name.&lt;/p&gt;
 &lt;h3&gt;Demo&lt;/h3&gt;
-&lt;p&gt;Keymap has been personally customized.&lt;/p&gt;
+&lt;p&gt;Keymap is personally customized.&lt;/p&gt;
 &lt;center&gt;
     &lt;img src=&quot;/overview-828bf0eedcf2d63fd07896aec3ce83e6.gif&quot; style=&quot;max-width:100%;&quot;&gt;
 &lt;/center&gt;
 &lt;h3&gt;Why use IdeaVim&lt;/h3&gt;
-&lt;p&gt;The followings are advantages in each of IntelliJ and Vim, I think.&lt;/p&gt;
+&lt;p&gt;The advantages in each of IntelliJ and Vim are as follows, I think.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;IntelliJ&lt;/strong&gt;: Very powerful code completeion, code navigation, refactoring, and so on with easy and simple settings.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Vim&lt;/strong&gt;: Very various and efficient operations as Text Editor. An concept of mode(normal/insert/visual) and keymap.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;So, &lt;strong&gt;IntelliJ with Vim-like operation can take both of those advantages&lt;/strong&gt;. IdeaVim supports the majority of Vim features, even though it hasn’t yet been able to support the details.&lt;/p&gt;
+&lt;p&gt;So, &lt;strong&gt;IntelliJ with Vim-like operation can take both of these advantages&lt;/strong&gt;. IdeaVim supports many Vim features.&lt;/p&gt;
 &lt;p&gt;In this blog post, I’ll introduce what features IdeaVim supports, how to setup IdeaVim, and how great IdeaVim is.&lt;/p&gt;
 &lt;h2&gt;Supported Vim features&lt;/h2&gt;
-&lt;p&gt;The followings are frequently used Vim features supported by IdeaVim.&lt;/p&gt;
+&lt;p&gt;The followings are commonly used Vim features supported by IdeaVim.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -109,7 +109,7 @@ text object operation(
 &lt;p&gt;You can see more details at README.md of &lt;a href=&quot;https://github.com/JetBrains/ideavim&quot;&gt;GitHub repositoy&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Install IdeaVim&lt;/h2&gt;
 &lt;p&gt;In IntelliJ or other Jetbrains IDEs, you can install IdeaVim from &lt;code class=&quot;language-text&quot;&gt;[Preferences] &amp;gt; [Plugins]&lt;/code&gt;.
-After install, you have to restart IDE to enable IdeaVim.&lt;/p&gt;
+After install, you have to restart the IDE to enable IdeaVim.&lt;/p&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
@@ -147,14 +147,13 @@ After install, you have to restart IDE to enable IdeaVim.&lt;/p&gt;
   &lt;/a&gt;
     &lt;/p&gt;
 &lt;h3&gt;EAP build&lt;/h3&gt;
-&lt;p&gt;You can install EAP (Early Access Program) build of IdeaVim by adding the following URL to &lt;code class=&quot;language-text&quot;&gt;[Settings] &amp;gt; [Plugins] &amp;gt; [Browse Repositories] &amp;gt; [Manage Repositories]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can install an EAP (Early Access Program) build of IdeaVim by adding the following URL to &lt;code class=&quot;language-text&quot;&gt;[Settings] &amp;gt; [Plugins] &amp;gt; [Browse Repositories] &amp;gt; [Manage Repositories]&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://plugins.jetbrains.com/plugins/eap/ideavim&quot;&gt;https://plugins.jetbrains.com/plugins/eap/ideavim&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Currently, a new version of IdeaVim is officially released about a few times for a year, so sometimes bug fixes or new features are not released soon.
-So I normally use EAP build.&lt;/p&gt;
+&lt;p&gt;Currently, a new version of IdeaVim is officially released a few times for a year, so sometimes bug fixes or new features are not released soon. So I normally use the EAP build.&lt;/p&gt;
 &lt;h2&gt;How to setup IdeaVim&lt;/h2&gt;
 &lt;h3&gt;.ideavimrc&lt;/h3&gt;
-&lt;p&gt;IdeaVim loads &lt;code class=&quot;language-text&quot;&gt;~/.ideavimrc&lt;/code&gt; when IDE started. We can write settings to &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;, with same syntax as &lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;. A list of supported &lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt; commands is &lt;a href=&quot;https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md&quot;&gt;here&lt;/a&gt;.&lt;br&gt;
-In addition, &lt;code class=&quot;language-text&quot;&gt;set surround&lt;/code&gt; enables a &lt;a href=&quot;https://github.com/tpope/vim-surround&quot;&gt;vim-surround&lt;/a&gt; emulation.&lt;/p&gt;
+&lt;p&gt;IdeaVim loads a file &lt;code class=&quot;language-text&quot;&gt;~/.ideavimrc&lt;/code&gt; when the IDE started. We can write the settings to &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;, with the same syntax as &lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt;. A list of supported &lt;code class=&quot;language-text&quot;&gt;set&lt;/code&gt; commands is &lt;a href=&quot;https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md&quot;&gt;here&lt;/a&gt;.&lt;br&gt;
+In addition, a &lt;code class=&quot;language-text&quot;&gt;set surround&lt;/code&gt; command enables a &lt;a href=&quot;https://github.com/tpope/vim-surround&quot;&gt;vim-surround&lt;/a&gt; emulation.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;incsearch&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;ignorecase&lt;/span&gt;
@@ -164,10 +163,9 @@ nnoremap L $
 nnoremap H ^
 &lt;span class=&quot;token builtin&quot;&gt;noremap&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;h3&gt;DRY in Vim and IdeaVim keymaps&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt; can be written as same syntax. This is a large advantage, because you don’t need to learn new specific syntax, and you can share the settings of the common basic keymaps (e.g. &lt;code class=&quot;language-text&quot;&gt;nnoremap ; :&lt;/code&gt;) between both of them.  &lt;/p&gt;
-&lt;p&gt;To share the settings, I prepared a shared keymaps file &lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;. It is loaded in &lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt; by a &lt;code class=&quot;language-text&quot;&gt;source&lt;/code&gt; command.&lt;br&gt;
-Thus you can centralize the common basic keymaps to one file. You can keep DRY principle.&lt;/p&gt;
+&lt;h3&gt;Share the keymaps between Vim and IdeaVim&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt; can be written as the same syntax. This is a large advantage, because you don’t need to learn new specific syntax, and you can share the settings of the common basic keymaps (e.g. &lt;code class=&quot;language-text&quot;&gt;nnoremap ; :&lt;/code&gt;) between both of them.&lt;/p&gt;
+&lt;p&gt;To share the settings, I prepared a shared keymaps file &lt;code class=&quot;language-text&quot;&gt;.vimrc.keymap&lt;/code&gt;. It is loaded in &lt;code class=&quot;language-text&quot;&gt;.vimrc&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt; by a &lt;code class=&quot;language-text&quot;&gt;source&lt;/code&gt; command. Thus you can centralize the common basic keymaps to the one file.&lt;/p&gt;
 &lt;h5&gt;.ideavimrc&lt;/h5&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;&quot; Load common basic keymaps&lt;/span&gt;
@@ -187,18 +185,16 @@ nnoremap H ^
 &lt;li&gt;&lt;a href=&quot;https://github.com/ikenox/dotfiles/blob/master/ideavimrc&quot;&gt;.ideavimrc&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/ikenox/dotfiles/blob/master/vimrc.keymap&quot;&gt;.vimrc.keymap&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Vim-like keymap to IntelliJ features&lt;/h3&gt;
-&lt;p&gt;In my &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;, a statement &lt;code class=&quot;language-text&quot;&gt;map XXX :action YYY&lt;/code&gt; often appears.&lt;br&gt;
-&lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; is a IdeaVim-specific command. By using &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; command, you can call IntelliJ features.&lt;br&gt;
-The following is an example.&lt;/p&gt;
+&lt;h3&gt;Vim-like keymap to IntelliJ functions&lt;/h3&gt;
+&lt;p&gt;In my &lt;code class=&quot;language-text&quot;&gt;.ideavimrc&lt;/code&gt;, a statement &lt;code class=&quot;language-text&quot;&gt;map XXX :action YYY&lt;/code&gt; often appears. &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; is a IdeaVim-specific command. By using &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; command, you can call IntelliJ functions.&lt;/p&gt;
+&lt;p&gt;The following is an example of keymap.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-vim&quot;&gt;&lt;code class=&quot;language-vim&quot;&gt;nnoremap &lt;span class=&quot;token builtin&quot;&gt;gd&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoDeclaration&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;GotoDeclaration&lt;/code&gt; is called “action”. It corresponds to a one of the IntelliJ features. It navigates to the declaration of a symbol on a your text cursor.&lt;br&gt;
-So, &lt;code class=&quot;language-text&quot;&gt;nnoremap gd :action GotoDeclaration&lt;/code&gt; means, “When you type &lt;code class=&quot;language-text&quot;&gt;gd&lt;/code&gt;, then you’ll be navigate to the declaration of a symbol on the cursor”.&lt;/p&gt;
-&lt;p&gt;Thus, by using &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; command, &lt;strong&gt;you can define a vim-like keymap to any IntelliJ features, even very powerful code modification, code navigation, refactoring, and more features.&lt;/strong&gt; &lt;/p&gt;
-&lt;p&gt;You can call any IntelliJ features, from high-level features (e.g. refactoring) to low-level features (e.g. move text cursor). You can also call features of IntelliJ Plugin you’ve installed.&lt;/p&gt;
-&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; command dramatically boosts the convinience of IdeaVim-ed IntelliJ.&lt;br&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;GotoDeclaration&lt;/code&gt; is one of an “action”. An action corresponds to one of the IntelliJ functions. It navigates to the declaration of the symbol on the text cursor. So, &lt;code class=&quot;language-text&quot;&gt;nnoremap gd :action GotoDeclaration&lt;/code&gt; means, “When you type &lt;code class=&quot;language-text&quot;&gt;gd&lt;/code&gt; in the normal mode, then you’ll be navigated to the declaration of the symbol”.&lt;br&gt;
+Thus, by using an &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; command, &lt;strong&gt;you can define a vim-like keymap to any IntelliJ functions, even very powerful code modification, code navigation, refactoring, and the more functions.&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;You can call any IntelliJ functions, from high-level functions (e.g. refactoring) to low-level functions (e.g. move text cursor). You can also call the functions of the IntelliJ plugin you’ve installed.&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;:action&lt;/code&gt; command dramatically boosts the usability of IdeaVim-ed IntelliJ.&lt;br&gt;
 The followings are my recommended actions.&lt;/p&gt;
 &lt;h4&gt;Examples of Action&lt;/h4&gt;
 &lt;table&gt;
@@ -243,7 +239,7 @@ The followings are my recommended actions.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;RenameElement&lt;/td&gt;
-&lt;td&gt;Rename symbol&lt;/td&gt;
+&lt;td&gt;Rename a symbol&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;ReformatCode&lt;/td&gt;
@@ -289,15 +285,15 @@ nnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;spa
 vnoremap &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;a &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;action GotoAction&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
 &lt;h3&gt;Search an action name&lt;/h3&gt;
-&lt;p&gt;If you want to know the action name of some IntelliJ features, you can use a .
-You can search an action by words, by using &lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;If you want to know an action name of some IntelliJ functions, you can use an &lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt; command.
+By using the command you can search an action by words.&lt;/p&gt;
 &lt;center&gt;
     &lt;img src=&quot;/actionlist-25c4a08714b0cbdc134d5b0b0bf519ae.gif&quot; style=&quot;max-width:100%;&quot;&gt;
 &lt;/center&gt;
-&lt;p&gt;But, currently, there is no way to know the action name of IntelliJ functions which you want to call from IdeaVim.&lt;br&gt;
-When called &lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt;, the shortcut key binding of the each action is displayed. It may be a hint of corresponded IntelliJ features.&lt;/p&gt;
+&lt;p&gt;But, currently there is no way to know the action name of the IntelliJ function which you want to call from IdeaVim.&lt;br&gt;
+Calling &lt;code class=&quot;language-text&quot;&gt;:actionlist&lt;/code&gt; will display assigned shortcut key for the each action. It may be a hint of the corresponded IntelliJ function.&lt;/p&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;In this blog post I introduced IdeaVim. IdeaVim hasn’t emulated Vim completely yet, but still great plugin.&lt;br&gt;
+&lt;p&gt;In this blog post, I introduced IdeaVim. IdeaVim hasn’t emulated Vim completely yet, but it’s still a great plugin.&lt;br&gt;
 Let’s enjoy IdeaVim!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Corne Cherry Keyboardを組んだ]]></title><description><![CDATA[Corne Cherry Keyboardは、 @foostan さんが設計している自作キーボード。 設計図はオープンソースになっており、GitHubにて公開されている。( foostan/crkbd ) また、現在は 遊舎工房 さんの実店舗にてCorne Cherry…]]></description><link>https://ikenox.info/2019-01-21-made-corne-keyboard/</link><guid isPermaLink="false">https://ikenox.info/2019-01-21-made-corne-keyboard/</guid><pubDate>Mon, 21 Jan 2019 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Corne Cherry Keyboardは、&lt;a href=&quot;https://twitter.com/foostan&quot; target=&quot;_blank&quot;&gt;@foostan&lt;/a&gt;さんが設計している自作キーボード。&lt;br&gt;
 設計図はオープンソースになっており、GitHubにて公開されている。(&lt;a href=&quot;https://github.com/foostan/crkbd/&quot; target=&quot;_blank&quot;&gt;foostan/crkbd&lt;/a&gt;)&lt;br&gt;
 また、現在は&lt;a href=&quot;https://yushakobo.jp/news/2018/12/07/storeopen/&quot; target=&quot;_blank&quot;&gt;遊舎工房&lt;/a&gt;さんの実店舗にてCorne Cherryのキットが販売されている様子。&lt;/p&gt;
