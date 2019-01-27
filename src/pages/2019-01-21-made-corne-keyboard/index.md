@@ -1,6 +1,7 @@
 ---
 title: Corne Cherry Keyboardを組んだ
 date: "2019-01-21T00:00Z"
+thumbnail: "./my-corne3.jpg"
 ---
 
 Corne Cherry Keyboardは、<a href="https://twitter.com/foostan" target="_blank">@foostan</a>さんが設計している自作キーボード。  

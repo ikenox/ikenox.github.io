@@ -1,6 +1,7 @@
 ---
 title: Getting Started with IdeaVim
 date: "2019-01-25T00:00Z"
+thumbnail: "./overview.gif"
 ---
 
 ## IdeaVim
@@ -187,3 +188,4 @@ Calling `:actionlist` will display assigned shortcut key for the each action. It
 
 In this blog post, I introduced IdeaVim. IdeaVim hasn't emulated Vim completely yet, but it's still a great plugin.  
 Let's enjoy IdeaVim!
+
