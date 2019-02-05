@@ -4,6 +4,8 @@ date: "2019-01-25T00:00Z"
 thumbnail: "./overview.gif"
 ---
 
+Japanese version is [here](/2017-12-25-ideavim-introduction)
+
 ## IdeaVim
 
 <preview-link title="IdeaVim" url="https://plugins.jetbrains.com/plugin/164-ideavim"></preview-link>
