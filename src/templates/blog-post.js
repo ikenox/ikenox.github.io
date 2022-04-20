@@ -37,11 +37,11 @@ const BlogPostTemplate = ({ data, location }) => {
             }</span> </p>
         </header>
         <div style={{ margin: "1rem 0 0 0" }}>
-          <HatenaBookmarkButton />
+          <PocketButton />
           &nbsp;
           <TwitterButton />
           &nbsp;
-          <PocketButton />
+          <HatenaBookmarkButton />
         </div>
 
         <section
