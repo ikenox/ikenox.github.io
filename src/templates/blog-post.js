@@ -29,11 +29,11 @@ const BlogPostTemplate = ({ data, location }) => {
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>
-            <span>{posted}</span>
+            <span>Published: {posted}</span>
             <span>{posted === modified
               ? <div />
               : <span>
-              &nbsp;(Last Modified: {modified} <ExternalLink to={`https://github.com/ikenox/ikenox.github.io/commits/master` + post.fields.fileRelativePath}>changelog</ExternalLink>)</span>
+              &nbsp;|&nbsp;Last Modified: {modified} <ExternalLink to={`https://github.com/ikenox/ikenox.github.io/commits/master` + post.fields.fileRelativePath}>changelog</ExternalLink></span>
             }</span> </p>
         </header>
         <div style={{ margin: "1rem 0 0 0" }}>
