@@ -1,0 +1,24 @@
+code[class*="language-"],
+pre[class*="language-"]{
+    font-size: .9em;
+    line-height: 1.6em;
+}
+
+pre[class*="language-"]{
+    padding: 1em;
+    border: none;
+    border-radius: 0;
+}
+
+*:not(pre) >  code[class*="language-"]  {
+    background: #eeeeee;
+    color: black;
+    vertical-align: middle;
+    font-size: .9em;
+    padding: .1em .15em;
+    line-height: 1em;
+    margin: 0 .15em;
+    box-shadow: none;
+    border: none;
+}
+
