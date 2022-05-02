@@ -29,7 +29,7 @@ const BlogPostTemplate = ({ data, location }) => {
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>
-            <span>Published {posted}</span>
+            <span>{posted}</span>
             <span>{posted === modified
               ? <div />
               : <span>
