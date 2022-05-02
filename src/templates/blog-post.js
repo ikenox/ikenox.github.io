@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -29,11 +29,12 @@ const BlogPostTemplate = ({ data, location }) => {
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>
-            <span>Published: {posted}</span>
+            <span>Published {posted}</span>
             <span>{posted === modified
               ? <div />
               : <span>
-              &nbsp;|&nbsp;Last Modified: {modified} <ExternalLink to={`https://github.com/ikenox/ikenox.github.io/commits/master` + post.fields.fileRelativePath}>changelog</ExternalLink></span>
+              &nbsp;|&nbsp;Modified {modified} <ExternalLink to={`https://github.com/ikenox/ikenox.github.io/commits/master` + post.fields.fileRelativePath}>changelog</ExternalLink>
+            </span>
             }</span> </p>
         </header>
         <div style={{ margin: "1rem 0 0 0" }}>
@@ -80,7 +81,7 @@ export const pageQuery = graphql`
         }
         markdownRemark(id: { eq: $id }) {
             fields {
-                lastModified(formatString: "yyyy/MM/DD")
+                lastModified(formatString: "yyyy-MM-DD")
                 fileRelativePath
             }
             id
@@ -88,7 +89,7 @@ export const pageQuery = graphql`
             html
             frontmatter {
                 title
-                date(formatString: "yyyy/MM/DD")
+                date(formatString: "yyyy-MM-DD")
                 description
             }
         }

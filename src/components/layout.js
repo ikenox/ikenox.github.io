@@ -29,7 +29,7 @@ const Layout = ({ location, title, children }) => {
       <main>{children}</main>
       <hr />
       <footer>
-        © {new Date().getFullYear()} Naoto Ikeno. This site is built by <ExternalLink to={`https://www.gatsbyjs.com/`}>Gatsby</ExternalLink> and managed by <ExternalLink to={`https://github.com/ikenox/ikenox.github.io`}>This repository</ExternalLink>.
+        © {new Date().getFullYear()} Naoto Ikeno<br/>This site is built by <ExternalLink to={`https://www.gatsbyjs.com/`}>Gatsby</ExternalLink> and managed by <ExternalLink to={`https://github.com/ikenox/ikenox.github.io`}>This repository</ExternalLink>.
       </footer>
     </div>
   )
