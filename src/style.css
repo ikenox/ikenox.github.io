@@ -2,7 +2,7 @@ body {
     padding: 1rem 1rem 3rem 1rem;
     font-size: 13pt;
     line-height: 1.7em;
-    font-family: Menlo, Monaco, "Courier New", monospace, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: Menlo, Monaco, "Courier New", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .global-wrapper{
