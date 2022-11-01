@@ -1,13 +1,13 @@
 ---
 templateKey: blog-post
-title: In Clean Architecture, where to put validation logic?
+title: "The Clean Architecture: Where should we put validation logics in the code"
 date: "2019-09-21T15:00Z"
 lastModified: "2019-09-21T15:00Z"
 lang: en
 ---
 
-When working with Clean Architecture, I sometimes wonder where to put the validation logic.
-In this archicle, I'll consider where to put validation logic in Clean Architecture.
+When working with Clean Architecture, I sometimes wonder where should I put validation logics in the code.
+In this archicle, I'll try to conclude where should we put validation logics in the Clean Architecture.
 
 ## Conclusion
 
