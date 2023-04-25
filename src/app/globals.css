@@ -1,0 +1,39 @@
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+  --code-font: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  margin: auto;
+  padding: 0 1.5rem;
+  font-size: 13pt;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+p, li {
+  line-height: 1.6em;
+}
+
+table {
+  border: 1px outset grey;
+  border-spacing: 2px;
+}
+
+td, th {
+  border: 1px inset grey;
+  padding: .4em;
+}
+
+.no-vertical-margin > *:not(:first-child) {
+  margin-top: .2em;
+}
+
+.no-vertical-margin > *:not(:last-child) {
+  margin-bottom: .2em;
+}
+
+.post-summary {
+  margin: 2em 0;
+}
