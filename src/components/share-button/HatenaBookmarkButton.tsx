@@ -16,7 +16,7 @@ export function HatenaBookmarkButton() {
 
     return () => {
       document.getElementById("hatena-button-wrapper")?.removeChild(script);
-    }
+    };
   });
 
   return (
@@ -27,16 +27,7 @@ export function HatenaBookmarkButton() {
         data-hatena-bookmark-layout="basic-label-counter"
         data-hatena-bookmark-lang="ja"
         title="このエントリーをはてなブックマークに追加"
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png"
-          alt="このエントリーをはてなブックマークに追加"
-          width="20"
-          height="20"
-          style={{ border: undefined }}
-        />
-      </a>
+      ></a>
     </span>
   );
 }
