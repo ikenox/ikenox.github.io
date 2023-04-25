@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { pageInfo } from "@/app/page-info";
+import { pageInfoBase, toMetadata } from "@/app/page-info";
 import Link from "next/link";
 
 export default async function AboutMe() {
@@ -29,7 +29,7 @@ export default async function AboutMe() {
   );
 }
 
-export const metadata: Metadata = {
-  ...pageInfo,
+export const metadata: Metadata = toMetadata({
+  ...pageInfoBase,
   title: "About me",
-};
+});

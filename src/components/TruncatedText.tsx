@@ -4,7 +4,7 @@ export const TruncatedText = ({ text, maxLines }: { text: string; maxLines: numb
       display: "-webkit-box",
       textOverflow: "ellipsis",
       overflow: "hidden",
-      WebkitLineClamp: 3,
+      WebkitLineClamp: maxLines,
       WebkitBoxOrient: "vertical",
     }}
   >
