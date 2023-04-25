@@ -34,3 +34,4 @@ jobs:
         with:
           publish_dir: .build
           cname: ikenox.info
+          github_token: ${{ secrets.GITHUB_TOKEN }}
