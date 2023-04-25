@@ -29,10 +29,7 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.build
-          publish_branch: deployment
-          cname: ikenox.info
+          folder: ./build
