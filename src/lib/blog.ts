@@ -32,7 +32,16 @@ export async function getPostBySlug(slug: string): Promise<BlogPost> {
     title: data.title as string,
     date: new Date(data.date as string),
     lang: data.lang as string | undefined,
-    contentText: htmlToText(contentHtml),
+    contentText: htmlToText(contentHtml, {
+      selectors: [
+        {
+          selector: "a",
+          options: {
+            ignoreHref: true,
+          },
+        },
+      ],
+    }),
     contentHtml,
   };
 }
