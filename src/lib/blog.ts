@@ -79,7 +79,7 @@ export default async function markdownToHtml(markdown: string, locationPath?: st
     .use(rehypeExternalLinks, { target: "_blank" })
     .use(rehypeFormat)
     .use(rehypePrettyCode, {
-      theme: "min-dark",
+      theme: "dark-plus",
       keepBackground: true,
     })
     .use(rehypeStringify)
