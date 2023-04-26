@@ -71,11 +71,12 @@ IdeaVim プラグインを使うと、
 
 IdeaVim のアップデートは現状だと年に数回程度しか行われていません。
 IntelliJ 内から`[Settings] > [Plugins] > [Browse Repositories] > [Manage Repositories]`に下記の URL
-を追加することで、まだ正式にはリリースされていない EAP\[^1]ビルドの IdeaVim を利用することができます。\
-<https://plugins.jetbrains.com/plugins/eap/ideavim>\
-不便だと思っていた不具合が EAP ビルドでは直っているみたいなケースも少なくないので、筆者は常に最新の EAP ビルドを利用しています。
+を追加することで、まだ正式にはリリースされていない EAP[^eap]ビルドの IdeaVim を利用することができます。
+[^eap]: Early Access Program
 
-\[^1]: Early Access Program
+<https://plugins.jetbrains.com/plugins/eap/ideavim>
+
+不便だと思っていた不具合が EAP ビルドでは直っているみたいなケースも少なくないので、筆者は常に最新の EAP ビルドを利用しています。
 
 ## IdeaVim の設定方法
 
