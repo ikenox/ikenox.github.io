@@ -1,3 +1,7 @@
+* {
+  word-wrap: anywhere;
+}
+
 pre {
   font-family: var(--code-font);
   padding: 1em;
@@ -23,4 +27,12 @@ pre > * {
 img {
   max-width: 640px;
   width: 100%;
+}
+
+table {
+  table-layout: fixed;
+}
+
+td {
+  word-wrap: anywhere;
 }
