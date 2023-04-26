@@ -1,6 +1,5 @@
 import fs from "fs";
 import matter from "gray-matter";
-import { htmlToText } from "html-to-text";
 
 import remarkGfm from "remark-gfm";
 import { unified } from "unified";
@@ -12,6 +11,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeExternalLinks from "rehype-external-links";
 import { visit } from "unist-util-visit";
 import { join } from "path";
+import { htmlToText } from "html-to-text";
 
 const postsDirectory = join(process.cwd(), "blog");
 
@@ -58,6 +58,12 @@ export async function getPostBySlug(slug: string): Promise<BlogPost> {
             ignoreHref: true,
           },
         },
+        ...["h1", "h2", "h3", "h4", "h5", "h6"].map((selector) => ({
+          selector,
+          options: {
+            uppercase: false,
+          },
+        })),
       ],
     }),
     contentHtml,
