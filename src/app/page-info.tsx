@@ -31,5 +31,5 @@ export const toMetadata = (m: PageInfo): Metadata => ({
   icons: {
     icon: { url: "/favicon.ico", type: "image/x-icon" },
   },
-  viewport: "viewport-fit=cover",
+  viewport: "initial-scale=1, viewport-fit=cover",
 });
