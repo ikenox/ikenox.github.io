@@ -61,7 +61,7 @@ date: "2023-05-01"
 </html>
 ```
 
-HTML ドキュメントに期待する構造の定義を struct で行います。struct の各フィールドにおいて、 h2s で用意されているアトリビュートで CSS Selector
+HTML ドキュメントに期待する構造の定義を struct で行います。struct の各フィールドにおいて、 attribute で CSS Selector
 を記述します。  
 一例としては以下のようになります。
 
