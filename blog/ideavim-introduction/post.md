@@ -10,7 +10,7 @@ lastModified: "2017-12-25T00:00Z"
 
 ## IdeaVim
 
-[IdeaVim](https://plugins.jetbrains.com/plugin/164-ideavim)  
+[IdeaVim](https://plugins.jetbrains.com/plugin/164-ideavim)
 Github: [JetBrains/ideavim](https://github.com/JetBrains/ideavim)
 
 IdeaVim は、**IntelliJ や Android Studio などの JetBrains 系列の IDE で使える Vim プラグイン** です。このプラグインを導入することで

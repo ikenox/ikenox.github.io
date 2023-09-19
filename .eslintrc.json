@@ -9,9 +9,8 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
+  "includes": ["./src/**/*.{ts,tsx,js,jsx}"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unsafe-assignment": "error",
