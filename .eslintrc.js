@@ -1,26 +1,26 @@
-const { readGitignoreFiles } = require("eslint-gitignore")
-module.exports= {
+const { readGitignoreFiles } = require("eslint-gitignore");
+module.exports = {
   extends: [
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    "project": "./tsconfig.json"
+    project: "./tsconfig.json",
   },
   plugins: ["@typescript-eslint"],
   ignorePatterns: [
     ...readGitignoreFiles({ cwd: __dirname }),
     ".eslintrc.js",
     "*.config.js",
-    "next-env.d.ts"
+    "next-env.d.ts",
   ],
   rules: {
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unsafe-assignment": "error",
     "@typescript-eslint/no-unsafe-call": "error",
-    "@typescript-eslint/strict-boolean-expressions": "error"
-  }
-}
+    "@typescript-eslint/strict-boolean-expressions": "error",
+  },
+};
