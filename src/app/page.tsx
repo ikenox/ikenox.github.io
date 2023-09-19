@@ -1,9 +1,9 @@
-import { BlogPost, getAllPosts } from "@/lib/blog";
-import React from "react";
-import Link from "next/link";
-import { toDateString, trimString } from "@/lib/util";
-import { pageInfoBase, toMetadata } from "@/app/page-info";
-import { TruncatedText } from "@/components/TruncatedText";
+import { BlogPost, getAllPosts } from '@/lib/blog';
+import React from 'react';
+import Link from 'next/link';
+import { toDateString, trimString } from '@/lib/util';
+import { pageInfoBase, toMetadata } from '@/app/page-info';
+import { TruncatedText } from '@/components/TruncatedText';
 
 export default async function Home() {
   const posts = await getAllPosts();
@@ -23,7 +23,7 @@ export default async function Home() {
 
 function PostSummary({ post }: { post: BlogPost }) {
   return (
-    <div className={"post-summary no-vertical-margin"}>
+    <div className={'post-summary no-vertical-margin'}>
       <p>{toDateString(post.date)}</p>
       <h2>
         <Link href={`/blog/${post.slug}`}>{post.title}</Link>

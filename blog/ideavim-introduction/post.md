@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
 title: IntelliJ(Android Studio)のVimプラグイン「IdeaVim」の使い方と設定
-date: "2017-12-25T00:00Z"
-lastModified: "2017-12-25T00:00Z"
+date: '2017-12-25T00:00Z'
+lastModified: '2017-12-25T00:00Z'
 ---
 
 この記事は[JetBrains Advent Calendar 2017](https://qiita.com/advent-calendar/2017/jetbrains)

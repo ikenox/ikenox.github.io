@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
-title: "The Clean Architecture: Where should we put validation logics in the code"
-date: "2019-09-21T15:00Z"
-lastModified: "2019-09-21T15:00Z"
+title: 'The Clean Architecture: Where should we put validation logics in the code'
+date: '2019-09-21T15:00Z'
+lastModified: '2019-09-21T15:00Z'
 lang: en
 ---
 

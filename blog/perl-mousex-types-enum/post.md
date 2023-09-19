@@ -1,9 +1,9 @@
 ---
 templateKey: blog-post
-path: "/2018-05-20/perl-mousex-types-enum"
+path: '/2018-05-20/perl-mousex-types-enum'
 title: MouseX::Types::Enum - PerlでJavaのenum(列挙型)のようなクラスを実現するモジュール
-date: "2018-05-20T00:00Z"
-lastModified: "2018-05-20T00:00Z"
+date: '2018-05-20T00:00Z'
+lastModified: '2018-05-20T00:00Z'
 ---
 
 [MouseX::Types::Enum](https://metacpan.org/pod/MouseX::Types::Enum)

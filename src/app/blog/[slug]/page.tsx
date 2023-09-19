@@ -1,11 +1,11 @@
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
-import { HatenaBookmarkButton } from "@/components/share-button/HatenaBookmarkButton";
-import { PocketButton } from "@/components/share-button/PocketButton";
-import { TwitterButton } from "@/components/share-button/TwitterButton";
-import { toDateString } from "@/lib/util";
-import { Metadata } from "next";
-import { pageInfoBase, toMetadata } from "@/app/page-info";
-import { BlogPostBody } from "@/components/BlogPostBody";
+import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { HatenaBookmarkButton } from '@/components/share-button/HatenaBookmarkButton';
+import { PocketButton } from '@/components/share-button/PocketButton';
+import { TwitterButton } from '@/components/share-button/TwitterButton';
+import { toDateString } from '@/lib/util';
+import { Metadata } from 'next';
+import { pageInfoBase, toMetadata } from '@/app/page-info';
+import { BlogPostBody } from '@/components/BlogPostBody';
 
 type Params = {
   readonly slug: string;
@@ -16,7 +16,7 @@ export default async function Post({ params }: { params: Params }) {
 
   return (
     <main>
-      <div className={"no-vertical-margin"}>
+      <div className={'no-vertical-margin'}>
         <h1>{post.title}</h1>
         <p>{toDateString(post.date)}</p>
       </div>

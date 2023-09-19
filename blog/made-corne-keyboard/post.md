@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
 title: Corne Keyboard (コルネキーボード) を組んだ
-date: "2019-01-21T00:00Z"
-lastModified: "2019-01-21T00:00Z"
+date: '2019-01-21T00:00Z'
+lastModified: '2019-01-21T00:00Z'
 ---
 
 Corne Keyboard は、 [@foostan](https://twitter.com/foostan)

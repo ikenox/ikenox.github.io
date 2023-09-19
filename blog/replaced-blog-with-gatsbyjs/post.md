@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
 title: ブログをGatsbyJSに載せ替えました
-date: "2018-08-04T00:00Z"
-lastModified: "2018-08-04T00:00Z"
+date: '2018-08-04T00:00Z'
+lastModified: '2018-08-04T00:00Z'
 ---
 
 ### GatsbyJS

@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
 title: Clean Architectureにおいてバリデーションはどこでやるべきか
-date: "2019-03-25T10:00Z"
-lastModified: "2019-03-25T10:00Z"
+date: '2019-03-25T10:00Z'
+lastModified: '2019-03-25T10:00Z'
 ---
 
 クリーンアーキテクチャで web アプリケーションを作る際に、バリデーションはどのレイヤの責務なのか？と悩むことが多いため、それについての考察を行ってみる。

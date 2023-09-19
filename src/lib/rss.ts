@@ -1,7 +1,7 @@
-import RSS from "rss";
-import { getAllPosts } from "@/lib/blog";
-import { description, siteName, siteUrl } from "@/metadata";
-import { trimString } from "@/lib/util";
+import RSS from 'rss';
+import { getAllPosts } from '@/lib/blog';
+import { description, siteName, siteUrl } from '@/metadata';
+import { trimString } from '@/lib/util';
 
 export default async function generateRssFeed(): Promise<string> {
   const feed = new RSS({

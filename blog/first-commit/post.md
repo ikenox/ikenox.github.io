@@ -1,9 +1,9 @@
 ---
 templateKey: blog-post
 title: first commit
-date: "2017-10-15T00:00Z"
-lastModified: "2017-10-15T00:00Z"
-tags: ["tag1", "tag2"]
+date: '2017-10-15T00:00Z'
+lastModified: '2017-10-15T00:00Z'
+tags: ['tag1', 'tag2']
 description: first commit
 lang: ja
 ---

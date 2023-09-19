@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
 title: IdeaVimで、「IntelliJでいつも使ってるあの機能」のaction名を探し当てる
-date: "2019-06-11T00:00Z"
-lastModified: "2019-06-11T00:00Z"
+date: '2019-06-11T00:00Z'
+lastModified: '2019-06-11T00:00Z'
 lang: ja
 ---
 
