@@ -1,11 +1,5 @@
 {
   "trailingComma": "es5",
   "printWidth": 100,
-  "overrides": [
-    {
-      "files": "*.md",
-      "options": {
-      }
-    }
-  ]
+  "singleQuote": true
 }

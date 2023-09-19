@@ -1,9 +1,9 @@
 ---
 templateKey: blog-post
 title: Getting Started with IdeaVim
-date: "2019-01-25T00:00Z"
-lastModified: "2019-01-25T00:00Z"
-thumbnail: "./static/overview.gif"
+date: '2019-01-25T00:00Z'
+lastModified: '2019-01-25T00:00Z'
+thumbnail: './static/overview.gif'
 lang: en
 ---
 

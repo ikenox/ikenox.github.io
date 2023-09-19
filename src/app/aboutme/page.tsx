@@ -1,6 +1,6 @@
-import { Metadata } from "next";
-import { pageInfoBase, toMetadata } from "@/app/page-info";
-import Link from "next/link";
+import { Metadata } from 'next';
+import { pageInfoBase, toMetadata } from '@/app/page-info';
+import Link from 'next/link';
 
 export default async function AboutMe() {
   return (
@@ -13,14 +13,14 @@ export default async function AboutMe() {
       <ul>
         <li>
           <Link
-            href={"https://www.slideshare.net/ssuser901930/mbaas-for-global-and-china-170523864"}
-            target={"_blank"}
+            href={'https://www.slideshare.net/ssuser901930/mbaas-for-global-and-china-170523864'}
+            target={'_blank'}
           >
             MBaaS for Global and China
           </Link>
         </li>
         <li>
-          <Link href={"https://speakerdeck.com/dena_tech/techcon2021-winter7"} target={"_blank"}>
+          <Link href={'https://speakerdeck.com/dena_tech/techcon2021-winter7'} target={'_blank'}>
             アーキテクトを目指す若手エンジニアのこれまで
           </Link>
         </li>
@@ -31,5 +31,5 @@ export default async function AboutMe() {
 
 export const metadata: Metadata = toMetadata({
   ...pageInfoBase,
-  title: "About me",
+  title: 'About me',
 });
