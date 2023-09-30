@@ -1,0 +1,21 @@
+---
+import { SITE_TITLE } from '../consts';
+import NavLink from './NavLink.astro';
+import HeaderLinks from './NavLinks.astro';
+---
+
+<header>
+  <nav>
+    <h2><NavLink href="/">{SITE_TITLE}</NavLink></h2>
+     &nbsp;|&nbsp;<HeaderLinks />
+  </nav>
+</header>
+<style>
+  nav {
+    display: inline-flex;
+    align-items: baseline;
+  }
+  * {
+    margin-bottom: 0;
+  }
+</style>

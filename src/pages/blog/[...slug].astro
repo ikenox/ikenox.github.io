@@ -1,0 +1,74 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import TweetButton from '../../components/TweetButton.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.flatMap((post) => [
+    {
+      params: { slug: post.slug },
+      props: { kind: 'origin', post },
+    },
+    ...(post.data.oldPaths ?? []).map((oldPath) => ({
+      params: { slug: oldPath },
+      props: { kind: 'old', originSlug: post.slug },
+    })),
+  ]);
+}
+type Props =
+  | { kind: 'origin'; post: CollectionEntry<'blog'> }
+  | { kind: 'old'; originSlug: string };
+
+const props = Astro.props;
+
+if (props.kind == 'old') {
+  return Astro.redirect('../' + props.originSlug);
+}
+
+const { Content } = await props.post.render();
+const {
+  data: { title, pubDate, updatedDate, lang = 'ja' },
+} = props.post;
+---
+
+<BaseLayout title={title} description={''} lang={lang}>
+  <article>
+    <div class="title">
+      <h1>{title}</h1>
+      <p>
+        <FormattedDate date={pubDate} />
+        {
+          updatedDate && (
+            <>
+              {' | '}
+              updated: <FormattedDate date={updatedDate} />
+            </>
+          )
+        }
+      </p>
+      <p>
+        <TweetButton text={title} url={Astro.request.url} />
+      </p>
+    </div>
+    <Content />
+  </article>
+</BaseLayout>
+<style>
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0;
+  }
+  .title {
+    margin-bottom: 1.5rem;
+  }
+</style>
+<style is:global>
+  .footnotes {
+    font-size: 1rem;
+  }
+  .footnotes p {
+    margin: 0;
+  }
+</style>

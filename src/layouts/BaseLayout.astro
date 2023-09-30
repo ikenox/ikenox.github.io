@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+type Props = {
+  title: string;
+  description: string;
+  lang: string;
+  footer?: boolean;
+};
+
+const { title, description, lang, footer = true } = Astro.props.frontmatter || Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    {footer && <Footer />}
+  </body>
+</html>

@@ -13,9 +13,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   ignorePatterns: [
     ...readGitignoreFiles({ cwd: __dirname }),
-    '.eslintrc.js',
-    '*.config.js',
-    'next-env.d.ts',
+    '.eslintrc.js'
   ],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',

@@ -1,0 +1,16 @@
+---
+import { SITE_TITLE } from '../consts';
+import NavLink from './NavLink.astro';
+import NavLinks from './NavLinks.astro';
+---
+
+<footer>
+  <NavLink href="/">{SITE_TITLE}</NavLink>
+   &nbsp;|&nbsp;<NavLinks />
+</footer>
+<style>
+  footer {
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+  }
+</style>
