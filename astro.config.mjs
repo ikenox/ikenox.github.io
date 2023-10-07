@@ -13,6 +13,6 @@ export default defineConfig({
       theme: 'slack-dark',
     },
   },
-  output: 'server',
+  output: 'hybrid',
   adapter: cloudflare(),
 });

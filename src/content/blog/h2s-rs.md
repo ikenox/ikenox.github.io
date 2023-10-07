@@ -201,7 +201,7 @@ h2s では HTML
 すると、HTML ドキュメントが期待している構造と合わないため h2s からエラーが返却されます。
 どの位置でどういったエラーが起きたかはエラー内部にスタック構造で保持されており、 `.to_string()` で以下のようなエラーメッセージが得られます。
 
-```text
+```
 [articles(.articles > div)]: (index=2): [title(h2 > a)]: expected exactly one element, but no elements found
 ```
 

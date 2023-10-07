@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "wrangler pages dev ./dist",
+    "deploy": "wrangler pages deploy dist --project-name ikenox-info --branch main",
     "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
     "astro": "astro"
   },
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0"
+    "prettier-plugin-astro": "^0.12.0",
+    "wrangler": "^3.11.0"
   }
 }

@@ -36,7 +36,7 @@ IdeaVim では`:actionlist 文字列` コマンドによって、文字列に部
 
 `:actionlist <M-I>` で検索した場合
 
-```txt
+```
 --- Actions ---
 ImplementMethods                                   <M-I>
 MethodHierarchy.ImplementMethodAction              <M-I>
@@ -44,7 +44,7 @@ MethodHierarchy.ImplementMethodAction              <M-I>
 
 `:actionlist <M-S-` で検索した場合
 
-```txt
+```
 --- Actions ---
 $Redo                                              <M-S-Z> <A-S-BS>
 ActivateVersionControlToolWindow                   <M-9> <M-S-9>
