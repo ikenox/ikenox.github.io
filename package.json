@@ -7,7 +7,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier --ignore-path .gitignore --write .",
+    "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore --write .",
     "astro": "astro"
   },
   "dependencies": {
