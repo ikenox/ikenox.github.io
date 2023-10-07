@@ -6,7 +6,12 @@ type Props = {
 const { text, url } = Astro.props;
 ---
 
-<a class="twitter-share-button" href={`https://twitter.com/intent/tweet?text=${text}&url=${url}`}>
+<a
+  class="twitter-share-button"
+  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(
+    url
+  )}`}
+>
   <i></i>
   <span>Tweet</span>
 </a>
