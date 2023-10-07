@@ -35,33 +35,32 @@ const {
 
 <BaseLayout title={title} description={''} lang={lang}>
   <article>
-    <div class="title">
-      <h1>{title}</h1>
-      <p>
-        <FormattedDate date={pubDate} />
-        {
-          updatedDate && (
-            <>
-              {' | '}
-              updated: <FormattedDate date={updatedDate} />
-            </>
-          )
-        }
-      </p>
-      <p>
-        <TweetButton text={title} url={Astro.request.url} />
-      </p>
+    <h1>{title}</h1>
+    <p>
+      <FormattedDate date={pubDate} />
+      {
+        updatedDate && (
+          <>
+            {' | '}
+            updated: <FormattedDate date={updatedDate} />
+          </>
+        )
+      }
+    </p>
+    <TweetButton text={title} url={Astro.request.url} />
+    <div class="content">
+      <Content />
     </div>
-    <Content />
   </article>
 </BaseLayout>
 <style>
   h1 {
     font-size: 2.2rem;
+    margin-top: 1.5rem;
     margin-bottom: 0;
   }
-  .title {
-    margin-bottom: 1.5rem;
+  .content {
+    margin-top: 2rem;
   }
 </style>
 <style is:global>
