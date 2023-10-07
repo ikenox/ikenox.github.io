@@ -8,7 +8,13 @@ import prefetch from '@astrojs/prefetch';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ikenox.info',
-  integrations: [mdx(), sitemap(), prefetch()],
+  integrations: [
+    mdx(),
+    sitemap(),
+    prefetch({
+      selector: "a[href^='/']",
+    }),
+  ],
   markdown: {
     shikiConfig: {
       theme: 'slack-dark',
