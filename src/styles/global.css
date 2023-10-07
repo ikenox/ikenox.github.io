@@ -13,6 +13,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   line-height: 1.6;
+  margin-bottom: env(safe-area-inset-bottom);
 }
 
 @media (max-width: 720px) {
