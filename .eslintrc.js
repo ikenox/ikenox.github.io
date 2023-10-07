@@ -11,12 +11,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint'],
-  ignorePatterns: [
-    ...readGitignoreFiles({ cwd: __dirname }),
-    '.eslintrc.js',
-    '*.config.js',
-    'next-env.d.ts',
-  ],
+  ignorePatterns: [...readGitignoreFiles({ cwd: __dirname }), '.eslintrc.js'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'error',
