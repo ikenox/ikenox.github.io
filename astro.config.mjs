@@ -13,6 +13,7 @@ export default defineConfig({
     sitemap(),
     prefetch({
       selector: "a[href^='/']",
+      throttle: 10,
     }),
   ],
   markdown: {
