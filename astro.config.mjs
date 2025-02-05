@@ -23,4 +23,10 @@ export default defineConfig({
   },
   output: 'hybrid',
   adapter: cloudflare(),
+  redirects: {
+    '/blog/validation-in-clean-arch': '/blog/validation-in-clean-architecture',
+    '/blog/inheritance-and-delegation-and-interface': '/blog/inheritance-delegation-interface',
+    '/blog/database-is-like-global-variable': '/blog/repository-pattern',
+    '/blog/ideavim-introduction': '/blog/ideavim-getting-started',
+  },
 });
